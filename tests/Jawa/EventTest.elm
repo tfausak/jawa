@@ -11,6 +11,8 @@ import Jawa.Event.ProviderFirstFrameTest as ProviderFirstFrameTest
 import Jawa.Event.ReadyTest as ReadyTest
 import Jawa.Event.Remove as Remove
 import Jawa.Event.RemoveTest as RemoveTest
+import Jawa.Event.Seeked as Seeked
+import Jawa.Event.SeekedTest as SeekedTest
 import Jawa.Event.SetupErrorTest as SetupErrorTest
 import Jawa.Event.UserActive as UserActive
 import Jawa.Event.UserActiveTest as UserActiveTest
@@ -66,6 +68,13 @@ test =
                 "type": "remove"
             } """
             (Event.Remove Remove.Remove)
+        , TestHelper.testCodec "works with seeked"
+            Event.decoder
+            Event.encoder
+            """ {
+                "type": "seeked"
+            } """
+            (Event.Seeked Seeked.Seeked)
         , TestHelper.testCodec "works with setupError"
             Event.decoder
             Event.encoder
@@ -104,6 +113,7 @@ fuzzer =
         , Fuzz.map Event.ProviderFirstFrame ProviderFirstFrameTest.fuzzer
         , Fuzz.map Event.Ready ReadyTest.fuzzer
         , Fuzz.map Event.Remove RemoveTest.fuzzer
+        , Fuzz.map Event.Seeked SeekedTest.fuzzer
         , Fuzz.map Event.SetupError SetupErrorTest.fuzzer
         , Fuzz.map Event.UserActive UserActiveTest.fuzzer
         , Fuzz.map Event.UserInactive UserInactiveTest.fuzzer

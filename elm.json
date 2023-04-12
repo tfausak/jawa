@@ -10,6 +10,7 @@
         "Jawa.Event.ProviderFirstFrame",
         "Jawa.Event.Ready",
         "Jawa.Event.Remove",
+        "Jawa.Event.Seeked",
         "Jawa.Event.SetupError",
         "Jawa.Event.UserActive",
         "Jawa.Event.UserInactive",

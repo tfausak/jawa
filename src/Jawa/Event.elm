@@ -12,6 +12,7 @@ import Jawa.Event.DisplayClick as DisplayClick
 import Jawa.Event.ProviderFirstFrame as ProviderFirstFrame
 import Jawa.Event.Ready as Ready
 import Jawa.Event.Remove as Remove
+import Jawa.Event.Seeked as Seeked
 import Jawa.Event.SetupError as SetupError
 import Jawa.Event.UserActive as UserActive
 import Jawa.Event.UserInactive as UserInactive
@@ -27,6 +28,7 @@ type Event
     | ProviderFirstFrame ProviderFirstFrame.ProviderFirstFrame
     | Ready Ready.Ready
     | Remove Remove.Remove
+    | Seeked Seeked.Seeked
     | SetupError SetupError.SetupError
     | UserActive UserActive.UserActive
     | UserInactive UserInactive.UserInactive
@@ -57,6 +59,9 @@ decoderWith string =
 
         "remove" ->
             Json.Decode.map Remove Remove.decoder
+
+        "seeked" ->
+            Json.Decode.map Seeked Seeked.decoder
 
         "setupError" ->
             Json.Decode.map SetupError SetupError.decoder
@@ -90,6 +95,9 @@ encoder event =
 
         Remove x ->
             encoderWith "remove" Remove.encoder x
+
+        Seeked x ->
+            encoderWith "seeked" Seeked.encoder x
 
         SetupError x ->
             encoderWith "setupError" SetupError.encoder x
