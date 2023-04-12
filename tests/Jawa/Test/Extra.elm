@@ -1,4 +1,4 @@
-module Jawa.TestHelper exposing
+module Jawa.Test.Extra exposing
     ( fuzzCodec
     , testCodec
     )

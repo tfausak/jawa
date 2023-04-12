@@ -18,7 +18,7 @@ import Jawa.Event.UserActive as UserActive
 import Jawa.Event.UserActiveTest as UserActiveTest
 import Jawa.Event.UserInactive as UserInactive
 import Jawa.Event.UserInactiveTest as UserInactiveTest
-import Jawa.TestHelper as TestHelper
+import Jawa.Test.Extra as TestExtra
 import Jawa.Visibility as Visibility
 import Test
 
@@ -26,29 +26,29 @@ import Test
 test : Test.Test
 test =
     Test.concat
-        [ TestHelper.fuzzCodec "round trips" Event.decoder Event.encoder fuzzer
-        , TestHelper.testCodec "works with bufferFull"
+        [ TestExtra.fuzzCodec "round trips" Event.decoder Event.encoder fuzzer
+        , TestExtra.testCodec "works with bufferFull"
             Event.decoder
             Event.encoder
             """ {
                 "type": "bufferFull"
             } """
             (Event.BufferFull BufferFull.BufferFull)
-        , TestHelper.testCodec "works with displayClick"
+        , TestExtra.testCodec "works with displayClick"
             Event.decoder
             Event.encoder
             """ {
                 "type": "displayClick"
             } """
             (Event.DisplayClick DisplayClick.DisplayClick)
-        , TestHelper.testCodec "works with providerFirstFrame"
+        , TestExtra.testCodec "works with providerFirstFrame"
             Event.decoder
             Event.encoder
             """ {
                 "type": "providerFirstFrame"
             } """
             (Event.ProviderFirstFrame ProviderFirstFrame.ProviderFirstFrame)
-        , TestHelper.testCodec "works with ready"
+        , TestExtra.testCodec "works with ready"
             Event.decoder
             Event.encoder
             """ {
@@ -61,21 +61,21 @@ test =
                 , viewable = Visibility.Hidden
                 }
             )
-        , TestHelper.testCodec "works with remove"
+        , TestExtra.testCodec "works with remove"
             Event.decoder
             Event.encoder
             """ {
                 "type": "remove"
             } """
             (Event.Remove Remove.Remove)
-        , TestHelper.testCodec "works with seeked"
+        , TestExtra.testCodec "works with seeked"
             Event.decoder
             Event.encoder
             """ {
                 "type": "seeked"
             } """
             (Event.Seeked Seeked.Seeked)
-        , TestHelper.testCodec "works with setupError"
+        , TestExtra.testCodec "works with setupError"
             Event.decoder
             Event.encoder
             """ {
@@ -88,14 +88,14 @@ test =
                 , message = ""
                 }
             )
-        , TestHelper.testCodec "works with userActive"
+        , TestExtra.testCodec "works with userActive"
             Event.decoder
             Event.encoder
             """ {
                 "type": "userActive"
             } """
             (Event.UserActive UserActive.UserActive)
-        , TestHelper.testCodec "works with userInactive"
+        , TestExtra.testCodec "works with userInactive"
             Event.decoder
             Event.encoder
             """ {

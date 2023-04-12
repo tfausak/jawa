@@ -5,7 +5,7 @@ module Jawa.Event.ReadyTest exposing
 
 import Fuzz
 import Jawa.Event.Ready as Ready
-import Jawa.TestHelper as TestHelper
+import Jawa.Test.Extra as TestExtra
 import Jawa.Visibility as Visibility
 import Jawa.VisibilityTest as VisibilityTest
 import Test
@@ -14,8 +14,8 @@ import Test
 test : Test.Test
 test =
     Test.concat
-        [ TestHelper.fuzzCodec "round trips" Ready.decoder Ready.encoder fuzzer
-        , TestHelper.testCodec "works"
+        [ TestExtra.fuzzCodec "round trips" Ready.decoder Ready.encoder fuzzer
+        , TestExtra.testCodec "works"
             Ready.decoder
             Ready.encoder
             """ {

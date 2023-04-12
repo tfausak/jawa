@@ -5,15 +5,15 @@ module Jawa.Event.UserInactiveTest exposing
 
 import Fuzz
 import Jawa.Event.UserInactive as UserInactive
-import Jawa.TestHelper as TestHelper
+import Jawa.Test.Extra as TestExtra
 import Test
 
 
 test : Test.Test
 test =
     Test.concat
-        [ TestHelper.fuzzCodec "round trips" UserInactive.decoder UserInactive.encoder fuzzer
-        , TestHelper.testCodec "works"
+        [ TestExtra.fuzzCodec "round trips" UserInactive.decoder UserInactive.encoder fuzzer
+        , TestExtra.testCodec "works"
             UserInactive.decoder
             UserInactive.encoder
             """ {

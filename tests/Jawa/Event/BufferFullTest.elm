@@ -5,15 +5,15 @@ module Jawa.Event.BufferFullTest exposing
 
 import Fuzz
 import Jawa.Event.BufferFull as BufferFull
-import Jawa.TestHelper as TestHelper
+import Jawa.Test.Extra as TestExtra
 import Test
 
 
 test : Test.Test
 test =
     Test.concat
-        [ TestHelper.fuzzCodec "round trips" BufferFull.decoder BufferFull.encoder fuzzer
-        , TestHelper.testCodec "works"
+        [ TestExtra.fuzzCodec "round trips" BufferFull.decoder BufferFull.encoder fuzzer
+        , TestExtra.testCodec "works"
             BufferFull.decoder
             BufferFull.encoder
             """ {

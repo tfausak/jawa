@@ -4,7 +4,7 @@ module Jawa.VisibilityTest exposing
     )
 
 import Fuzz
-import Jawa.TestHelper as TestHelper
+import Jawa.Test.Extra as TestExtra
 import Jawa.Visibility as Visibility
 import Test
 
@@ -12,13 +12,13 @@ import Test
 test : Test.Test
 test =
     Test.concat
-        [ TestHelper.fuzzCodec "round trips" Visibility.decoder Visibility.encoder fuzzer
-        , TestHelper.testCodec "works with hidden"
+        [ TestExtra.fuzzCodec "round trips" Visibility.decoder Visibility.encoder fuzzer
+        , TestExtra.testCodec "works with hidden"
             Visibility.decoder
             Visibility.encoder
             "0"
             Visibility.Hidden
-        , TestHelper.testCodec "works with visible"
+        , TestExtra.testCodec "works with visible"
             Visibility.decoder
             Visibility.encoder
             "1"
