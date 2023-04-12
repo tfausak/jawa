@@ -2,10 +2,10 @@ module Jawa.EventTest exposing (test)
 
 import Fuzz
 import Jawa.Event as Event
-import Jawa.Event.Breakpoint as Breakpoint
 import Jawa.Event.BreakpointTest as BreakpointTest
 import Jawa.Event.BufferFull as BufferFull
 import Jawa.Event.BufferFullTest as BufferFullTest
+import Jawa.Event.ClickTest as ClickTest
 import Jawa.Event.DisplayClick as DisplayClick
 import Jawa.Event.DisplayClickTest as DisplayClickTest
 import Jawa.Event.ProviderFirstFrame as ProviderFirstFrame
@@ -47,6 +47,17 @@ test =
                 "type": "bufferFull"
             } """
             (Event.BufferFull BufferFull.BufferFull)
+        , TestExtra.testCodec "works with click"
+            Event.decoder
+            Event.encoder
+            """ {
+                "isTrusted": false,
+                "type": "click"
+            } """
+            (Event.Click
+                { isTrusted = False
+                }
+            )
         , TestExtra.testCodec "works with displayClick"
             Event.decoder
             Event.encoder
@@ -123,6 +134,7 @@ fuzzer =
     Fuzz.oneOf
         [ Fuzz.map Event.Breakpoint BreakpointTest.fuzzer
         , Fuzz.map Event.BufferFull BufferFullTest.fuzzer
+        , Fuzz.map Event.Click ClickTest.fuzzer
         , Fuzz.map Event.DisplayClick DisplayClickTest.fuzzer
         , Fuzz.map Event.ProviderFirstFrame ProviderFirstFrameTest.fuzzer
         , Fuzz.map Event.Ready ReadyTest.fuzzer

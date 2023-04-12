@@ -7,6 +7,7 @@
     "exposed-modules": [
         "Jawa.Event.Breakpoint",
         "Jawa.Event.BufferFull",
+        "Jawa.Event.Click",
         "Jawa.Event.DisplayClick",
         "Jawa.Event.ProviderFirstFrame",
         "Jawa.Event.Ready",
