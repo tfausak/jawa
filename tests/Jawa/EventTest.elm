@@ -23,6 +23,7 @@ import Jawa.Event.UserActive as UserActive
 import Jawa.Event.UserActiveTest as UserActiveTest
 import Jawa.Event.UserInactive as UserInactive
 import Jawa.Event.UserInactiveTest as UserInactiveTest
+import Jawa.MediaType as MT
 import Jawa.Test.Extra as TestExtra
 import Jawa.Viewable as Viewable
 import Test
@@ -94,11 +95,11 @@ test =
             Event.decoder
             Event.encoder
             """ {
-                "mediaType": "",
+                "mediaType": "audio",
                 "type": "mediaType"
             } """
             (Event.MediaType
-                { mediaType = ""
+                { mediaType = MT.Audio
                 }
             )
         , TestExtra.testCodec "works with providerFirstFrame"

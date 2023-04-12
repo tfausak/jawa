@@ -6,6 +6,7 @@ module Jawa.Event.MediaType exposing (MediaType, decoder, encoder)
 
 -}
 
+import Jawa.MediaType as MediaType
 import Json.Decode
 import Json.Encode
 
@@ -13,7 +14,7 @@ import Json.Encode
 {-| This event is not documented.
 -}
 type alias MediaType =
-    { mediaType : String
+    { mediaType : MediaType.MediaType
     }
 
 
@@ -22,7 +23,7 @@ type alias MediaType =
 decoder : Json.Decode.Decoder MediaType
 decoder =
     Json.Decode.map MediaType
-        (Json.Decode.field "mediaType" Json.Decode.string)
+        (Json.Decode.field "mediaType" MediaType.decoder)
 
 
 {-| A JSON encoder.
@@ -30,5 +31,5 @@ decoder =
 encoder : MediaType -> Json.Encode.Value
 encoder x =
     Json.Encode.object
-        [ ( "mediaType", Json.Encode.string x.mediaType )
+        [ ( "mediaType", MediaType.encoder x.mediaType )
         ]
