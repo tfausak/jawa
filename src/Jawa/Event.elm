@@ -10,6 +10,7 @@ import Dict
 import Jawa.Event.Ready as Ready
 import Jawa.Event.Remove as Remove
 import Jawa.Event.SetupError as SetupError
+import Jawa.Event.UserActive as UserActive
 import Json.Decode
 import Json.Encode
 
@@ -20,6 +21,7 @@ type Event
     = Ready Ready.Ready
     | Remove Remove.Remove
     | SetupError SetupError.SetupError
+    | UserActive UserActive.UserActive
 
 
 {-| A JSON decoder.
@@ -42,6 +44,9 @@ decoderWith string =
         "setupError" ->
             Json.Decode.map SetupError SetupError.decoder
 
+        "userActive" ->
+            Json.Decode.map UserActive UserActive.decoder
+
         _ ->
             Json.Decode.fail <| "invalid Event: " ++ string
 
@@ -59,6 +64,9 @@ encoder event =
 
         SetupError x ->
             encoderWith "setupError" SetupError.encoder x
+
+        UserActive x ->
+            encoderWith "userActive" UserActive.encoder x
 
 
 encoderWith : String -> (a -> Json.Decode.Value) -> a -> Json.Encode.Value
