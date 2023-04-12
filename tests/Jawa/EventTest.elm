@@ -24,7 +24,7 @@ import Jawa.Event.UserActiveTest as UserActiveTest
 import Jawa.Event.UserInactive as UserInactive
 import Jawa.Event.UserInactiveTest as UserInactiveTest
 import Jawa.Test.Extra as TestExtra
-import Jawa.Visibility as Visibility
+import Jawa.Viewable as Viewable
 import Test
 
 
@@ -118,7 +118,7 @@ test =
             } """
             (Event.Ready
                 { setupTime = 0.1
-                , viewable = Visibility.Hidden
+                , viewable = Viewable.Hidden
                 }
             )
         , TestExtra.testCodec "works with remove"
