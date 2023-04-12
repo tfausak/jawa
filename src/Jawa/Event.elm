@@ -8,6 +8,7 @@ module Jawa.Event exposing (Event(..), decoder, encoder)
 
 import Dict
 import Jawa.Event.BufferFull as BufferFull
+import Jawa.Event.DisplayClick as DisplayClick
 import Jawa.Event.Ready as Ready
 import Jawa.Event.Remove as Remove
 import Jawa.Event.SetupError as SetupError
@@ -21,6 +22,7 @@ import Json.Encode
 -}
 type Event
     = BufferFull BufferFull.BufferFull
+    | DisplayClick DisplayClick.DisplayClick
     | Ready Ready.Ready
     | Remove Remove.Remove
     | SetupError SetupError.SetupError
@@ -41,6 +43,9 @@ decoderWith string =
     case string of
         "bufferFull" ->
             Json.Decode.map BufferFull BufferFull.decoder
+
+        "displayClick" ->
+            Json.Decode.map DisplayClick DisplayClick.decoder
 
         "ready" ->
             Json.Decode.map Ready Ready.decoder
@@ -68,6 +73,9 @@ encoder event =
     case event of
         BufferFull x ->
             encoderWith "bufferFull" BufferFull.encoder x
+
+        DisplayClick x ->
+            encoderWith "displayClick" DisplayClick.encoder x
 
         Ready x ->
             encoderWith "ready" Ready.encoder x
