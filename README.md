@@ -7,3 +7,8 @@ Type definitions for JWP events.
 This package provides types along with JSON decoders (and encoders) for events
 from JW Player's JavaScript player. It is meant to be used together with a port
 to listen to `.on('all')` events, or any subset of those.
+
+``` js
+jwplayer().on('all', (_, data) =>
+    yourApp.ports.yourPort.send(JSON.stringify(data)));
+```
