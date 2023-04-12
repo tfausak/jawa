@@ -2,6 +2,8 @@ module Jawa.EventTest exposing (test)
 
 import Fuzz
 import Jawa.Event as Event
+import Jawa.Event.BufferFull as BufferFull
+import Jawa.Event.BufferFullTest as BufferFullTest
 import Jawa.Event.ReadyTest as ReadyTest
 import Jawa.Event.Remove as Remove
 import Jawa.Event.RemoveTest as RemoveTest
@@ -19,6 +21,13 @@ test : Test.Test
 test =
     Test.concat
         [ TestHelper.fuzzCodec "round trips" Event.decoder Event.encoder fuzzer
+        , TestHelper.testCodec "works with bufferFull"
+            Event.decoder
+            Event.encoder
+            """ {
+                "type": "bufferFull"
+            } """
+            (Event.BufferFull BufferFull.BufferFull)
         , TestHelper.testCodec "works with ready"
             Event.decoder
             Event.encoder
@@ -72,7 +81,8 @@ test =
 fuzzer : Fuzz.Fuzzer Event.Event
 fuzzer =
     Fuzz.oneOf
-        [ Fuzz.map Event.Ready ReadyTest.fuzzer
+        [ Fuzz.map Event.BufferFull BufferFullTest.fuzzer
+        , Fuzz.map Event.Ready ReadyTest.fuzzer
         , Fuzz.map Event.Remove RemoveTest.fuzzer
         , Fuzz.map Event.SetupError SetupErrorTest.fuzzer
         , Fuzz.map Event.UserActive UserActiveTest.fuzzer
