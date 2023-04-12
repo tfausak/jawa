@@ -9,6 +9,7 @@
         "Jawa.Event.BufferFull",
         "Jawa.Event.Click",
         "Jawa.Event.DisplayClick",
+        "Jawa.Event.FirstFrame",
         "Jawa.Event.ProviderFirstFrame",
         "Jawa.Event.Ready",
         "Jawa.Event.Remove",

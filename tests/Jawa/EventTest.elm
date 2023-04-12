@@ -8,6 +8,7 @@ import Jawa.Event.BufferFullTest as BufferFullTest
 import Jawa.Event.ClickTest as ClickTest
 import Jawa.Event.DisplayClick as DisplayClick
 import Jawa.Event.DisplayClickTest as DisplayClickTest
+import Jawa.Event.FirstFrameTest as FirstFrameTest
 import Jawa.Event.ProviderFirstFrame as ProviderFirstFrame
 import Jawa.Event.ProviderFirstFrameTest as ProviderFirstFrameTest
 import Jawa.Event.ReadyTest as ReadyTest
@@ -65,6 +66,17 @@ test =
                 "type": "displayClick"
             } """
             (Event.DisplayClick DisplayClick.DisplayClick)
+        , TestExtra.testCodec "works with firstFrame"
+            Event.decoder
+            Event.encoder
+            """ {
+                "loadTime": 0.1,
+                "type": "firstFrame"
+            } """
+            (Event.FirstFrame
+                { loadTime = 0.1
+                }
+            )
         , TestExtra.testCodec "works with providerFirstFrame"
             Event.decoder
             Event.encoder
@@ -136,6 +148,7 @@ fuzzer =
         , Fuzz.map Event.BufferFull BufferFullTest.fuzzer
         , Fuzz.map Event.Click ClickTest.fuzzer
         , Fuzz.map Event.DisplayClick DisplayClickTest.fuzzer
+        , Fuzz.map Event.FirstFrame FirstFrameTest.fuzzer
         , Fuzz.map Event.ProviderFirstFrame ProviderFirstFrameTest.fuzzer
         , Fuzz.map Event.Ready ReadyTest.fuzzer
         , Fuzz.map Event.Remove RemoveTest.fuzzer

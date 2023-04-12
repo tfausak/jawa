@@ -11,6 +11,7 @@ import Jawa.Event.Breakpoint as Breakpoint
 import Jawa.Event.BufferFull as BufferFull
 import Jawa.Event.Click as Click
 import Jawa.Event.DisplayClick as DisplayClick
+import Jawa.Event.FirstFrame as FirstFrame
 import Jawa.Event.ProviderFirstFrame as ProviderFirstFrame
 import Jawa.Event.Ready as Ready
 import Jawa.Event.Remove as Remove
@@ -29,6 +30,7 @@ type Event
     | BufferFull BufferFull.BufferFull
     | Click Click.Click
     | DisplayClick DisplayClick.DisplayClick
+    | FirstFrame FirstFrame.FirstFrame
     | ProviderFirstFrame ProviderFirstFrame.ProviderFirstFrame
     | Ready Ready.Ready
     | Remove Remove.Remove
@@ -60,6 +62,9 @@ decoderWith string =
 
         "displayClick" ->
             Json.Decode.map DisplayClick DisplayClick.decoder
+
+        "firstFrame" ->
+            Json.Decode.map FirstFrame FirstFrame.decoder
 
         "providerFirstFrame" ->
             Json.Decode.map ProviderFirstFrame ProviderFirstFrame.decoder
@@ -102,6 +107,9 @@ encoder event =
 
         DisplayClick x ->
             encoderWith "displayClick" DisplayClick.encoder x
+
+        FirstFrame x ->
+            encoderWith "firstFrame" FirstFrame.encoder x
 
         ProviderFirstFrame x ->
             encoderWith "providerFirstFrame" ProviderFirstFrame.encoder x
