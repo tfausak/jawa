@@ -9,6 +9,7 @@
         "Jawa.Event.Remove",
         "Jawa.Event.SetupError",
         "Jawa.Event.UserActive",
+        "Jawa.Event.UserInactive",
         "Jawa.Event",
         "Jawa.Visibility"
     ],

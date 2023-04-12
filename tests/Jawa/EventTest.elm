@@ -8,6 +8,8 @@ import Jawa.Event.RemoveTest as RemoveTest
 import Jawa.Event.SetupErrorTest as SetupErrorTest
 import Jawa.Event.UserActive as UserActive
 import Jawa.Event.UserActiveTest as UserActiveTest
+import Jawa.Event.UserInactive as UserInactive
+import Jawa.Event.UserInactiveTest as UserInactiveTest
 import Jawa.TestHelper as TestHelper
 import Jawa.Visibility as Visibility
 import Test
@@ -57,6 +59,13 @@ test =
                 "type": "userActive"
             } """
             (Event.UserActive UserActive.UserActive)
+        , TestHelper.testCodec "works with userInactive"
+            Event.decoder
+            Event.encoder
+            """ {
+                "type": "userInactive"
+            } """
+            (Event.UserInactive UserInactive.UserInactive)
         ]
 
 
@@ -67,4 +76,5 @@ fuzzer =
         , Fuzz.map Event.Remove RemoveTest.fuzzer
         , Fuzz.map Event.SetupError SetupErrorTest.fuzzer
         , Fuzz.map Event.UserActive UserActiveTest.fuzzer
+        , Fuzz.map Event.UserInactive UserInactiveTest.fuzzer
         ]
