@@ -9,6 +9,7 @@ import Jawa.Event.ClickTest as ClickTest
 import Jawa.Event.DisplayClick as DisplayClick
 import Jawa.Event.DisplayClickTest as DisplayClickTest
 import Jawa.Event.FirstFrameTest as FirstFrameTest
+import Jawa.Event.FullscreenTest as FullscreenTest
 import Jawa.Event.ProviderFirstFrame as ProviderFirstFrame
 import Jawa.Event.ProviderFirstFrameTest as ProviderFirstFrameTest
 import Jawa.Event.ReadyTest as ReadyTest
@@ -75,6 +76,17 @@ test =
             } """
             (Event.FirstFrame
                 { loadTime = 0.1
+                }
+            )
+        , TestExtra.testCodec "works with fullscreen"
+            Event.decoder
+            Event.encoder
+            """ {
+                "fullscreen": false,
+                "type": "fullscreen"
+            } """
+            (Event.Fullscreen
+                { fullscreen = False
                 }
             )
         , TestExtra.testCodec "works with providerFirstFrame"
@@ -149,6 +161,7 @@ fuzzer =
         , Fuzz.map Event.Click ClickTest.fuzzer
         , Fuzz.map Event.DisplayClick DisplayClickTest.fuzzer
         , Fuzz.map Event.FirstFrame FirstFrameTest.fuzzer
+        , Fuzz.map Event.Fullscreen FullscreenTest.fuzzer
         , Fuzz.map Event.ProviderFirstFrame ProviderFirstFrameTest.fuzzer
         , Fuzz.map Event.Ready ReadyTest.fuzzer
         , Fuzz.map Event.Remove RemoveTest.fuzzer

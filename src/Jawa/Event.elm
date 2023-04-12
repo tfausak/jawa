@@ -12,6 +12,7 @@ import Jawa.Event.BufferFull as BufferFull
 import Jawa.Event.Click as Click
 import Jawa.Event.DisplayClick as DisplayClick
 import Jawa.Event.FirstFrame as FirstFrame
+import Jawa.Event.Fullscreen as Fullscreen
 import Jawa.Event.ProviderFirstFrame as ProviderFirstFrame
 import Jawa.Event.Ready as Ready
 import Jawa.Event.Remove as Remove
@@ -31,6 +32,7 @@ type Event
     | Click Click.Click
     | DisplayClick DisplayClick.DisplayClick
     | FirstFrame FirstFrame.FirstFrame
+    | Fullscreen Fullscreen.Fullscreen
     | ProviderFirstFrame ProviderFirstFrame.ProviderFirstFrame
     | Ready Ready.Ready
     | Remove Remove.Remove
@@ -65,6 +67,9 @@ decoderWith string =
 
         "firstFrame" ->
             Json.Decode.map FirstFrame FirstFrame.decoder
+
+        "fullscreen" ->
+            Json.Decode.map Fullscreen Fullscreen.decoder
 
         "providerFirstFrame" ->
             Json.Decode.map ProviderFirstFrame ProviderFirstFrame.decoder
@@ -110,6 +115,9 @@ encoder event =
 
         FirstFrame x ->
             encoderWith "firstFrame" FirstFrame.encoder x
+
+        Fullscreen x ->
+            encoderWith "fullscreen" Fullscreen.encoder x
 
         ProviderFirstFrame x ->
             encoderWith "providerFirstFrame" ProviderFirstFrame.encoder x
