@@ -6,8 +6,8 @@ module Jawa.Event.ReadyTest exposing
 import Fuzz
 import Jawa.Event.Ready as Ready
 import Jawa.Test.Extra as TestExtra
-import Jawa.Viewable as Viewable
-import Jawa.ViewableTest as ViewableTest
+import Jawa.Viewable as V
+import Jawa.ViewableTest as V
 import Test
 
 
@@ -23,7 +23,7 @@ test =
                 "viewable": 0
             } """
             { setupTime = 0.1
-            , viewable = Viewable.Hidden
+            , viewable = V.Hidden
             }
         ]
 
@@ -32,4 +32,4 @@ fuzzer : Fuzz.Fuzzer Ready.Ready
 fuzzer =
     Fuzz.map2 Ready.Ready
         Fuzz.niceFloat
-        ViewableTest.fuzzer
+        V.fuzzer

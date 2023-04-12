@@ -2,30 +2,30 @@ module Jawa.EventTest exposing (test)
 
 import Fuzz
 import Jawa.Event as Event
-import Jawa.Event.BreakpointTest as BreakpointTest
+import Jawa.Event.BreakpointTest as Breakpoint
 import Jawa.Event.BufferFull as BufferFull
-import Jawa.Event.BufferFullTest as BufferFullTest
-import Jawa.Event.ClickTest as ClickTest
+import Jawa.Event.BufferFullTest as BufferFull
+import Jawa.Event.ClickTest as Click
 import Jawa.Event.DisplayClick as DisplayClick
-import Jawa.Event.DisplayClickTest as DisplayClickTest
-import Jawa.Event.FirstFrameTest as FirstFrameTest
-import Jawa.Event.FullscreenTest as FullscreenTest
-import Jawa.Event.MediaTypeTest as MediaTypeTest
+import Jawa.Event.DisplayClickTest as DisplayClick
+import Jawa.Event.FirstFrameTest as FirstFrame
+import Jawa.Event.FullscreenTest as Fullscreen
+import Jawa.Event.MediaTypeTest as MediaType
 import Jawa.Event.ProviderFirstFrame as ProviderFirstFrame
-import Jawa.Event.ProviderFirstFrameTest as ProviderFirstFrameTest
-import Jawa.Event.ReadyTest as ReadyTest
+import Jawa.Event.ProviderFirstFrameTest as ProviderFirstFrame
+import Jawa.Event.ReadyTest as Ready
 import Jawa.Event.Remove as Remove
-import Jawa.Event.RemoveTest as RemoveTest
+import Jawa.Event.RemoveTest as Remove
 import Jawa.Event.Seeked as Seeked
-import Jawa.Event.SeekedTest as SeekedTest
-import Jawa.Event.SetupErrorTest as SetupErrorTest
+import Jawa.Event.SeekedTest as Seeked
+import Jawa.Event.SetupErrorTest as SetupError
 import Jawa.Event.UserActive as UserActive
-import Jawa.Event.UserActiveTest as UserActiveTest
+import Jawa.Event.UserActiveTest as UserActive
 import Jawa.Event.UserInactive as UserInactive
-import Jawa.Event.UserInactiveTest as UserInactiveTest
+import Jawa.Event.UserInactiveTest as UserInactive
 import Jawa.MediaType as MT
 import Jawa.Test.Extra as TestExtra
-import Jawa.Viewable as Viewable
+import Jawa.Viewable as V
 import Test
 
 
@@ -119,7 +119,7 @@ test =
             } """
             (Event.Ready
                 { setupTime = 0.1
-                , viewable = Viewable.Hidden
+                , viewable = V.Hidden
                 }
             )
         , TestExtra.testCodec "works with remove"
@@ -169,18 +169,18 @@ test =
 fuzzer : Fuzz.Fuzzer Event.Event
 fuzzer =
     Fuzz.oneOf
-        [ Fuzz.map Event.Breakpoint BreakpointTest.fuzzer
-        , Fuzz.map Event.BufferFull BufferFullTest.fuzzer
-        , Fuzz.map Event.Click ClickTest.fuzzer
-        , Fuzz.map Event.DisplayClick DisplayClickTest.fuzzer
-        , Fuzz.map Event.FirstFrame FirstFrameTest.fuzzer
-        , Fuzz.map Event.Fullscreen FullscreenTest.fuzzer
-        , Fuzz.map Event.MediaType MediaTypeTest.fuzzer
-        , Fuzz.map Event.ProviderFirstFrame ProviderFirstFrameTest.fuzzer
-        , Fuzz.map Event.Ready ReadyTest.fuzzer
-        , Fuzz.map Event.Remove RemoveTest.fuzzer
-        , Fuzz.map Event.Seeked SeekedTest.fuzzer
-        , Fuzz.map Event.SetupError SetupErrorTest.fuzzer
-        , Fuzz.map Event.UserActive UserActiveTest.fuzzer
-        , Fuzz.map Event.UserInactive UserInactiveTest.fuzzer
+        [ Fuzz.map Event.Breakpoint Breakpoint.fuzzer
+        , Fuzz.map Event.BufferFull BufferFull.fuzzer
+        , Fuzz.map Event.Click Click.fuzzer
+        , Fuzz.map Event.DisplayClick DisplayClick.fuzzer
+        , Fuzz.map Event.FirstFrame FirstFrame.fuzzer
+        , Fuzz.map Event.Fullscreen Fullscreen.fuzzer
+        , Fuzz.map Event.MediaType MediaType.fuzzer
+        , Fuzz.map Event.ProviderFirstFrame ProviderFirstFrame.fuzzer
+        , Fuzz.map Event.Ready Ready.fuzzer
+        , Fuzz.map Event.Remove Remove.fuzzer
+        , Fuzz.map Event.Seeked Seeked.fuzzer
+        , Fuzz.map Event.SetupError SetupError.fuzzer
+        , Fuzz.map Event.UserActive UserActive.fuzzer
+        , Fuzz.map Event.UserInactive UserInactive.fuzzer
         ]

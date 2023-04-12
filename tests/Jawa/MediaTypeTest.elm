@@ -4,7 +4,7 @@ module Jawa.MediaTypeTest exposing
     )
 
 import Fuzz
-import Jawa.MediaType as MediaType
+import Jawa.MediaType as MT
 import Jawa.Test.Extra as TestExtra
 import Test
 
@@ -12,23 +12,23 @@ import Test
 test : Test.Test
 test =
     Test.concat
-        [ TestExtra.fuzzCodec "round trips" MediaType.decoder MediaType.encoder fuzzer
+        [ TestExtra.fuzzCodec "round trips" MT.decoder MT.encoder fuzzer
         , TestExtra.testCodec "works with audio"
-            MediaType.decoder
-            MediaType.encoder
+            MT.decoder
+            MT.encoder
             "\"audio\""
-            MediaType.Audio
+            MT.Audio
         , TestExtra.testCodec "works with video"
-            MediaType.decoder
-            MediaType.encoder
+            MT.decoder
+            MT.encoder
             "\"video\""
-            MediaType.Video
+            MT.Video
         ]
 
 
-fuzzer : Fuzz.Fuzzer MediaType.MediaType
+fuzzer : Fuzz.Fuzzer MT.MediaType
 fuzzer =
     Fuzz.oneOf
-        [ Fuzz.constant MediaType.Audio
-        , Fuzz.constant MediaType.Video
+        [ Fuzz.constant MT.Audio
+        , Fuzz.constant MT.Video
         ]
