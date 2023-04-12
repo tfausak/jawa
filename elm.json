@@ -11,6 +11,7 @@
         "Jawa.Event.DisplayClick",
         "Jawa.Event.FirstFrame",
         "Jawa.Event.Fullscreen",
+        "Jawa.Event.MediaType",
         "Jawa.Event.ProviderFirstFrame",
         "Jawa.Event.Ready",
         "Jawa.Event.Remove",

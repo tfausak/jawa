@@ -10,6 +10,7 @@ import Jawa.Event.DisplayClick as DisplayClick
 import Jawa.Event.DisplayClickTest as DisplayClickTest
 import Jawa.Event.FirstFrameTest as FirstFrameTest
 import Jawa.Event.FullscreenTest as FullscreenTest
+import Jawa.Event.MediaTypeTest as MediaTypeTest
 import Jawa.Event.ProviderFirstFrame as ProviderFirstFrame
 import Jawa.Event.ProviderFirstFrameTest as ProviderFirstFrameTest
 import Jawa.Event.ReadyTest as ReadyTest
@@ -89,6 +90,17 @@ test =
                 { fullscreen = False
                 }
             )
+        , TestExtra.testCodec "works with mediaType"
+            Event.decoder
+            Event.encoder
+            """ {
+                "mediaType": "",
+                "type": "mediaType"
+            } """
+            (Event.MediaType
+                { mediaType = ""
+                }
+            )
         , TestExtra.testCodec "works with providerFirstFrame"
             Event.decoder
             Event.encoder
@@ -162,6 +174,7 @@ fuzzer =
         , Fuzz.map Event.DisplayClick DisplayClickTest.fuzzer
         , Fuzz.map Event.FirstFrame FirstFrameTest.fuzzer
         , Fuzz.map Event.Fullscreen FullscreenTest.fuzzer
+        , Fuzz.map Event.MediaType MediaTypeTest.fuzzer
         , Fuzz.map Event.ProviderFirstFrame ProviderFirstFrameTest.fuzzer
         , Fuzz.map Event.Ready ReadyTest.fuzzer
         , Fuzz.map Event.Remove RemoveTest.fuzzer
