@@ -1,0 +1,15 @@
+{
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "Elmtooling.elm-ls-vscode"
+            ],
+            "settings": {
+                "editor.formatOnSave": true
+            }
+        }
+    },
+    "dockerComposeFile": "compose.yaml",
+    "service": "devcontainer",
+    "workspaceFolder": "/workspaces/jawa"
+}
