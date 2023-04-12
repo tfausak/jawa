@@ -1,0 +1,13 @@
+{
+    "services": {
+        "devcontainer": {
+            "command": "sh -exc 'while sleep 1m; do :; done'",
+            "image": "public.ecr.aws/acilearning/elm:0.19.1",
+            "init": true,
+            "volumes": [
+                ".:/workspaces/jawa"
+            ],
+            "working_dir": "/workspaces/jawa"
+        }
+    }
+}
