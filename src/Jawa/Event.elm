@@ -7,6 +7,7 @@ module Jawa.Event exposing (Event(..), decoder, encoder)
 -}
 
 import Dict
+import Jawa.Event.Breakpoint as Breakpoint
 import Jawa.Event.BufferFull as BufferFull
 import Jawa.Event.DisplayClick as DisplayClick
 import Jawa.Event.ProviderFirstFrame as ProviderFirstFrame
@@ -23,7 +24,8 @@ import Json.Encode
 {-| <https://docs.jwplayer.com/players/reference/onall>
 -}
 type Event
-    = BufferFull BufferFull.BufferFull
+    = Breakpoint Breakpoint.Breakpoint
+    | BufferFull BufferFull.BufferFull
     | DisplayClick DisplayClick.DisplayClick
     | ProviderFirstFrame ProviderFirstFrame.ProviderFirstFrame
     | Ready Ready.Ready
@@ -47,6 +49,9 @@ decoderWith string =
     case string of
         "bufferFull" ->
             Json.Decode.map BufferFull BufferFull.decoder
+
+        "breakpoint" ->
+            Json.Decode.map Breakpoint Breakpoint.decoder
 
         "displayClick" ->
             Json.Decode.map DisplayClick DisplayClick.decoder
@@ -81,6 +86,9 @@ decoderWith string =
 encoder : Event -> Json.Encode.Value
 encoder event =
     case event of
+        Breakpoint x ->
+            encoderWith "breakpoint" Breakpoint.encoder x
+
         BufferFull x ->
             encoderWith "bufferFull" BufferFull.encoder x
 
