@@ -3,7 +3,7 @@
     "name": "tfausak/jawa",
     "summary": "Type definitions for JWP events.",
     "license": "MIT",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "exposed-modules": [
         "Jawa.Event.Ready",
         "Jawa.Event.Remove",
