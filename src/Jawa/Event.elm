@@ -9,6 +9,7 @@ module Jawa.Event exposing (Event(..), decoder, encoder)
 import Dict
 import Jawa.Event.BufferFull as BufferFull
 import Jawa.Event.DisplayClick as DisplayClick
+import Jawa.Event.ProviderFirstFrame as ProviderFirstFrame
 import Jawa.Event.Ready as Ready
 import Jawa.Event.Remove as Remove
 import Jawa.Event.SetupError as SetupError
@@ -23,6 +24,7 @@ import Json.Encode
 type Event
     = BufferFull BufferFull.BufferFull
     | DisplayClick DisplayClick.DisplayClick
+    | ProviderFirstFrame ProviderFirstFrame.ProviderFirstFrame
     | Ready Ready.Ready
     | Remove Remove.Remove
     | SetupError SetupError.SetupError
@@ -46,6 +48,9 @@ decoderWith string =
 
         "displayClick" ->
             Json.Decode.map DisplayClick DisplayClick.decoder
+
+        "providerFirstFrame" ->
+            Json.Decode.map ProviderFirstFrame ProviderFirstFrame.decoder
 
         "ready" ->
             Json.Decode.map Ready Ready.decoder
@@ -76,6 +81,9 @@ encoder event =
 
         DisplayClick x ->
             encoderWith "displayClick" DisplayClick.encoder x
+
+        ProviderFirstFrame x ->
+            encoderWith "providerFirstFrame" ProviderFirstFrame.encoder x
 
         Ready x ->
             encoderWith "ready" Ready.encoder x
