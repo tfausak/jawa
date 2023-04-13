@@ -28,6 +28,7 @@ import Jawa.Event.UserInactive as UserInactive
 import Jawa.Event.UserInactiveTest as UserInactive
 import Jawa.Event.ViewableTest as Viewable
 import Jawa.MediaType as MT
+import Jawa.State as S
 import Jawa.Test.Extra as TestExtra
 import Jawa.Viewable as V
 import Test
@@ -135,18 +136,18 @@ test =
             Event.decoder
             Event.encoder
             """ {
-                "newstate": "a",
-                "oldstate": "b",
+                "newstate": "buffering",
+                "oldstate": "complete",
                 "pauseReason": "c",
-                "reason": "d",
+                "reason": "error",
                 "type": "pause",
                 "viewable": 0
             } """
             (Event.Pause
-                { newstate = "a"
-                , oldstate = "b"
+                { newstate = S.Buffering
+                , oldstate = S.Complete
                 , pauseReason = "c"
-                , reason = "d"
+                , reason = S.Error
                 , viewable = V.Hidden
                 }
             )

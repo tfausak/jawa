@@ -5,6 +5,8 @@ module Jawa.Event.PauseTest exposing
 
 import Fuzz
 import Jawa.Event.Pause as Pause
+import Jawa.State as S
+import Jawa.StateTest as S
 import Jawa.Test.Extra as TestExtra
 import Jawa.Viewable as V
 import Jawa.ViewableTest as V
@@ -19,16 +21,16 @@ test =
             Pause.decoder
             Pause.encoder
             """ {
-                "newstate": "a",
-                "oldstate": "b",
+                "newstate": "buffering",
+                "oldstate": "complete",
                 "pauseReason": "c",
-                "reason": "d",
+                "reason": "error",
                 "viewable": 0
             } """
-            { newstate = "a"
-            , oldstate = "b"
+            { newstate = S.Buffering
+            , oldstate = S.Complete
             , pauseReason = "c"
-            , reason = "d"
+            , reason = S.Error
             , viewable = V.Hidden
             }
         ]
@@ -37,8 +39,8 @@ test =
 fuzzer : Fuzz.Fuzzer Pause.Pause
 fuzzer =
     Fuzz.map5 Pause.Pause
+        S.fuzzer
+        S.fuzzer
         Fuzz.string
-        Fuzz.string
-        Fuzz.string
-        Fuzz.string
+        S.fuzzer
         V.fuzzer
