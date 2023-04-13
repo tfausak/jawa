@@ -6,6 +6,7 @@
     "version": "2.0.0",
     "exposed-modules": [
         "Jawa.Event.Breakpoint",
+        "Jawa.Event.BufferChange",
         "Jawa.Event.BufferFull",
         "Jawa.Event.Click",
         "Jawa.Event.DisplayClick",
@@ -23,6 +24,7 @@
         "Jawa.Event.Viewable",
         "Jawa.Event",
         "Jawa.MediaType",
+        "Jawa.SeekRange",
         "Jawa.Viewable"
     ],
     "elm-version": "0.19.1 <= v < 0.20.0",

@@ -8,6 +8,7 @@ module Jawa.Event exposing (Event(..), decoder, encoder)
 
 import Dict
 import Jawa.Event.Breakpoint as Breakpoint
+import Jawa.Event.BufferChange as BufferChange
 import Jawa.Event.BufferFull as BufferFull
 import Jawa.Event.Click as Click
 import Jawa.Event.DisplayClick as DisplayClick
@@ -31,6 +32,7 @@ import Json.Encode
 -}
 type Event
     = Breakpoint Breakpoint.Breakpoint
+    | BufferChange BufferChange.BufferChange
     | BufferFull BufferFull.BufferFull
     | Click Click.Click
     | DisplayClick DisplayClick.DisplayClick
@@ -59,11 +61,14 @@ decoder =
 decoderWith : String -> Json.Decode.Decoder Event
 decoderWith string =
     case string of
-        "bufferFull" ->
-            Json.Decode.map BufferFull BufferFull.decoder
-
         "breakpoint" ->
             Json.Decode.map Breakpoint Breakpoint.decoder
+
+        "bufferChange" ->
+            Json.Decode.map BufferChange BufferChange.decoder
+
+        "bufferFull" ->
+            Json.Decode.map BufferFull BufferFull.decoder
 
         "click" ->
             Json.Decode.map Click Click.decoder
@@ -121,6 +126,9 @@ encoder event =
 
         BufferFull x ->
             encoderWith "bufferFull" BufferFull.encoder x
+
+        BufferChange x ->
+            encoderWith "bufferChange" BufferChange.encoder x
 
         Click x ->
             encoderWith "click" Click.encoder x

@@ -3,6 +3,7 @@ module Jawa.EventTest exposing (test)
 import Fuzz
 import Jawa.Event as Event
 import Jawa.Event.BreakpointTest as Breakpoint
+import Jawa.Event.BufferChangeTest as BufferChange
 import Jawa.Event.BufferFull as BufferFull
 import Jawa.Event.BufferFullTest as BufferFull
 import Jawa.Event.ClickTest as Click
@@ -44,6 +45,31 @@ test =
             } """
             (Event.Breakpoint
                 { breakpoint = 0
+                }
+            )
+        , TestExtra.testCodec "works with bufferChange"
+            Event.decoder
+            Event.encoder
+            """ {
+                "bufferPercent": 0.1,
+                "currentTime": 0.2,
+                "duration": 0.3,
+                "position": 0.4,
+                "seekRange": {
+                    "end": 0.5,
+                    "start": 0.6
+                },
+                "type": "bufferChange"
+            } """
+            (Event.BufferChange
+                { bufferPercent = 0.1
+                , currentTime = 0.2
+                , duration = 0.3
+                , position = 0.4
+                , seekRange =
+                    { end = 0.5
+                    , start = 0.6
+                    }
                 }
             )
         , TestExtra.testCodec "works with bufferFull"
@@ -195,6 +221,7 @@ fuzzer : Fuzz.Fuzzer Event.Event
 fuzzer =
     Fuzz.oneOf
         [ Fuzz.map Event.Breakpoint Breakpoint.fuzzer
+        , Fuzz.map Event.BufferChange BufferChange.fuzzer
         , Fuzz.map Event.BufferFull BufferFull.fuzzer
         , Fuzz.map Event.Click Click.fuzzer
         , Fuzz.map Event.DisplayClick DisplayClick.fuzzer
