@@ -27,6 +27,7 @@ import Jawa.Event.Remove as Remove
 import Jawa.Event.Resize as Resize
 import Jawa.Event.Seeked as Seeked
 import Jawa.Event.SetupError as SetupError
+import Jawa.Event.Time as Time
 import Jawa.Event.UserActive as UserActive
 import Jawa.Event.UserInactive as UserInactive
 import Jawa.Event.Viewable as Viewable
@@ -58,6 +59,7 @@ type Event
     | Resize Resize.Resize
     | Seeked Seeked.Seeked
     | SetupError SetupError.SetupError
+    | Time Time.Time
     | UserActive UserActive.UserActive
     | UserInactive UserInactive.UserInactive
     | Viewable Viewable.Viewable
@@ -134,6 +136,9 @@ decoderWith string =
 
         "setupError" ->
             Json.Decode.map SetupError SetupError.decoder
+
+        "time" ->
+            Json.Decode.map Time Time.decoder
 
         "userActive" ->
             Json.Decode.map UserActive UserActive.decoder
@@ -215,6 +220,9 @@ encoder event =
 
         SetupError x ->
             encoderWith "setupError" SetupError.encoder x
+
+        Time x ->
+            encoderWith "time" Time.encoder x
 
         UserActive x ->
             encoderWith "userActive" UserActive.encoder x

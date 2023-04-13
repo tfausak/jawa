@@ -25,6 +25,7 @@
         "Jawa.Event.Resize",
         "Jawa.Event.Seeked",
         "Jawa.Event.SetupError",
+        "Jawa.Event.Time",
         "Jawa.Event.UserActive",
         "Jawa.Event.UserInactive",
         "Jawa.Event.Viewable",

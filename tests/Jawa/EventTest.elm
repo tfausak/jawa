@@ -30,6 +30,7 @@ import Jawa.Event.ResizeTest as Resize
 import Jawa.Event.Seeked as Seeked
 import Jawa.Event.SeekedTest as Seeked
 import Jawa.Event.SetupErrorTest as SetupError
+import Jawa.Event.TimeTest as Time
 import Jawa.Event.UserActive as UserActive
 import Jawa.Event.UserActiveTest as UserActive
 import Jawa.Event.UserInactive as UserInactive
@@ -279,6 +280,31 @@ test =
                 , message = ""
                 }
             )
+        , TestExtra.testCodec "works with time"
+            Event.decoder
+            Event.encoder
+            """ {
+                "currentTime": 0.1,
+                "duration": 0.2,
+                "position": 0.3,
+                "seekRange": {
+                    "end": 0.4,
+                    "start": 0.5
+                },
+                "type": "time",
+                "viewable": 0
+            } """
+            (Event.Time
+                { currentTime = 0.1
+                , duration = 0.2
+                , position = 0.3
+                , seekRange =
+                    { end = 0.4
+                    , start = 0.5
+                    }
+                , viewable = V.Hidden
+                }
+            )
         , TestExtra.testCodec "works with userActive"
             Event.decoder
             Event.encoder
@@ -356,6 +382,7 @@ fuzzer =
         , Fuzz.map Event.Resize Resize.fuzzer
         , Fuzz.map Event.Seeked Seeked.fuzzer
         , Fuzz.map Event.SetupError SetupError.fuzzer
+        , Fuzz.map Event.Time Time.fuzzer
         , Fuzz.map Event.UserActive UserActive.fuzzer
         , Fuzz.map Event.UserInactive UserInactive.fuzzer
         , Fuzz.map Event.Viewable Viewable.fuzzer
