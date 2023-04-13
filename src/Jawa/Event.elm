@@ -13,6 +13,7 @@ import Jawa.Event.BufferChange as BufferChange
 import Jawa.Event.BufferFull as BufferFull
 import Jawa.Event.Click as Click
 import Jawa.Event.Complete as Complete
+import Jawa.Event.Controls as Controls
 import Jawa.Event.DisplayClick as DisplayClick
 import Jawa.Event.FirstFrame as FirstFrame
 import Jawa.Event.Fullscreen as Fullscreen
@@ -48,6 +49,7 @@ type Event
     | BufferFull BufferFull.BufferFull
     | Click Click.Click
     | Complete Complete.Complete
+    | Controls Controls.Controls
     | DisplayClick DisplayClick.DisplayClick
     | FirstFrame FirstFrame.FirstFrame
     | Fullscreen Fullscreen.Fullscreen
@@ -100,6 +102,9 @@ decoderWith string =
 
         "complete" ->
             Json.Decode.map Complete Complete.decoder
+
+        "controls" ->
+            Json.Decode.map Controls Controls.decoder
 
         "displayClick" ->
             Json.Decode.map DisplayClick DisplayClick.decoder
@@ -193,6 +198,9 @@ encoder event =
 
         Complete x ->
             encoderWith "complete" Complete.encoder x
+
+        Controls x ->
+            encoderWith "controls" Controls.encoder x
 
         DisplayClick x ->
             encoderWith "displayClick" DisplayClick.encoder x

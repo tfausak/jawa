@@ -11,6 +11,7 @@ import Jawa.Event.BufferFullTest as BufferFull
 import Jawa.Event.ClickTest as Click
 import Jawa.Event.Complete as Complete
 import Jawa.Event.CompleteTest as Complete
+import Jawa.Event.ControlsTest as Controls
 import Jawa.Event.DisplayClick as DisplayClick
 import Jawa.Event.DisplayClickTest as DisplayClick
 import Jawa.Event.FirstFrameTest as FirstFrame
@@ -125,6 +126,17 @@ test =
                 "type": "complete"
             } """
             (Event.Complete Complete.Complete)
+        , TestExtra.testCodec "works with controls"
+            Event.decoder
+            Event.encoder
+            """ {
+                "controls": false,
+                "type": "controls"
+            } """
+            (Event.Controls
+                { controls = False
+                }
+            )
         , TestExtra.testCodec "works with displayClick"
             Event.decoder
             Event.encoder
@@ -424,6 +436,7 @@ fuzzer =
         , Fuzz.map Event.BufferFull BufferFull.fuzzer
         , Fuzz.map Event.Click Click.fuzzer
         , Fuzz.map Event.Complete Complete.fuzzer
+        , Fuzz.map Event.Controls Controls.fuzzer
         , Fuzz.map Event.DisplayClick DisplayClick.fuzzer
         , Fuzz.map Event.FirstFrame FirstFrame.fuzzer
         , Fuzz.map Event.Fullscreen Fullscreen.fuzzer

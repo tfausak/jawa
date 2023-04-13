@@ -11,6 +11,7 @@
         "Jawa.Event.BufferFull",
         "Jawa.Event.Click",
         "Jawa.Event.Complete",
+        "Jawa.Event.Controls",
         "Jawa.Event.DisplayClick",
         "Jawa.Event.FirstFrame",
         "Jawa.Event.Fullscreen",
