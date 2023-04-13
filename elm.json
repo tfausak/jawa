@@ -5,6 +5,7 @@
     "license": "MIT",
     "version": "2.0.0",
     "exposed-modules": [
+        "Jawa.Event.BeforeComplete",
         "Jawa.Event.Breakpoint",
         "Jawa.Event.BufferChange",
         "Jawa.Event.BufferFull",

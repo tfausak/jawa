@@ -2,6 +2,8 @@ module Jawa.EventTest exposing (test)
 
 import Fuzz
 import Jawa.Event as Event
+import Jawa.Event.BeforeComplete as BeforeComplete
+import Jawa.Event.BeforeCompleteTest as BeforeComplete
 import Jawa.Event.BreakpointTest as Breakpoint
 import Jawa.Event.BufferChangeTest as BufferChange
 import Jawa.Event.BufferFull as BufferFull
@@ -44,6 +46,13 @@ test : Test.Test
 test =
     Test.concat
         [ TestExtra.fuzzCodec "round trips" Event.decoder Event.encoder fuzzer
+        , TestExtra.testCodec "works with beforeComplete"
+            Event.decoder
+            Event.encoder
+            """ {
+                "type": "beforeComplete"
+            } """
+            (Event.BeforeComplete BeforeComplete.BeforeComplete)
         , TestExtra.testCodec "works with breakpoint"
             Event.decoder
             Event.encoder
@@ -293,7 +302,8 @@ test =
 fuzzer : Fuzz.Fuzzer Event.Event
 fuzzer =
     Fuzz.oneOf
-        [ Fuzz.map Event.Breakpoint Breakpoint.fuzzer
+        [ Fuzz.map Event.BeforeComplete BeforeComplete.fuzzer
+        , Fuzz.map Event.Breakpoint Breakpoint.fuzzer
         , Fuzz.map Event.BufferChange BufferChange.fuzzer
         , Fuzz.map Event.BufferFull BufferFull.fuzzer
         , Fuzz.map Event.Click Click.fuzzer
