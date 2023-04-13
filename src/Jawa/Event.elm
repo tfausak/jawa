@@ -34,6 +34,7 @@ import Jawa.Event.UserActive as UserActive
 import Jawa.Event.UserInactive as UserInactive
 import Jawa.Event.Viewable as Viewable
 import Jawa.Event.VisualQuality as VisualQuality
+import Jawa.Event.Volume as Volume
 import Json.Decode
 import Json.Encode
 
@@ -68,6 +69,7 @@ type Event
     | UserInactive UserInactive.UserInactive
     | Viewable Viewable.Viewable
     | VisualQuality VisualQuality.VisualQuality
+    | Volume Volume.Volume
 
 
 {-| A JSON decoder.
@@ -162,6 +164,9 @@ decoderWith string =
         "visualQuality" ->
             Json.Decode.map VisualQuality VisualQuality.decoder
 
+        "volume" ->
+            Json.Decode.map Volume Volume.decoder
+
         _ ->
             Json.Decode.fail <| "invalid Event: " ++ string
 
@@ -251,6 +256,9 @@ encoder event =
 
         VisualQuality x ->
             encoderWith "visualQuality" VisualQuality.encoder x
+
+        Volume x ->
+            encoderWith "volume" Volume.encoder x
 
 
 encoderWith : String -> (a -> Json.Decode.Value) -> a -> Json.Encode.Value

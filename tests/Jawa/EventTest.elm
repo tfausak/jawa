@@ -39,6 +39,7 @@ import Jawa.Event.UserInactive as UserInactive
 import Jawa.Event.UserInactiveTest as UserInactive
 import Jawa.Event.ViewableTest as Viewable
 import Jawa.Event.VisualQualityTest as VisualQuality
+import Jawa.Event.VolumeTest as Volume
 import Jawa.MediaType as MT
 import Jawa.Metadata as M
 import Jawa.PauseReason as PaR
@@ -400,6 +401,17 @@ test =
                 , reason = QR.Api
                 }
             )
+        , TestExtra.testCodec "works with volume"
+            Event.decoder
+            Event.encoder
+            """ {
+                "type": "volume",
+                "volume": 0.1
+            } """
+            (Event.Volume
+                { volume = 0.1
+                }
+            )
         ]
 
 
@@ -433,4 +445,5 @@ fuzzer =
         , Fuzz.map Event.UserInactive UserInactive.fuzzer
         , Fuzz.map Event.Viewable Viewable.fuzzer
         , Fuzz.map Event.VisualQuality VisualQuality.fuzzer
+        , Fuzz.map Event.Volume Volume.fuzzer
         ]
