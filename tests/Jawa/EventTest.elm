@@ -15,6 +15,7 @@ import Jawa.Event.DisplayClick as DisplayClick
 import Jawa.Event.DisplayClickTest as DisplayClick
 import Jawa.Event.FirstFrameTest as FirstFrame
 import Jawa.Event.FullscreenTest as Fullscreen
+import Jawa.Event.IdleTest as Idle
 import Jawa.Event.MediaTypeTest as MediaType
 import Jawa.Event.PauseTest as Pause
 import Jawa.Event.PlayTest as Play
@@ -145,6 +146,21 @@ test =
             } """
             (Event.Fullscreen
                 { fullscreen = False
+                }
+            )
+        , TestExtra.testCodec "works with idle"
+            Event.decoder
+            Event.encoder
+            """ {
+                "newstate": "buffering",
+                "oldstate": "complete",
+                "reason": "error",
+                "type": "idle"
+            } """
+            (Event.Idle
+                { newstate = S.Buffering
+                , oldstate = S.Complete
+                , reason = S.Error
                 }
             )
         , TestExtra.testCodec "works with mediaType"
@@ -329,6 +345,7 @@ fuzzer =
         , Fuzz.map Event.DisplayClick DisplayClick.fuzzer
         , Fuzz.map Event.FirstFrame FirstFrame.fuzzer
         , Fuzz.map Event.Fullscreen Fullscreen.fuzzer
+        , Fuzz.map Event.Idle Idle.fuzzer
         , Fuzz.map Event.MediaType MediaType.fuzzer
         , Fuzz.map Event.Pause Pause.fuzzer
         , Fuzz.map Event.Play Play.fuzzer

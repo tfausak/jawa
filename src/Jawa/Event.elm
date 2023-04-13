@@ -16,6 +16,7 @@ import Jawa.Event.Complete as Complete
 import Jawa.Event.DisplayClick as DisplayClick
 import Jawa.Event.FirstFrame as FirstFrame
 import Jawa.Event.Fullscreen as Fullscreen
+import Jawa.Event.Idle as Idle
 import Jawa.Event.MediaType as MediaType
 import Jawa.Event.Pause as Pause
 import Jawa.Event.Play as Play
@@ -46,6 +47,7 @@ type Event
     | DisplayClick DisplayClick.DisplayClick
     | FirstFrame FirstFrame.FirstFrame
     | Fullscreen Fullscreen.Fullscreen
+    | Idle Idle.Idle
     | MediaType MediaType.MediaType
     | Pause Pause.Pause
     | Play Play.Play
@@ -99,6 +101,9 @@ decoderWith string =
 
         "fullscreen" ->
             Json.Decode.map Fullscreen Fullscreen.decoder
+
+        "idle" ->
+            Json.Decode.map Idle Idle.decoder
 
         "mediaType" ->
             Json.Decode.map MediaType MediaType.decoder
@@ -177,6 +182,9 @@ encoder event =
 
         Fullscreen x ->
             encoderWith "fullscreen" Fullscreen.encoder x
+
+        Idle x ->
+            encoderWith "idle" Idle.encoder x
 
         MediaType x ->
             encoderWith "mediaType" MediaType.encoder x
