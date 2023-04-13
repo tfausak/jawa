@@ -22,6 +22,7 @@ import Jawa.Event.MediaType as MediaType
 import Jawa.Event.Mute as Mute
 import Jawa.Event.Pause as Pause
 import Jawa.Event.Play as Play
+import Jawa.Event.PlaybackRateChanged as PlaybackRateChanged
 import Jawa.Event.PlaylistComplete as PlaylistComplete
 import Jawa.Event.ProviderFirstFrame as ProviderFirstFrame
 import Jawa.Event.Ready as Ready
@@ -58,6 +59,7 @@ type Event
     | Mute Mute.Mute
     | Pause Pause.Pause
     | Play Play.Play
+    | PlaybackRateChanged PlaybackRateChanged.PlaybackRateChanged
     | PlaylistComplete PlaylistComplete.PlaylistComplete
     | ProviderFirstFrame ProviderFirstFrame.ProviderFirstFrame
     | Ready Ready.Ready
@@ -129,6 +131,9 @@ decoderWith string =
 
         "play" ->
             Json.Decode.map Play Play.decoder
+
+        "playbackRateChanged" ->
+            Json.Decode.map PlaybackRateChanged PlaybackRateChanged.decoder
 
         "playlistComplete" ->
             Json.Decode.map PlaylistComplete PlaylistComplete.decoder
@@ -225,6 +230,9 @@ encoder event =
 
         Play x ->
             encoderWith "play" Play.encoder x
+
+        PlaybackRateChanged x ->
+            encoderWith "playbackRateChanged" PlaybackRateChanged.encoder x
 
         PlaylistComplete x ->
             encoderWith "playlistComplete" PlaylistComplete.encoder x

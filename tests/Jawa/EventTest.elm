@@ -21,6 +21,7 @@ import Jawa.Event.MediaTypeTest as MediaType
 import Jawa.Event.MuteTest as Mute
 import Jawa.Event.PauseTest as Pause
 import Jawa.Event.PlayTest as Play
+import Jawa.Event.PlaybackRateChangedTest as PlaybackRateChanged
 import Jawa.Event.PlaylistComplete as PlaylistComplete
 import Jawa.Event.PlaylistCompleteTest as PlaylistComplete
 import Jawa.Event.ProviderFirstFrame as ProviderFirstFrame
@@ -241,6 +242,17 @@ test =
                 , viewable = V.Hidden
                 }
             )
+        , TestExtra.testCodec "works with playbackRateChanged"
+            Event.decoder
+            Event.encoder
+            """ {
+                "playbackRate": 0.1,
+                "type": "playbackRateChanged"
+            } """
+            (Event.PlaybackRateChanged
+                { playbackRate = 0.1
+                }
+            )
         , TestExtra.testCodec "works with playlistComplete"
             Event.decoder
             Event.encoder
@@ -445,6 +457,7 @@ fuzzer =
         , Fuzz.map Event.Mute Mute.fuzzer
         , Fuzz.map Event.Pause Pause.fuzzer
         , Fuzz.map Event.Play Play.fuzzer
+        , Fuzz.map Event.PlaybackRateChanged PlaybackRateChanged.fuzzer
         , Fuzz.map Event.PlaylistComplete PlaylistComplete.fuzzer
         , Fuzz.map Event.ProviderFirstFrame ProviderFirstFrame.fuzzer
         , Fuzz.map Event.Ready Ready.fuzzer
