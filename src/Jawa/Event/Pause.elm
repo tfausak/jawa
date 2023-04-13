@@ -6,6 +6,7 @@ module Jawa.Event.Pause exposing (Pause, decoder, encoder)
 
 -}
 
+import Jawa.PauseReason as PR
 import Jawa.State as S
 import Jawa.Viewable as V
 import Json.Decode
@@ -17,7 +18,7 @@ import Json.Encode
 type alias Pause =
     { newstate : S.State
     , oldstate : S.State
-    , pauseReason : String
+    , pauseReason : PR.PauseReason
     , reason : S.State
     , viewable : V.Viewable
     }
@@ -30,7 +31,7 @@ decoder =
     Json.Decode.map5 Pause
         (Json.Decode.field "newstate" S.decoder)
         (Json.Decode.field "oldstate" S.decoder)
-        (Json.Decode.field "pauseReason" Json.Decode.string)
+        (Json.Decode.field "pauseReason" PR.decoder)
         (Json.Decode.field "reason" S.decoder)
         (Json.Decode.field "viewable" V.decoder)
 
@@ -42,7 +43,7 @@ encoder x =
     Json.Encode.object
         [ ( "newstate", S.encoder x.newstate )
         , ( "oldstate", S.encoder x.oldstate )
-        , ( "pauseReason", Json.Encode.string x.pauseReason )
+        , ( "pauseReason", PR.encoder x.pauseReason )
         , ( "reason", S.encoder x.reason )
         , ( "viewable", V.encoder x.viewable )
         ]

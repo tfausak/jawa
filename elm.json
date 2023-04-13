@@ -25,6 +25,7 @@
         "Jawa.Event.Viewable",
         "Jawa.Event",
         "Jawa.MediaType",
+        "Jawa.PauseReason",
         "Jawa.SeekRange",
         "Jawa.State",
         "Jawa.Viewable"
