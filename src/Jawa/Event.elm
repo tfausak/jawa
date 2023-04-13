@@ -192,11 +192,11 @@ encoder event =
         Breakpoint x ->
             encoderWith "breakpoint" Breakpoint.encoder x
 
-        BufferFull x ->
-            encoderWith "bufferFull" BufferFull.encoder x
-
         BufferChange x ->
             encoderWith "bufferChange" BufferChange.encoder x
+
+        BufferFull x ->
+            encoderWith "bufferFull" BufferFull.encoder x
 
         Click x ->
             encoderWith "click" Click.encoder x
