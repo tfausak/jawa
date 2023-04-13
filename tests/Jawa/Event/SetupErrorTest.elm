@@ -5,15 +5,15 @@ module Jawa.Event.SetupErrorTest exposing
 
 import Fuzz
 import Jawa.Event.SetupError as SetupError
-import Jawa.TestHelper as TestHelper
+import Jawa.Test.Extra as TestExtra
 import Test
 
 
 test : Test.Test
 test =
     Test.concat
-        [ TestHelper.fuzzCodec "round trips" SetupError.decoder SetupError.encoder fuzzer
-        , TestHelper.testCodec "works"
+        [ TestExtra.fuzzCodec "round trips" SetupError.decoder SetupError.encoder fuzzer
+        , TestExtra.testCodec "works"
             SetupError.decoder
             SetupError.encoder
             """ {

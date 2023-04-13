@@ -6,7 +6,7 @@ module Jawa.Event.Ready exposing (Ready, decoder, encoder)
 
 -}
 
-import Jawa.Visibility as Visibility
+import Jawa.Viewable as V
 import Json.Decode
 import Json.Encode
 
@@ -15,7 +15,7 @@ import Json.Encode
 -}
 type alias Ready =
     { setupTime : Float
-    , viewable : Visibility.Visibility
+    , viewable : V.Viewable
     }
 
 
@@ -25,7 +25,7 @@ decoder : Json.Decode.Decoder Ready
 decoder =
     Json.Decode.map2 Ready
         (Json.Decode.field "setupTime" Json.Decode.float)
-        (Json.Decode.field "viewable" Visibility.decoder)
+        (Json.Decode.field "viewable" V.decoder)
 
 
 {-| A JSON encoder.
@@ -34,5 +34,5 @@ encoder : Ready -> Json.Encode.Value
 encoder x =
     Json.Encode.object
         [ ( "setupTime", Json.Encode.float x.setupTime )
-        , ( "viewable", Visibility.encoder x.viewable )
+        , ( "viewable", V.encoder x.viewable )
         ]

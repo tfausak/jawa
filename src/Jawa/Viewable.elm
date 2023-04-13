@@ -1,8 +1,8 @@
-module Jawa.Visibility exposing (Visibility(..), decoder, encoder)
+module Jawa.Viewable exposing (Viewable(..), decoder, encoder)
 
 {-|
 
-@docs Visibility, decoder, encoder
+@docs Viewable, decoder, encoder
 
 -}
 
@@ -12,14 +12,14 @@ import Json.Encode
 
 {-| <https://docs.jwplayer.com/players/reference/viewability-events-1#onviewable>
 -}
-type Visibility
+type Viewable
     = Hidden
     | Visible
 
 
 {-| A JSON decoder.
 -}
-decoder : Json.Decode.Decoder Visibility
+decoder : Json.Decode.Decoder Viewable
 decoder =
     Json.Decode.int
         |> Json.Decode.andThen
@@ -32,15 +32,15 @@ decoder =
                         Json.Decode.succeed Visible
 
                     _ ->
-                        Json.Decode.fail <| "invalid Visibility: " ++ String.fromInt int
+                        Json.Decode.fail <| "invalid Viewable: " ++ String.fromInt int
             )
 
 
 {-| A JSON encoder.
 -}
-encoder : Visibility -> Json.Encode.Value
-encoder visibility =
-    case visibility of
+encoder : Viewable -> Json.Encode.Value
+encoder viewable =
+    case viewable of
         Hidden ->
             Json.Encode.int 0
 

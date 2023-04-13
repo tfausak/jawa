@@ -5,15 +5,15 @@ module Jawa.Event.RemoveTest exposing
 
 import Fuzz
 import Jawa.Event.Remove as Remove
-import Jawa.TestHelper as TestHelper
+import Jawa.Test.Extra as TestExtra
 import Test
 
 
 test : Test.Test
 test =
     Test.concat
-        [ TestHelper.fuzzCodec "round trips" Remove.decoder Remove.encoder fuzzer
-        , TestHelper.testCodec "works"
+        [ TestExtra.fuzzCodec "round trips" Remove.decoder Remove.encoder fuzzer
+        , TestExtra.testCodec "works"
             Remove.decoder
             Remove.encoder
             """ {
