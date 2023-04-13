@@ -17,6 +17,7 @@ import Jawa.Event.MediaType as MediaType
 import Jawa.Event.ProviderFirstFrame as ProviderFirstFrame
 import Jawa.Event.Ready as Ready
 import Jawa.Event.Remove as Remove
+import Jawa.Event.Resize as Resize
 import Jawa.Event.Seeked as Seeked
 import Jawa.Event.SetupError as SetupError
 import Jawa.Event.UserActive as UserActive
@@ -39,6 +40,7 @@ type Event
     | ProviderFirstFrame ProviderFirstFrame.ProviderFirstFrame
     | Ready Ready.Ready
     | Remove Remove.Remove
+    | Resize Resize.Resize
     | Seeked Seeked.Seeked
     | SetupError SetupError.SetupError
     | UserActive UserActive.UserActive
@@ -86,6 +88,9 @@ decoderWith string =
 
         "remove" ->
             Json.Decode.map Remove Remove.decoder
+
+        "resize" ->
+            Json.Decode.map Resize Resize.decoder
 
         "seeked" ->
             Json.Decode.map Seeked Seeked.decoder
@@ -140,6 +145,9 @@ encoder event =
 
         Remove x ->
             encoderWith "remove" Remove.encoder x
+
+        Resize x ->
+            encoderWith "resize" Resize.encoder x
 
         Seeked x ->
             encoderWith "seeked" Seeked.encoder x

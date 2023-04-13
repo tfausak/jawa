@@ -16,6 +16,7 @@ import Jawa.Event.ProviderFirstFrameTest as ProviderFirstFrame
 import Jawa.Event.ReadyTest as Ready
 import Jawa.Event.Remove as Remove
 import Jawa.Event.RemoveTest as Remove
+import Jawa.Event.ResizeTest as Resize
 import Jawa.Event.Seeked as Seeked
 import Jawa.Event.SeekedTest as Seeked
 import Jawa.Event.SetupErrorTest as SetupError
@@ -130,6 +131,19 @@ test =
                 "type": "remove"
             } """
             (Event.Remove Remove.Remove)
+        , TestExtra.testCodec "works with resize"
+            Event.decoder
+            Event.encoder
+            """ {
+                "height": 0,
+                "type": "resize",
+                "width": 1
+            } """
+            (Event.Resize
+                { height = 0
+                , width = 1
+                }
+            )
         , TestExtra.testCodec "works with seeked"
             Event.decoder
             Event.encoder
@@ -190,6 +204,7 @@ fuzzer =
         , Fuzz.map Event.ProviderFirstFrame ProviderFirstFrame.fuzzer
         , Fuzz.map Event.Ready Ready.fuzzer
         , Fuzz.map Event.Remove Remove.fuzzer
+        , Fuzz.map Event.Resize Resize.fuzzer
         , Fuzz.map Event.Seeked Seeked.fuzzer
         , Fuzz.map Event.SetupError SetupError.fuzzer
         , Fuzz.map Event.UserActive UserActive.fuzzer
