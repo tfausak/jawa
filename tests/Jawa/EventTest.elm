@@ -28,9 +28,12 @@ import Jawa.Event.UserActiveTest as UserActive
 import Jawa.Event.UserInactive as UserInactive
 import Jawa.Event.UserInactiveTest as UserInactive
 import Jawa.Event.ViewableTest as Viewable
+import Jawa.Event.VisualQualityTest as VisualQuality
 import Jawa.MediaType as MT
 import Jawa.PauseReason as PaR
 import Jawa.PlayReason as PlR
+import Jawa.QualityMode as QM
+import Jawa.QualityReason as QR
 import Jawa.State as S
 import Jawa.Test.Extra as TestExtra
 import Jawa.Viewable as V
@@ -257,6 +260,33 @@ test =
             (Event.Viewable
                 { viewable = V.Hidden }
             )
+        , TestExtra.testCodec "works with visualQuality"
+            Event.decoder
+            Event.encoder
+            """ {
+                "level": {
+                    "bitrate": 0,
+                    "height": 1,
+                    "index": 2,
+                    "label": "a",
+                    "width": 3
+                },
+                "mode": "auto",
+                "reason": "api",
+                "type": "visualQuality"
+            } """
+            (Event.VisualQuality
+                { level =
+                    { bitrate = 0
+                    , height = 1
+                    , index = 2
+                    , label = "a"
+                    , width = 3
+                    }
+                , mode = QM.Auto
+                , reason = QR.Api
+                }
+            )
         ]
 
 
@@ -282,4 +312,5 @@ fuzzer =
         , Fuzz.map Event.UserActive UserActive.fuzzer
         , Fuzz.map Event.UserInactive UserInactive.fuzzer
         , Fuzz.map Event.Viewable Viewable.fuzzer
+        , Fuzz.map Event.VisualQuality VisualQuality.fuzzer
         ]

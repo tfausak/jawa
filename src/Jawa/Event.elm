@@ -26,6 +26,7 @@ import Jawa.Event.SetupError as SetupError
 import Jawa.Event.UserActive as UserActive
 import Jawa.Event.UserInactive as UserInactive
 import Jawa.Event.Viewable as Viewable
+import Jawa.Event.VisualQuality as VisualQuality
 import Json.Decode
 import Json.Encode
 
@@ -52,6 +53,7 @@ type Event
     | UserActive UserActive.UserActive
     | UserInactive UserInactive.UserInactive
     | Viewable Viewable.Viewable
+    | VisualQuality VisualQuality.VisualQuality
 
 
 {-| A JSON decoder.
@@ -122,6 +124,9 @@ decoderWith string =
         "viewable" ->
             Json.Decode.map Viewable Viewable.decoder
 
+        "visualQuality" ->
+            Json.Decode.map VisualQuality VisualQuality.decoder
+
         _ ->
             Json.Decode.fail <| "invalid Event: " ++ string
 
@@ -187,6 +192,9 @@ encoder event =
 
         Viewable x ->
             encoderWith "viewable" Viewable.encoder x
+
+        VisualQuality x ->
+            encoderWith "visualQuality" VisualQuality.encoder x
 
 
 encoderWith : String -> (a -> Json.Decode.Value) -> a -> Json.Encode.Value
