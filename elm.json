@@ -19,6 +19,7 @@
         "Jawa.Event.SetupError",
         "Jawa.Event.UserActive",
         "Jawa.Event.UserInactive",
+        "Jawa.Event.Viewable",
         "Jawa.Event",
         "Jawa.MediaType",
         "Jawa.Viewable"

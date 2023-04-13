@@ -21,6 +21,7 @@ import Jawa.Event.Seeked as Seeked
 import Jawa.Event.SetupError as SetupError
 import Jawa.Event.UserActive as UserActive
 import Jawa.Event.UserInactive as UserInactive
+import Jawa.Event.Viewable as Viewable
 import Json.Decode
 import Json.Encode
 
@@ -42,6 +43,7 @@ type Event
     | SetupError SetupError.SetupError
     | UserActive UserActive.UserActive
     | UserInactive UserInactive.UserInactive
+    | Viewable Viewable.Viewable
 
 
 {-| A JSON decoder.
@@ -97,6 +99,9 @@ decoderWith string =
         "userInactive" ->
             Json.Decode.map UserInactive UserInactive.decoder
 
+        "viewable" ->
+            Json.Decode.map Viewable Viewable.decoder
+
         _ ->
             Json.Decode.fail <| "invalid Event: " ++ string
 
@@ -147,6 +152,9 @@ encoder event =
 
         UserInactive x ->
             encoderWith "userInactive" UserInactive.encoder x
+
+        Viewable x ->
+            encoderWith "viewable" Viewable.encoder x
 
 
 encoderWith : String -> (a -> Json.Decode.Value) -> a -> Json.Encode.Value

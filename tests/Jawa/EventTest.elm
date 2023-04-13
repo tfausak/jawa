@@ -23,6 +23,7 @@ import Jawa.Event.UserActive as UserActive
 import Jawa.Event.UserActiveTest as UserActive
 import Jawa.Event.UserInactive as UserInactive
 import Jawa.Event.UserInactiveTest as UserInactive
+import Jawa.Event.ViewableTest as Viewable
 import Jawa.MediaType as MT
 import Jawa.Test.Extra as TestExtra
 import Jawa.Viewable as V
@@ -163,6 +164,16 @@ test =
                 "type": "userInactive"
             } """
             (Event.UserInactive UserInactive.UserInactive)
+        , TestExtra.testCodec "works with viewable"
+            Event.decoder
+            Event.encoder
+            """ {
+                "viewable": 0,
+                "type": "viewable"
+            } """
+            (Event.Viewable
+                { viewable = V.Hidden }
+            )
         ]
 
 
@@ -183,4 +194,5 @@ fuzzer =
         , Fuzz.map Event.SetupError SetupError.fuzzer
         , Fuzz.map Event.UserActive UserActive.fuzzer
         , Fuzz.map Event.UserInactive UserInactive.fuzzer
+        , Fuzz.map Event.Viewable Viewable.fuzzer
         ]
