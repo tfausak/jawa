@@ -9,6 +9,8 @@ import Jawa.Event.BufferChangeTest as BufferChange
 import Jawa.Event.BufferFull as BufferFull
 import Jawa.Event.BufferFullTest as BufferFull
 import Jawa.Event.ClickTest as Click
+import Jawa.Event.Complete as Complete
+import Jawa.Event.CompleteTest as Complete
 import Jawa.Event.DisplayClick as DisplayClick
 import Jawa.Event.DisplayClickTest as DisplayClick
 import Jawa.Event.FirstFrameTest as FirstFrame
@@ -107,6 +109,13 @@ test =
                 { isTrusted = False
                 }
             )
+        , TestExtra.testCodec "works with complete"
+            Event.decoder
+            Event.encoder
+            """ {
+                "type": "complete"
+            } """
+            (Event.Complete Complete.Complete)
         , TestExtra.testCodec "works with displayClick"
             Event.decoder
             Event.encoder
@@ -307,6 +316,7 @@ fuzzer =
         , Fuzz.map Event.BufferChange BufferChange.fuzzer
         , Fuzz.map Event.BufferFull BufferFull.fuzzer
         , Fuzz.map Event.Click Click.fuzzer
+        , Fuzz.map Event.Complete Complete.fuzzer
         , Fuzz.map Event.DisplayClick DisplayClick.fuzzer
         , Fuzz.map Event.FirstFrame FirstFrame.fuzzer
         , Fuzz.map Event.Fullscreen Fullscreen.fuzzer
