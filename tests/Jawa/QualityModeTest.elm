@@ -28,7 +28,7 @@ test =
 
 fuzzer : Fuzz.Fuzzer QM.QualityMode
 fuzzer =
-    Fuzz.oneOf
-        [ Fuzz.constant QM.Auto
-        , Fuzz.constant QM.Manual
+    Fuzz.oneOfValues
+        [ QM.Auto
+        , QM.Manual
         ]

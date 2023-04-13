@@ -28,7 +28,7 @@ test =
 
 fuzzer : Fuzz.Fuzzer V.Viewable
 fuzzer =
-    Fuzz.oneOf
-        [ Fuzz.constant V.Hidden
-        , Fuzz.constant V.Visible
+    Fuzz.oneOfValues
+        [ V.Hidden
+        , V.Visible
         ]

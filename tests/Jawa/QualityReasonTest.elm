@@ -33,8 +33,8 @@ test =
 
 fuzzer : Fuzz.Fuzzer QR.QualityReason
 fuzzer =
-    Fuzz.oneOf
-        [ Fuzz.constant QR.Api
-        , Fuzz.constant QR.Auto
-        , Fuzz.constant QR.InitialChoice
+    Fuzz.oneOfValues
+        [ QR.Api
+        , QR.Auto
+        , QR.InitialChoice
         ]

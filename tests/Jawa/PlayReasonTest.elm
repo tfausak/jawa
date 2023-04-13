@@ -48,11 +48,11 @@ test =
 
 fuzzer : Fuzz.Fuzzer PlR.PlayReason
 fuzzer =
-    Fuzz.oneOf
-        [ Fuzz.constant PlR.Autostart
-        , Fuzz.constant PlR.External
-        , Fuzz.constant PlR.Interaction
-        , Fuzz.constant PlR.Playlist
-        , Fuzz.constant PlR.RelatedAuto
-        , Fuzz.constant PlR.RelatedInteraction
+    Fuzz.oneOfValues
+        [ PlR.Autostart
+        , PlR.External
+        , PlR.Interaction
+        , PlR.Playlist
+        , PlR.RelatedAuto
+        , PlR.RelatedInteraction
         ]

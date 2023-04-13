@@ -28,7 +28,7 @@ test =
 
 fuzzer : Fuzz.Fuzzer MT.MediaType
 fuzzer =
-    Fuzz.oneOf
-        [ Fuzz.constant MT.Audio
-        , Fuzz.constant MT.Video
+    Fuzz.oneOfValues
+        [ MT.Audio
+        , MT.Video
         ]

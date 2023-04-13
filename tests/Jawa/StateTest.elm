@@ -58,13 +58,13 @@ test =
 
 fuzzer : Fuzz.Fuzzer S.State
 fuzzer =
-    Fuzz.oneOf
-        [ Fuzz.constant S.Buffering
-        , Fuzz.constant S.Complete
-        , Fuzz.constant S.Error
-        , Fuzz.constant S.Idle
-        , Fuzz.constant S.Loading
-        , Fuzz.constant S.Paused
-        , Fuzz.constant S.Playing
-        , Fuzz.constant S.Stalled
+    Fuzz.oneOfValues
+        [ S.Buffering
+        , S.Complete
+        , S.Error
+        , S.Idle
+        , S.Loading
+        , S.Paused
+        , S.Playing
+        , S.Stalled
         ]

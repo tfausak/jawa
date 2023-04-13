@@ -33,8 +33,8 @@ test =
 
 fuzzer : Fuzz.Fuzzer PaR.PauseReason
 fuzzer =
-    Fuzz.oneOf
-        [ Fuzz.constant PaR.External
-        , Fuzz.constant PaR.Interaction
-        , Fuzz.constant PaR.Viewable
+    Fuzz.oneOfValues
+        [ PaR.External
+        , PaR.Interaction
+        , PaR.Viewable
         ]
