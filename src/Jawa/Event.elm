@@ -25,6 +25,7 @@ import Jawa.Event.ProviderFirstFrame as ProviderFirstFrame
 import Jawa.Event.Ready as Ready
 import Jawa.Event.Remove as Remove
 import Jawa.Event.Resize as Resize
+import Jawa.Event.Seek as Seek
 import Jawa.Event.Seeked as Seeked
 import Jawa.Event.SetupError as SetupError
 import Jawa.Event.Time as Time
@@ -57,6 +58,7 @@ type Event
     | Ready Ready.Ready
     | Remove Remove.Remove
     | Resize Resize.Resize
+    | Seek Seek.Seek
     | Seeked Seeked.Seeked
     | SetupError SetupError.SetupError
     | Time Time.Time
@@ -130,6 +132,9 @@ decoderWith string =
 
         "resize" ->
             Json.Decode.map Resize Resize.decoder
+
+        "seek" ->
+            Json.Decode.map Seek Seek.decoder
 
         "seeked" ->
             Json.Decode.map Seeked Seeked.decoder
@@ -214,6 +219,9 @@ encoder event =
 
         Resize x ->
             encoderWith "resize" Resize.encoder x
+
+        Seek x ->
+            encoderWith "seek" Seek.encoder x
 
         Seeked x ->
             encoderWith "seeked" Seeked.encoder x

@@ -23,6 +23,7 @@
         "Jawa.Event.Ready",
         "Jawa.Event.Remove",
         "Jawa.Event.Resize",
+        "Jawa.Event.Seek",
         "Jawa.Event.Seeked",
         "Jawa.Event.SetupError",
         "Jawa.Event.Time",

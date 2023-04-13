@@ -27,6 +27,7 @@ import Jawa.Event.ReadyTest as Ready
 import Jawa.Event.Remove as Remove
 import Jawa.Event.RemoveTest as Remove
 import Jawa.Event.ResizeTest as Resize
+import Jawa.Event.SeekTest as Seek
 import Jawa.Event.Seeked as Seeked
 import Jawa.Event.SeekedTest as Seeked
 import Jawa.Event.SetupErrorTest as SetupError
@@ -262,6 +263,33 @@ test =
                 , width = 1
                 }
             )
+        , TestExtra.testCodec "works with seek"
+            Event.decoder
+            Event.encoder
+            """ {
+                "currentTime": 0.1,
+                "duration": 0.2,
+                "metadata": null,
+                "offset": 0.3,
+                "position": 0.4,
+                "seekRange": {
+                    "end": 0.5,
+                    "start": 0.6
+                },
+                "type": "seek"
+            } """
+            (Event.Seek
+                { currentTime = 0.1
+                , duration = 0.2
+                , metadata = M.Metadata Json.Encode.null
+                , offset = 0.3
+                , position = 0.4
+                , seekRange =
+                    { end = 0.5
+                    , start = 0.6
+                    }
+                }
+            )
         , TestExtra.testCodec "works with seeked"
             Event.decoder
             Event.encoder
@@ -384,6 +412,7 @@ fuzzer =
         , Fuzz.map Event.Ready Ready.fuzzer
         , Fuzz.map Event.Remove Remove.fuzzer
         , Fuzz.map Event.Resize Resize.fuzzer
+        , Fuzz.map Event.Seek Seek.fuzzer
         , Fuzz.map Event.Seeked Seeked.fuzzer
         , Fuzz.map Event.SetupError SetupError.fuzzer
         , Fuzz.map Event.Time Time.fuzzer
