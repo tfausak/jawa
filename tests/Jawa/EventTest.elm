@@ -38,6 +38,7 @@ import Jawa.Event.UserInactiveTest as UserInactive
 import Jawa.Event.ViewableTest as Viewable
 import Jawa.Event.VisualQualityTest as VisualQuality
 import Jawa.MediaType as MT
+import Jawa.Metadata as M
 import Jawa.PauseReason as PaR
 import Jawa.PlayReason as PlR
 import Jawa.QualityMode as QM
@@ -45,6 +46,7 @@ import Jawa.QualityReason as QR
 import Jawa.State as S
 import Jawa.Test.Extra as TestExtra
 import Jawa.Viewable as V
+import Json.Encode
 import Test
 
 
@@ -286,6 +288,7 @@ test =
             """ {
                 "currentTime": 0.1,
                 "duration": 0.2,
+                "metadata": null,
                 "position": 0.3,
                 "seekRange": {
                     "end": 0.4,
@@ -297,6 +300,7 @@ test =
             (Event.Time
                 { currentTime = 0.1
                 , duration = 0.2
+                , metadata = M.Metadata Json.Encode.null
                 , position = 0.3
                 , seekRange =
                     { end = 0.4

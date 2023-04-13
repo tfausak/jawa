@@ -32,6 +32,7 @@
         "Jawa.Event.VisualQuality",
         "Jawa.Event",
         "Jawa.MediaType",
+        "Jawa.Metadata",
         "Jawa.PauseReason",
         "Jawa.PlayReason",
         "Jawa.QualityLevel",
