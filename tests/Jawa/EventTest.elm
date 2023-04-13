@@ -17,6 +17,7 @@ import Jawa.Event.FirstFrameTest as FirstFrame
 import Jawa.Event.FullscreenTest as Fullscreen
 import Jawa.Event.IdleTest as Idle
 import Jawa.Event.MediaTypeTest as MediaType
+import Jawa.Event.MuteTest as Mute
 import Jawa.Event.PauseTest as Pause
 import Jawa.Event.PlayTest as Play
 import Jawa.Event.PlaylistComplete as PlaylistComplete
@@ -176,6 +177,17 @@ test =
             } """
             (Event.MediaType
                 { mediaType = MT.Audio
+                }
+            )
+        , TestExtra.testCodec "works with mute"
+            Event.decoder
+            Event.encoder
+            """ {
+                "mute": false,
+                "type": "mute"
+            } """
+            (Event.Mute
+                { mute = False
                 }
             )
         , TestExtra.testCodec "works with pause"
@@ -405,6 +417,7 @@ fuzzer =
         , Fuzz.map Event.Fullscreen Fullscreen.fuzzer
         , Fuzz.map Event.Idle Idle.fuzzer
         , Fuzz.map Event.MediaType MediaType.fuzzer
+        , Fuzz.map Event.Mute Mute.fuzzer
         , Fuzz.map Event.Pause Pause.fuzzer
         , Fuzz.map Event.Play Play.fuzzer
         , Fuzz.map Event.PlaylistComplete PlaylistComplete.fuzzer

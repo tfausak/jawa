@@ -16,6 +16,7 @@
         "Jawa.Event.Fullscreen",
         "Jawa.Event.Idle",
         "Jawa.Event.MediaType",
+        "Jawa.Event.Mute",
         "Jawa.Event.Pause",
         "Jawa.Event.Play",
         "Jawa.Event.PlaylistComplete",
