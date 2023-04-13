@@ -16,6 +16,7 @@ import Jawa.Event.FirstFrame as FirstFrame
 import Jawa.Event.Fullscreen as Fullscreen
 import Jawa.Event.MediaType as MediaType
 import Jawa.Event.Pause as Pause
+import Jawa.Event.Play as Play
 import Jawa.Event.ProviderFirstFrame as ProviderFirstFrame
 import Jawa.Event.Ready as Ready
 import Jawa.Event.Remove as Remove
@@ -41,6 +42,7 @@ type Event
     | Fullscreen Fullscreen.Fullscreen
     | MediaType MediaType.MediaType
     | Pause Pause.Pause
+    | Play Play.Play
     | ProviderFirstFrame ProviderFirstFrame.ProviderFirstFrame
     | Ready Ready.Ready
     | Remove Remove.Remove
@@ -89,6 +91,9 @@ decoderWith string =
 
         "pause" ->
             Json.Decode.map Pause Pause.decoder
+
+        "play" ->
+            Json.Decode.map Play Play.decoder
 
         "providerFirstFrame" ->
             Json.Decode.map ProviderFirstFrame ProviderFirstFrame.decoder
@@ -152,6 +157,9 @@ encoder event =
 
         Pause x ->
             encoderWith "pause" Pause.encoder x
+
+        Play x ->
+            encoderWith "play" Play.encoder x
 
         ProviderFirstFrame x ->
             encoderWith "providerFirstFrame" ProviderFirstFrame.encoder x

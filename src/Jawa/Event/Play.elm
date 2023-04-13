@@ -1,12 +1,12 @@
-module Jawa.Event.Pause exposing (Pause, decoder, encoder)
+module Jawa.Event.Play exposing (Play, decoder, encoder)
 
 {-|
 
-@docs Pause, decoder, encoder
+@docs Play, decoder, encoder
 
 -}
 
-import Jawa.PauseReason as PaR
+import Jawa.PlayReason as PlR
 import Jawa.State as S
 import Jawa.Viewable as V
 import Json.Decode
@@ -15,10 +15,10 @@ import Json.Encode
 
 {-| <https://docs.jwplayer.com/players/reference/playback-events-1#onpause>
 -}
-type alias Pause =
+type alias Play =
     { newstate : S.State
     , oldstate : S.State
-    , pauseReason : PaR.PauseReason
+    , playReason : PlR.PlayReason
     , reason : S.State
     , viewable : V.Viewable
     }
@@ -26,24 +26,24 @@ type alias Pause =
 
 {-| A JSON decoder.
 -}
-decoder : Json.Decode.Decoder Pause
+decoder : Json.Decode.Decoder Play
 decoder =
-    Json.Decode.map5 Pause
+    Json.Decode.map5 Play
         (Json.Decode.field "newstate" S.decoder)
         (Json.Decode.field "oldstate" S.decoder)
-        (Json.Decode.field "pauseReason" PaR.decoder)
+        (Json.Decode.field "playReason" PlR.decoder)
         (Json.Decode.field "reason" S.decoder)
         (Json.Decode.field "viewable" V.decoder)
 
 
 {-| A JSON encoder.
 -}
-encoder : Pause -> Json.Encode.Value
+encoder : Play -> Json.Encode.Value
 encoder x =
     Json.Encode.object
         [ ( "newstate", S.encoder x.newstate )
         , ( "oldstate", S.encoder x.oldstate )
-        , ( "pauseReason", PaR.encoder x.pauseReason )
+        , ( "playReason", PlR.encoder x.playReason )
         , ( "reason", S.encoder x.reason )
         , ( "viewable", V.encoder x.viewable )
         ]

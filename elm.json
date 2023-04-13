@@ -14,6 +14,7 @@
         "Jawa.Event.Fullscreen",
         "Jawa.Event.MediaType",
         "Jawa.Event.Pause",
+        "Jawa.Event.Play",
         "Jawa.Event.ProviderFirstFrame",
         "Jawa.Event.Ready",
         "Jawa.Event.Remove",
@@ -26,6 +27,7 @@
         "Jawa.Event",
         "Jawa.MediaType",
         "Jawa.PauseReason",
+        "Jawa.PlayReason",
         "Jawa.SeekRange",
         "Jawa.State",
         "Jawa.Viewable"

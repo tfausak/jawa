@@ -13,6 +13,7 @@ import Jawa.Event.FirstFrameTest as FirstFrame
 import Jawa.Event.FullscreenTest as Fullscreen
 import Jawa.Event.MediaTypeTest as MediaType
 import Jawa.Event.PauseTest as Pause
+import Jawa.Event.PlayTest as Play
 import Jawa.Event.ProviderFirstFrame as ProviderFirstFrame
 import Jawa.Event.ProviderFirstFrameTest as ProviderFirstFrame
 import Jawa.Event.ReadyTest as Ready
@@ -28,7 +29,8 @@ import Jawa.Event.UserInactive as UserInactive
 import Jawa.Event.UserInactiveTest as UserInactive
 import Jawa.Event.ViewableTest as Viewable
 import Jawa.MediaType as MT
-import Jawa.PauseReason as PR
+import Jawa.PauseReason as PaR
+import Jawa.PlayReason as PlR
 import Jawa.State as S
 import Jawa.Test.Extra as TestExtra
 import Jawa.Viewable as V
@@ -147,7 +149,26 @@ test =
             (Event.Pause
                 { newstate = S.Buffering
                 , oldstate = S.Complete
-                , pauseReason = PR.External
+                , pauseReason = PaR.External
+                , reason = S.Error
+                , viewable = V.Hidden
+                }
+            )
+        , TestExtra.testCodec "works with play"
+            Event.decoder
+            Event.encoder
+            """ {
+                "newstate": "buffering",
+                "oldstate": "complete",
+                "playReason": "autostart",
+                "reason": "error",
+                "type": "play",
+                "viewable": 0
+            } """
+            (Event.Play
+                { newstate = S.Buffering
+                , oldstate = S.Complete
+                , playReason = PlR.Autostart
                 , reason = S.Error
                 , viewable = V.Hidden
                 }
@@ -251,6 +272,7 @@ fuzzer =
         , Fuzz.map Event.Fullscreen Fullscreen.fuzzer
         , Fuzz.map Event.MediaType MediaType.fuzzer
         , Fuzz.map Event.Pause Pause.fuzzer
+        , Fuzz.map Event.Play Play.fuzzer
         , Fuzz.map Event.ProviderFirstFrame ProviderFirstFrame.fuzzer
         , Fuzz.map Event.Ready Ready.fuzzer
         , Fuzz.map Event.Remove Remove.fuzzer

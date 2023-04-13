@@ -4,7 +4,7 @@ module Jawa.PauseReasonTest exposing
     )
 
 import Fuzz
-import Jawa.PauseReason as PR
+import Jawa.PauseReason as PaR
 import Jawa.Test.Extra as TestExtra
 import Test
 
@@ -12,29 +12,29 @@ import Test
 test : Test.Test
 test =
     Test.concat
-        [ TestExtra.fuzzCodec "round trips" PR.decoder PR.encoder fuzzer
+        [ TestExtra.fuzzCodec "round trips" PaR.decoder PaR.encoder fuzzer
         , TestExtra.testCodec "works with external"
-            PR.decoder
-            PR.encoder
+            PaR.decoder
+            PaR.encoder
             "\"external\""
-            PR.External
+            PaR.External
         , TestExtra.testCodec "works with interaction"
-            PR.decoder
-            PR.encoder
+            PaR.decoder
+            PaR.encoder
             "\"interaction\""
-            PR.Interaction
+            PaR.Interaction
         , TestExtra.testCodec "works with viewable"
-            PR.decoder
-            PR.encoder
+            PaR.decoder
+            PaR.encoder
             "\"viewable\""
-            PR.Viewable
+            PaR.Viewable
         ]
 
 
-fuzzer : Fuzz.Fuzzer PR.PauseReason
+fuzzer : Fuzz.Fuzzer PaR.PauseReason
 fuzzer =
     Fuzz.oneOf
-        [ Fuzz.constant PR.External
-        , Fuzz.constant PR.Interaction
-        , Fuzz.constant PR.Viewable
+        [ Fuzz.constant PaR.External
+        , Fuzz.constant PaR.Interaction
+        , Fuzz.constant PaR.Viewable
         ]
