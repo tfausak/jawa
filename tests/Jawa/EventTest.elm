@@ -12,6 +12,7 @@ import Jawa.Event.DisplayClickTest as DisplayClick
 import Jawa.Event.FirstFrameTest as FirstFrame
 import Jawa.Event.FullscreenTest as Fullscreen
 import Jawa.Event.MediaTypeTest as MediaType
+import Jawa.Event.PauseTest as Pause
 import Jawa.Event.ProviderFirstFrame as ProviderFirstFrame
 import Jawa.Event.ProviderFirstFrameTest as ProviderFirstFrame
 import Jawa.Event.ReadyTest as Ready
@@ -130,6 +131,25 @@ test =
                 { mediaType = MT.Audio
                 }
             )
+        , TestExtra.testCodec "works with pause"
+            Event.decoder
+            Event.encoder
+            """ {
+                "newstate": "a",
+                "oldstate": "b",
+                "pauseReason": "c",
+                "reason": "d",
+                "type": "pause",
+                "viewable": 0
+            } """
+            (Event.Pause
+                { newstate = "a"
+                , oldstate = "b"
+                , pauseReason = "c"
+                , reason = "d"
+                , viewable = V.Hidden
+                }
+            )
         , TestExtra.testCodec "works with providerFirstFrame"
             Event.decoder
             Event.encoder
@@ -228,6 +248,7 @@ fuzzer =
         , Fuzz.map Event.FirstFrame FirstFrame.fuzzer
         , Fuzz.map Event.Fullscreen Fullscreen.fuzzer
         , Fuzz.map Event.MediaType MediaType.fuzzer
+        , Fuzz.map Event.Pause Pause.fuzzer
         , Fuzz.map Event.ProviderFirstFrame ProviderFirstFrame.fuzzer
         , Fuzz.map Event.Ready Ready.fuzzer
         , Fuzz.map Event.Remove Remove.fuzzer
