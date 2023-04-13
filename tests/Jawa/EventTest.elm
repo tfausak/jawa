@@ -18,6 +18,8 @@ import Jawa.Event.FullscreenTest as Fullscreen
 import Jawa.Event.MediaTypeTest as MediaType
 import Jawa.Event.PauseTest as Pause
 import Jawa.Event.PlayTest as Play
+import Jawa.Event.PlaylistComplete as PlaylistComplete
+import Jawa.Event.PlaylistCompleteTest as PlaylistComplete
 import Jawa.Event.ProviderFirstFrame as ProviderFirstFrame
 import Jawa.Event.ProviderFirstFrameTest as ProviderFirstFrame
 import Jawa.Event.ReadyTest as Ready
@@ -194,6 +196,13 @@ test =
                 , viewable = V.Hidden
                 }
             )
+        , TestExtra.testCodec "works with playlistComplete"
+            Event.decoder
+            Event.encoder
+            """ {
+                "type": "playlistComplete"
+            } """
+            (Event.PlaylistComplete PlaylistComplete.PlaylistComplete)
         , TestExtra.testCodec "works with providerFirstFrame"
             Event.decoder
             Event.encoder
@@ -323,6 +332,7 @@ fuzzer =
         , Fuzz.map Event.MediaType MediaType.fuzzer
         , Fuzz.map Event.Pause Pause.fuzzer
         , Fuzz.map Event.Play Play.fuzzer
+        , Fuzz.map Event.PlaylistComplete PlaylistComplete.fuzzer
         , Fuzz.map Event.ProviderFirstFrame ProviderFirstFrame.fuzzer
         , Fuzz.map Event.Ready Ready.fuzzer
         , Fuzz.map Event.Remove Remove.fuzzer

@@ -17,6 +17,7 @@
         "Jawa.Event.MediaType",
         "Jawa.Event.Pause",
         "Jawa.Event.Play",
+        "Jawa.Event.PlaylistComplete",
         "Jawa.Event.ProviderFirstFrame",
         "Jawa.Event.Ready",
         "Jawa.Event.Remove",
