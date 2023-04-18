@@ -20,6 +20,7 @@
         "Jawa.Event.Mute",
         "Jawa.Event.Pause",
         "Jawa.Event.PipEnter",
+        "Jawa.Event.PipLeave",
         "Jawa.Event.Play",
         "Jawa.Event.PlaybackRateChanged",
         "Jawa.Event.PlaylistComplete",
