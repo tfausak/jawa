@@ -1,4 +1,4 @@
-module Jawa.Event.Seeked exposing (Seeked(..), decoder, encoder)
+module Jawa.Event.Seeked exposing (Seeked, decoder, encoder)
 
 {-|
 
@@ -12,8 +12,8 @@ import Json.Encode
 
 {-| <https://docs.jwplayer.com/players/reference/seek-events-1#onseeked>
 -}
-type Seeked
-    = Seeked
+type alias Seeked =
+    {}
 
 
 {-| A JSON decoder.
@@ -21,7 +21,7 @@ type Seeked
 decoder : Json.Decode.Decoder Seeked
 decoder =
     Json.Decode.dict Json.Decode.value
-        |> Json.Decode.map (always Seeked)
+        |> Json.Decode.map (always {})
 
 
 {-| A JSON encoder.

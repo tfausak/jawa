@@ -1,4 +1,4 @@
-module Jawa.Event.UserInactive exposing (UserInactive(..), decoder, encoder)
+module Jawa.Event.UserInactive exposing (UserInactive, decoder, encoder)
 
 {-|
 
@@ -12,8 +12,8 @@ import Json.Encode
 
 {-| This event is not documented.
 -}
-type UserInactive
-    = UserInactive
+type alias UserInactive =
+    {}
 
 
 {-| A JSON decoder.
@@ -21,7 +21,7 @@ type UserInactive
 decoder : Json.Decode.Decoder UserInactive
 decoder =
     Json.Decode.dict Json.Decode.value
-        |> Json.Decode.map (always UserInactive)
+        |> Json.Decode.map (always {})
 
 
 {-| A JSON encoder.

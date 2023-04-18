@@ -18,10 +18,10 @@ test =
             Remove.encoder
             """ {
             } """
-            Remove.Remove
+            {}
         ]
 
 
 fuzzer : Fuzz.Fuzzer Remove.Remove
 fuzzer =
-    Fuzz.constant Remove.Remove
+    Fuzz.constant {}

@@ -18,10 +18,10 @@ test =
             PlaylistComplete.encoder
             """ {
             } """
-            PlaylistComplete.PlaylistComplete
+            {}
         ]
 
 
 fuzzer : Fuzz.Fuzzer PlaylistComplete.PlaylistComplete
 fuzzer =
-    Fuzz.constant PlaylistComplete.PlaylistComplete
+    Fuzz.constant {}

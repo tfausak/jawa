@@ -1,4 +1,4 @@
-module Jawa.Event.Remove exposing (Remove(..), decoder, encoder)
+module Jawa.Event.Remove exposing (Remove, decoder, encoder)
 
 {-|
 
@@ -12,8 +12,8 @@ import Json.Encode
 
 {-| <https://docs.jwplayer.com/players/reference/events-1#onremove>
 -}
-type Remove
-    = Remove
+type alias Remove =
+    {}
 
 
 {-| A JSON decoder.
@@ -21,7 +21,7 @@ type Remove
 decoder : Json.Decode.Decoder Remove
 decoder =
     Json.Decode.dict Json.Decode.value
-        |> Json.Decode.map (always Remove)
+        |> Json.Decode.map (always {})
 
 
 {-| A JSON encoder.

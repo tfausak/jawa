@@ -18,10 +18,10 @@ test =
             BufferFull.encoder
             """ {
             } """
-            BufferFull.BufferFull
+            {}
         ]
 
 
 fuzzer : Fuzz.Fuzzer BufferFull.BufferFull
 fuzzer =
-    Fuzz.constant BufferFull.BufferFull
+    Fuzz.constant {}

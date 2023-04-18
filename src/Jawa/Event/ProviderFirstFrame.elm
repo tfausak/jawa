@@ -1,4 +1,4 @@
-module Jawa.Event.ProviderFirstFrame exposing (ProviderFirstFrame(..), decoder, encoder)
+module Jawa.Event.ProviderFirstFrame exposing (ProviderFirstFrame, decoder, encoder)
 
 {-|
 
@@ -12,8 +12,8 @@ import Json.Encode
 
 {-| This event is not documented.
 -}
-type ProviderFirstFrame
-    = ProviderFirstFrame
+type alias ProviderFirstFrame =
+    {}
 
 
 {-| A JSON decoder.
@@ -21,7 +21,7 @@ type ProviderFirstFrame
 decoder : Json.Decode.Decoder ProviderFirstFrame
 decoder =
     Json.Decode.dict Json.Decode.value
-        |> Json.Decode.map (always ProviderFirstFrame)
+        |> Json.Decode.map (always {})
 
 
 {-| A JSON encoder.

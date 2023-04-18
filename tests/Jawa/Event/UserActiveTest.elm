@@ -18,10 +18,10 @@ test =
             UserActive.encoder
             """ {
             } """
-            UserActive.UserActive
+            {}
         ]
 
 
 fuzzer : Fuzz.Fuzzer UserActive.UserActive
 fuzzer =
-    Fuzz.constant UserActive.UserActive
+    Fuzz.constant {}
