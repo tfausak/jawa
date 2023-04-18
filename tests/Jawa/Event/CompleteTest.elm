@@ -18,10 +18,10 @@ test =
             Complete.encoder
             """ {
             } """
-            Complete.Complete
+            {}
         ]
 
 
 fuzzer : Fuzz.Fuzzer Complete.Complete
 fuzzer =
-    Fuzz.constant Complete.Complete
+    Fuzz.constant {}

@@ -18,10 +18,10 @@ test =
             BeforeComplete.encoder
             """ {
             } """
-            BeforeComplete.BeforeComplete
+            {}
         ]
 
 
 fuzzer : Fuzz.Fuzzer BeforeComplete.BeforeComplete
 fuzzer =
-    Fuzz.constant BeforeComplete.BeforeComplete
+    Fuzz.constant {}

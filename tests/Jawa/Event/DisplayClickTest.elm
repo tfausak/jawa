@@ -18,10 +18,10 @@ test =
             DisplayClick.encoder
             """ {
             } """
-            DisplayClick.DisplayClick
+            {}
         ]
 
 
 fuzzer : Fuzz.Fuzzer DisplayClick.DisplayClick
 fuzzer =
-    Fuzz.constant DisplayClick.DisplayClick
+    Fuzz.constant {}

@@ -18,10 +18,10 @@ test =
             ProviderFirstFrame.encoder
             """ {
             } """
-            ProviderFirstFrame.ProviderFirstFrame
+            {}
         ]
 
 
 fuzzer : Fuzz.Fuzzer ProviderFirstFrame.ProviderFirstFrame
 fuzzer =
-    Fuzz.constant ProviderFirstFrame.ProviderFirstFrame
+    Fuzz.constant {}

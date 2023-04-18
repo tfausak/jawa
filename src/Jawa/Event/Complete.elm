@@ -1,4 +1,4 @@
-module Jawa.Event.Complete exposing (Complete(..), decoder, encoder)
+module Jawa.Event.Complete exposing (Complete, decoder, encoder)
 
 {-|
 
@@ -12,8 +12,8 @@ import Json.Encode
 
 {-| <https://docs.jwplayer.com/players/reference/playback-events-1#oncomplete>
 -}
-type Complete
-    = Complete
+type alias Complete =
+    {}
 
 
 {-| A JSON decoder.
@@ -21,7 +21,7 @@ type Complete
 decoder : Json.Decode.Decoder Complete
 decoder =
     Json.Decode.dict Json.Decode.value
-        |> Json.Decode.map (always Complete)
+        |> Json.Decode.map (always {})
 
 
 {-| A JSON encoder.

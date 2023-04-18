@@ -1,4 +1,4 @@
-module Jawa.Event.PlaylistComplete exposing (PlaylistComplete(..), decoder, encoder)
+module Jawa.Event.PlaylistComplete exposing (PlaylistComplete, decoder, encoder)
 
 {-|
 
@@ -12,8 +12,8 @@ import Json.Encode
 
 {-| <https://docs.jwplayer.com/players/reference/advertising-events#onbeforecomplete>
 -}
-type PlaylistComplete
-    = PlaylistComplete
+type alias PlaylistComplete =
+    {}
 
 
 {-| A JSON decoder.
@@ -21,7 +21,7 @@ type PlaylistComplete
 decoder : Json.Decode.Decoder PlaylistComplete
 decoder =
     Json.Decode.dict Json.Decode.value
-        |> Json.Decode.map (always PlaylistComplete)
+        |> Json.Decode.map (always {})
 
 
 {-| A JSON encoder.

@@ -18,10 +18,10 @@ test =
             Seeked.encoder
             """ {
             } """
-            Seeked.Seeked
+            {}
         ]
 
 
 fuzzer : Fuzz.Fuzzer Seeked.Seeked
 fuzzer =
-    Fuzz.constant Seeked.Seeked
+    Fuzz.constant {}

@@ -1,4 +1,4 @@
-module Jawa.Event.BufferFull exposing (BufferFull(..), decoder, encoder)
+module Jawa.Event.BufferFull exposing (BufferFull, decoder, encoder)
 
 {-|
 
@@ -12,8 +12,8 @@ import Json.Encode
 
 {-| This event is not documented.
 -}
-type BufferFull
-    = BufferFull
+type alias BufferFull =
+    {}
 
 
 {-| A JSON decoder.
@@ -21,7 +21,7 @@ type BufferFull
 decoder : Json.Decode.Decoder BufferFull
 decoder =
     Json.Decode.dict Json.Decode.value
-        |> Json.Decode.map (always BufferFull)
+        |> Json.Decode.map (always {})
 
 
 {-| A JSON encoder.

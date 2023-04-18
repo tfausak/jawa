@@ -1,4 +1,4 @@
-module Jawa.Event.DisplayClick exposing (DisplayClick(..), decoder, encoder)
+module Jawa.Event.DisplayClick exposing (DisplayClick, decoder, encoder)
 
 {-|
 
@@ -12,8 +12,8 @@ import Json.Encode
 
 {-| <https://docs.jwplayer.com/players/reference/control-events#ondisplayclick>
 -}
-type DisplayClick
-    = DisplayClick
+type alias DisplayClick =
+    {}
 
 
 {-| A JSON decoder.
@@ -21,7 +21,7 @@ type DisplayClick
 decoder : Json.Decode.Decoder DisplayClick
 decoder =
     Json.Decode.dict Json.Decode.value
-        |> Json.Decode.map (always DisplayClick)
+        |> Json.Decode.map (always {})
 
 
 {-| A JSON encoder.

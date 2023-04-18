@@ -1,4 +1,4 @@
-module Jawa.Event.BeforeComplete exposing (BeforeComplete(..), decoder, encoder)
+module Jawa.Event.BeforeComplete exposing (BeforeComplete, decoder, encoder)
 
 {-|
 
@@ -12,8 +12,8 @@ import Json.Encode
 
 {-| <https://docs.jwplayer.com/players/reference/advertising-events#onbeforecomplete>
 -}
-type BeforeComplete
-    = BeforeComplete
+type alias BeforeComplete =
+    {}
 
 
 {-| A JSON decoder.
@@ -21,7 +21,7 @@ type BeforeComplete
 decoder : Json.Decode.Decoder BeforeComplete
 decoder =
     Json.Decode.dict Json.Decode.value
-        |> Json.Decode.map (always BeforeComplete)
+        |> Json.Decode.map (always {})
 
 
 {-| A JSON encoder.
