@@ -21,6 +21,7 @@ import Jawa.Event.PipLeaveTest as PipLeave
 import Jawa.Event.PlayTest as Play
 import Jawa.Event.PlaybackRateChangedTest as PlaybackRateChanged
 import Jawa.Event.PlaylistCompleteTest as PlaylistComplete
+import Jawa.Event.PlaylistTest as Playlist
 import Jawa.Event.ProviderFirstFrameTest as ProviderFirstFrame
 import Jawa.Event.ReadyTest as Ready
 import Jawa.Event.RemoveTest as Remove
@@ -259,6 +260,17 @@ test =
                 { playbackRate = 0.1
                 }
             )
+        , TestExtra.testCodec "works with playlist"
+            Event.decoder
+            Event.encoder
+            """ {
+                "playlist": [],
+                "type": "playlist"
+            } """
+            (Event.Playlist
+                { playlist = []
+                }
+            )
         , TestExtra.testCodec "works with playlistComplete"
             Event.decoder
             Event.encoder
@@ -467,6 +479,7 @@ fuzzer =
         , Fuzz.map Event.PipLeave PipLeave.fuzzer
         , Fuzz.map Event.Play Play.fuzzer
         , Fuzz.map Event.PlaybackRateChanged PlaybackRateChanged.fuzzer
+        , Fuzz.map Event.Playlist Playlist.fuzzer
         , Fuzz.map Event.PlaylistComplete PlaylistComplete.fuzzer
         , Fuzz.map Event.ProviderFirstFrame ProviderFirstFrame.fuzzer
         , Fuzz.map Event.Ready Ready.fuzzer
