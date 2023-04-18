@@ -394,7 +394,8 @@ test =
                 "type": "viewable"
             } """
             (Event.Viewable
-                { viewable = V.Hidden }
+                { viewable = V.Hidden
+                }
             )
         , TestExtra.testCodec "works with visualQuality"
             Event.decoder
