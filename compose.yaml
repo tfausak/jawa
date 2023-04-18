@@ -2,7 +2,7 @@
     "services": {
         "devcontainer": {
             "command": "sh -exc 'while sleep 1m; do :; done'",
-            "image": "public.ecr.aws/acilearning/elm:0.19.1",
+            "image": "mcr.microsoft.com/devcontainers/javascript-node:18",
             "init": true,
             "volumes": [
                 ".:/workspaces/jawa"
