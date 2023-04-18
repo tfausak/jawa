@@ -11,7 +11,7 @@ import Test
 
 test : Test.Test
 test =
-    Test.concat
+    Test.describe "Jawa.PlayReason"
         [ TestExtra.fuzzCodec "round trips" PlR.decoder PlR.encoder fuzzer
         , TestExtra.testCodec "works with autostart"
             PlR.decoder

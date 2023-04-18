@@ -9,7 +9,7 @@ import Test
 
 test : Test.Test
 test =
-    Test.concat
+    Test.describe "Jawa.Metadata"
         [ TestExtra.fuzzCodec "round trips" M.decoder M.encoder fuzzer
         , TestExtra.testCodec "works"
             M.decoder

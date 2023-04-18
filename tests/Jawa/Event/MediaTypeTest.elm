@@ -13,7 +13,7 @@ import Test
 
 test : Test.Test
 test =
-    Test.concat
+    Test.describe "Jawa.Event.MediaType"
         [ TestExtra.fuzzCodec "round trips" MediaType.decoder MediaType.encoder fuzzer
         , TestExtra.testCodec "works"
             MediaType.decoder

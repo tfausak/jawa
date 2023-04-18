@@ -11,7 +11,7 @@ import Test
 
 test : Test.Test
 test =
-    Test.concat
+    Test.describe "Jawa.QualityMode"
         [ TestExtra.fuzzCodec "round trips" QM.decoder QM.encoder fuzzer
         , TestExtra.testCodec "works with auto"
             QM.decoder

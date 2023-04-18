@@ -11,7 +11,7 @@ import Test
 
 test : Test.Test
 test =
-    Test.concat
+    Test.describe "Jawa.QualityReason"
         [ TestExtra.fuzzCodec "round trips" QR.decoder QR.encoder fuzzer
         , TestExtra.testCodec "works with api"
             QR.decoder

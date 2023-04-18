@@ -11,7 +11,7 @@ import Test
 
 test : Test.Test
 test =
-    Test.concat
+    Test.describe "Jawa.Event.PlaylistComplete"
         [ TestExtra.fuzzCodec "round trips" PlaylistComplete.decoder PlaylistComplete.encoder fuzzer
         , TestExtra.testCodec "works"
             PlaylistComplete.decoder

@@ -11,7 +11,7 @@ import Test
 
 test : Test.Test
 test =
-    Test.concat
+    Test.describe "Jawa.Event.SetupError"
         [ TestExtra.fuzzCodec "round trips" SetupError.decoder SetupError.encoder fuzzer
         , TestExtra.testCodec "works"
             SetupError.decoder

@@ -11,7 +11,7 @@ import Test
 
 test : Test.Test
 test =
-    Test.concat
+    Test.describe "Jawa.SeekRange"
         [ TestExtra.fuzzCodec "round trips" SR.decoder SR.encoder fuzzer
         , TestExtra.testCodec "works"
             SR.decoder

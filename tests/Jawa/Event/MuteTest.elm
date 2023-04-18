@@ -11,7 +11,7 @@ import Test
 
 test : Test.Test
 test =
-    Test.concat
+    Test.describe "Jawa.Event.Mute"
         [ TestExtra.fuzzCodec "round trips" Mute.decoder Mute.encoder fuzzer
         , TestExtra.testCodec "works"
             Mute.decoder

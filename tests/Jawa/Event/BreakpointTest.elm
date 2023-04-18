@@ -11,7 +11,7 @@ import Test
 
 test : Test.Test
 test =
-    Test.concat
+    Test.describe "Jawa.Event.Breakpoint"
         [ TestExtra.fuzzCodec "round trips" Breakpoint.decoder Breakpoint.encoder fuzzer
         , TestExtra.testCodec "works"
             Breakpoint.decoder

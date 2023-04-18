@@ -11,7 +11,7 @@ import Test
 
 test : Test.Test
 test =
-    Test.concat
+    Test.describe "Jawa.State"
         [ TestExtra.fuzzCodec "round trips" S.decoder S.encoder fuzzer
         , TestExtra.testCodec "works with buffering"
             S.decoder
