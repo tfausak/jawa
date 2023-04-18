@@ -11,7 +11,7 @@ import Test
 
 test : Test.Test
 test =
-    Test.concat
+    Test.describe "Jawa.Event.PlaybackRateChanged"
         [ TestExtra.fuzzCodec "round trips" PlaybackRateChanged.decoder PlaybackRateChanged.encoder fuzzer
         , TestExtra.testCodec "works"
             PlaybackRateChanged.decoder

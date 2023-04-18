@@ -12,7 +12,7 @@ import Test
 
 test : Test.Test
 test =
-    Test.concat
+    Test.describe "Jawa.Event.BufferChange"
         [ TestExtra.fuzzCodec "round trips" BufferChange.decoder BufferChange.encoder fuzzer
         , TestExtra.testCodec "works"
             BufferChange.decoder

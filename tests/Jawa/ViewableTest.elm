@@ -11,7 +11,7 @@ import Test
 
 test : Test.Test
 test =
-    Test.concat
+    Test.describe "Jawa.Viewable"
         [ TestExtra.fuzzCodec "round trips" V.decoder V.encoder fuzzer
         , TestExtra.testCodec "works with hidden"
             V.decoder

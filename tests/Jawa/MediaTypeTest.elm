@@ -11,7 +11,7 @@ import Test
 
 test : Test.Test
 test =
-    Test.concat
+    Test.describe "Jawa.MediaType"
         [ TestExtra.fuzzCodec "round trips" MT.decoder MT.encoder fuzzer
         , TestExtra.testCodec "works with audio"
             MT.decoder
