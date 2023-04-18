@@ -20,6 +20,7 @@ import Jawa.Event.IdleTest as Idle
 import Jawa.Event.MediaTypeTest as MediaType
 import Jawa.Event.MuteTest as Mute
 import Jawa.Event.PauseTest as Pause
+import Jawa.Event.PipEnterTest as PipEnter
 import Jawa.Event.PlayTest as Play
 import Jawa.Event.PlaybackRateChangedTest as PlaybackRateChanged
 import Jawa.Event.PlaylistComplete as PlaylistComplete
@@ -223,6 +224,13 @@ test =
                 , viewable = V.Hidden
                 }
             )
+        , TestExtra.testCodec "works with pipEnter"
+            Event.decoder
+            Event.encoder
+            """ {
+                "type": "pipEnter"
+            } """
+            (Event.PipEnter {})
         , TestExtra.testCodec "works with play"
             Event.decoder
             Event.encoder
@@ -456,6 +464,7 @@ fuzzer =
         , Fuzz.map Event.MediaType MediaType.fuzzer
         , Fuzz.map Event.Mute Mute.fuzzer
         , Fuzz.map Event.Pause Pause.fuzzer
+        , Fuzz.map Event.PipEnter PipEnter.fuzzer
         , Fuzz.map Event.Play Play.fuzzer
         , Fuzz.map Event.PlaybackRateChanged PlaybackRateChanged.fuzzer
         , Fuzz.map Event.PlaylistComplete PlaylistComplete.fuzzer
