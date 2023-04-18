@@ -2,17 +2,13 @@ module Jawa.EventTest exposing (test)
 
 import Fuzz
 import Jawa.Event as Event
-import Jawa.Event.BeforeComplete as BeforeComplete
 import Jawa.Event.BeforeCompleteTest as BeforeComplete
 import Jawa.Event.BreakpointTest as Breakpoint
 import Jawa.Event.BufferChangeTest as BufferChange
-import Jawa.Event.BufferFull as BufferFull
 import Jawa.Event.BufferFullTest as BufferFull
 import Jawa.Event.ClickTest as Click
-import Jawa.Event.Complete as Complete
 import Jawa.Event.CompleteTest as Complete
 import Jawa.Event.ControlsTest as Controls
-import Jawa.Event.DisplayClick as DisplayClick
 import Jawa.Event.DisplayClickTest as DisplayClick
 import Jawa.Event.FirstFrameTest as FirstFrame
 import Jawa.Event.FullscreenTest as Fullscreen
@@ -23,22 +19,16 @@ import Jawa.Event.PauseTest as Pause
 import Jawa.Event.PipEnterTest as PipEnter
 import Jawa.Event.PlayTest as Play
 import Jawa.Event.PlaybackRateChangedTest as PlaybackRateChanged
-import Jawa.Event.PlaylistComplete as PlaylistComplete
 import Jawa.Event.PlaylistCompleteTest as PlaylistComplete
-import Jawa.Event.ProviderFirstFrame as ProviderFirstFrame
 import Jawa.Event.ProviderFirstFrameTest as ProviderFirstFrame
 import Jawa.Event.ReadyTest as Ready
-import Jawa.Event.Remove as Remove
 import Jawa.Event.RemoveTest as Remove
 import Jawa.Event.ResizeTest as Resize
 import Jawa.Event.SeekTest as Seek
-import Jawa.Event.Seeked as Seeked
 import Jawa.Event.SeekedTest as Seeked
 import Jawa.Event.SetupErrorTest as SetupError
 import Jawa.Event.TimeTest as Time
-import Jawa.Event.UserActive as UserActive
 import Jawa.Event.UserActiveTest as UserActive
-import Jawa.Event.UserInactive as UserInactive
 import Jawa.Event.UserInactiveTest as UserInactive
 import Jawa.Event.ViewableTest as Viewable
 import Jawa.Event.VisualQualityTest as VisualQuality
@@ -66,7 +56,7 @@ test =
             """ {
                 "type": "beforeComplete"
             } """
-            (Event.BeforeComplete BeforeComplete.BeforeComplete)
+            (Event.BeforeComplete {})
         , TestExtra.testCodec "works with breakpoint"
             Event.decoder
             Event.encoder
@@ -109,7 +99,7 @@ test =
             """ {
                 "type": "bufferFull"
             } """
-            (Event.BufferFull BufferFull.BufferFull)
+            (Event.BufferFull {})
         , TestExtra.testCodec "works with click"
             Event.decoder
             Event.encoder
@@ -127,7 +117,7 @@ test =
             """ {
                 "type": "complete"
             } """
-            (Event.Complete Complete.Complete)
+            (Event.Complete {})
         , TestExtra.testCodec "works with controls"
             Event.decoder
             Event.encoder
@@ -145,7 +135,7 @@ test =
             """ {
                 "type": "displayClick"
             } """
-            (Event.DisplayClick DisplayClick.DisplayClick)
+            (Event.DisplayClick {})
         , TestExtra.testCodec "works with firstFrame"
             Event.decoder
             Event.encoder
@@ -267,14 +257,14 @@ test =
             """ {
                 "type": "playlistComplete"
             } """
-            (Event.PlaylistComplete PlaylistComplete.PlaylistComplete)
+            (Event.PlaylistComplete {})
         , TestExtra.testCodec "works with providerFirstFrame"
             Event.decoder
             Event.encoder
             """ {
                 "type": "providerFirstFrame"
             } """
-            (Event.ProviderFirstFrame ProviderFirstFrame.ProviderFirstFrame)
+            (Event.ProviderFirstFrame {})
         , TestExtra.testCodec "works with ready"
             Event.decoder
             Event.encoder
@@ -294,7 +284,7 @@ test =
             """ {
                 "type": "remove"
             } """
-            (Event.Remove Remove.Remove)
+            (Event.Remove {})
         , TestExtra.testCodec "works with resize"
             Event.decoder
             Event.encoder
@@ -341,7 +331,7 @@ test =
             """ {
                 "type": "seeked"
             } """
-            (Event.Seeked Seeked.Seeked)
+            (Event.Seeked {})
         , TestExtra.testCodec "works with setupError"
             Event.decoder
             Event.encoder
@@ -388,14 +378,14 @@ test =
             """ {
                 "type": "userActive"
             } """
-            (Event.UserActive UserActive.UserActive)
+            (Event.UserActive {})
         , TestExtra.testCodec "works with userInactive"
             Event.decoder
             Event.encoder
             """ {
                 "type": "userInactive"
             } """
-            (Event.UserInactive UserInactive.UserInactive)
+            (Event.UserInactive {})
         , TestExtra.testCodec "works with viewable"
             Event.decoder
             Event.encoder
