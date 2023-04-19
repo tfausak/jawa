@@ -8,22 +8,24 @@ module Jawa.PlaylistItem exposing (PlaylistItem, decoder, encoder)
 
 import Jawa.Preload as P
 import Json.Decode
+import Json.Decode.Extra
 import Json.Encode
+import Json.Encode.Extra
 
 
 {-| <https://docs.jwplayer.com/players/reference/playlist-events>
 -}
 type alias PlaylistItem =
-    { preload : P.Preload
+    { description : Maybe String
+    , file : String
+    , image : Maybe String
+    , mediaId : Maybe String
+    , preload : P.Preload
+    , title : Maybe String
 
     -- , allSources : List Source -- { file, label, type, default (bool) }
-    -- , description : Maybe String
     -- , feedData : {} -- is anything ever in this?
-    -- , file : String
-    -- , image : Maybe String
-    -- , mediaId : Maybe String
     -- , sources : List Source -- singleton?
-    -- , title : Maybe String
     -- , tracks : List Track -- { file, label, kind (captions, chapters, thumbnails) }
     }
 
@@ -32,8 +34,13 @@ type alias PlaylistItem =
 -}
 decoder : Json.Decode.Decoder PlaylistItem
 decoder =
-    Json.Decode.map PlaylistItem
+    Json.Decode.map6 PlaylistItem
+        (Json.Decode.Extra.optionalNullableField "description" Json.Decode.string)
+        (Json.Decode.field "file" Json.Decode.string)
+        (Json.Decode.Extra.optionalNullableField "image" Json.Decode.string)
+        (Json.Decode.Extra.optionalNullableField "mediaId" Json.Decode.string)
         (Json.Decode.field "preload" P.decoder)
+        (Json.Decode.Extra.optionalNullableField "title" Json.Decode.string)
 
 
 {-| A JSON encoder.
@@ -41,5 +48,10 @@ decoder =
 encoder : PlaylistItem -> Json.Encode.Value
 encoder x =
     Json.Encode.object
-        [ ( "preload", P.encoder x.preload )
+        [ ( "description", Json.Encode.Extra.maybe Json.Encode.string x.description )
+        , ( "file", Json.Encode.string x.file )
+        , ( "image", Json.Encode.Extra.maybe Json.Encode.string x.image )
+        , ( "mediaId", Json.Encode.Extra.maybe Json.Encode.string x.mediaId )
+        , ( "preload", P.encoder x.preload )
+        , ( "title", Json.Encode.Extra.maybe Json.Encode.string x.title )
         ]
