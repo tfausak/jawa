@@ -7,6 +7,7 @@ module Jawa.PlaylistItem exposing (PlaylistItem, decoder, encoder)
 -}
 
 import Jawa.Preload as P
+import Jawa.Track as T
 import Json.Decode
 import Json.Decode.Extra
 import Json.Encode
@@ -22,11 +23,11 @@ type alias PlaylistItem =
     , mediaId : Maybe String
     , preload : P.Preload
     , title : Maybe String
+    , tracks : List T.Track
 
     -- , allSources : List Source -- { file, label, type, default (bool) }
     -- , feedData : {} -- is anything ever in this?
     -- , sources : List Source -- singleton?
-    -- , tracks : List Track -- { file, label, kind (captions, chapters, thumbnails) }
     }
 
 
@@ -34,13 +35,14 @@ type alias PlaylistItem =
 -}
 decoder : Json.Decode.Decoder PlaylistItem
 decoder =
-    Json.Decode.map6 PlaylistItem
+    Json.Decode.map7 PlaylistItem
         (Json.Decode.Extra.optionalNullableField "description" Json.Decode.string)
         (Json.Decode.field "file" Json.Decode.string)
         (Json.Decode.Extra.optionalNullableField "image" Json.Decode.string)
         (Json.Decode.Extra.optionalNullableField "mediaId" Json.Decode.string)
         (Json.Decode.field "preload" P.decoder)
         (Json.Decode.Extra.optionalNullableField "title" Json.Decode.string)
+        (Json.Decode.field "tracks" (Json.Decode.list T.decoder))
 
 
 {-| A JSON encoder.
@@ -54,4 +56,5 @@ encoder x =
         , ( "mediaId", Json.Encode.Extra.maybe Json.Encode.string x.mediaId )
         , ( "preload", P.encoder x.preload )
         , ( "title", Json.Encode.Extra.maybe Json.Encode.string x.title )
+        , ( "tracks", Json.Encode.list T.encoder x.tracks )
         ]

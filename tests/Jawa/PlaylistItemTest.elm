@@ -8,6 +8,7 @@ import Jawa.PlaylistItem as PI
 import Jawa.Preload as P
 import Jawa.PreloadTest as P
 import Jawa.Test.Extra as TestExtra
+import Jawa.TrackTest as T
 import Test
 
 
@@ -20,7 +21,8 @@ test =
             PI.encoder
             """ {
                 "file": "a",
-                "preload": "auto"
+                "preload": "auto",
+                "tracks": []
             } """
             { description = Nothing
             , file = "a"
@@ -28,6 +30,7 @@ test =
             , mediaId = Nothing
             , preload = P.Auto
             , title = Nothing
+            , tracks = []
             }
         , TestExtra.testCodec "works with null fields"
             PI.decoder
@@ -38,7 +41,8 @@ test =
                 "image": null,
                 "mediaId": null,
                 "preload": "auto",
-                "title": null
+                "title": null,
+                "tracks": []
             } """
             { description = Nothing
             , file = "a"
@@ -46,6 +50,7 @@ test =
             , mediaId = Nothing
             , preload = P.Auto
             , title = Nothing
+            , tracks = []
             }
         , TestExtra.testCodec "works with non-null fields"
             PI.decoder
@@ -56,7 +61,8 @@ test =
                 "image": "c",
                 "mediaId": "d",
                 "preload": "auto",
-                "title": "e"
+                "title": "e",
+                "tracks": []
             } """
             { description = Just "a"
             , file = "b"
@@ -64,16 +70,18 @@ test =
             , mediaId = Just "d"
             , preload = P.Auto
             , title = Just "e"
+            , tracks = []
             }
         ]
 
 
 fuzzer : Fuzz.Fuzzer PI.PlaylistItem
 fuzzer =
-    Fuzz.map6 PI.PlaylistItem
+    Fuzz.map7 PI.PlaylistItem
         (Fuzz.maybe Fuzz.string)
         Fuzz.string
         (Fuzz.maybe Fuzz.string)
         (Fuzz.maybe Fuzz.string)
         P.fuzzer
         (Fuzz.maybe Fuzz.string)
+        (Fuzz.list T.fuzzer)
