@@ -49,6 +49,7 @@
         "Jawa.QualityMode",
         "Jawa.QualityReason",
         "Jawa.SeekRange",
+        "Jawa.Source",
         "Jawa.State",
         "Jawa.Track",
         "Jawa.TrackKind",

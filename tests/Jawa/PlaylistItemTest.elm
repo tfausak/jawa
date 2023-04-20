@@ -7,6 +7,7 @@ import Fuzz
 import Jawa.PlaylistItem as PI
 import Jawa.Preload as P
 import Jawa.PreloadTest as P
+import Jawa.SourceTest as S
 import Jawa.Test.Extra as TestExtra
 import Jawa.TrackTest as T
 import Test
@@ -20,15 +21,19 @@ test =
             PI.decoder
             PI.encoder
             """ {
+                "allSources": [],
                 "file": "a",
                 "preload": "auto",
+                "sources": [],
                 "tracks": []
             } """
-            { description = Nothing
+            { allSources = []
+            , description = Nothing
             , file = "a"
             , image = Nothing
             , mediaId = Nothing
             , preload = P.Auto
+            , sources = []
             , title = Nothing
             , tracks = []
             }
@@ -36,19 +41,23 @@ test =
             PI.decoder
             PI.encoder
             """ {
+                "allSources": [],
                 "description": null,
                 "file": "a",
                 "image": null,
                 "mediaId": null,
                 "preload": "auto",
+                "sources": [],
                 "title": null,
                 "tracks": []
             } """
-            { description = Nothing
+            { allSources = []
+            , description = Nothing
             , file = "a"
             , image = Nothing
             , mediaId = Nothing
             , preload = P.Auto
+            , sources = []
             , title = Nothing
             , tracks = []
             }
@@ -56,19 +65,23 @@ test =
             PI.decoder
             PI.encoder
             """ {
+                "allSources": [],
                 "description": "a",
                 "file": "b",
                 "image": "c",
                 "mediaId": "d",
                 "preload": "auto",
+                "sources": [],
                 "title": "e",
                 "tracks": []
             } """
-            { description = Just "a"
+            { allSources = []
+            , description = Just "a"
             , file = "b"
             , image = Just "c"
             , mediaId = Just "d"
             , preload = P.Auto
+            , sources = []
             , title = Just "e"
             , tracks = []
             }
@@ -77,11 +90,13 @@ test =
 
 fuzzer : Fuzz.Fuzzer PI.PlaylistItem
 fuzzer =
-    Fuzz.map7 PI.PlaylistItem
-        (Fuzz.maybe Fuzz.string)
-        Fuzz.string
-        (Fuzz.maybe Fuzz.string)
-        (Fuzz.maybe Fuzz.string)
-        P.fuzzer
-        (Fuzz.maybe Fuzz.string)
-        (Fuzz.list T.fuzzer)
+    Fuzz.constant PI.PlaylistItem
+        |> Fuzz.andMap (Fuzz.listOfLengthBetween 0 2 S.fuzzer)
+        |> Fuzz.andMap (Fuzz.maybe Fuzz.string)
+        |> Fuzz.andMap Fuzz.string
+        |> Fuzz.andMap (Fuzz.maybe Fuzz.string)
+        |> Fuzz.andMap (Fuzz.maybe Fuzz.string)
+        |> Fuzz.andMap P.fuzzer
+        |> Fuzz.andMap (Fuzz.listOfLengthBetween 0 2 S.fuzzer)
+        |> Fuzz.andMap (Fuzz.maybe Fuzz.string)
+        |> Fuzz.andMap (Fuzz.listOfLengthBetween 0 2 T.fuzzer)

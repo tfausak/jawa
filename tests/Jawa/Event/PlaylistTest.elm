@@ -28,4 +28,4 @@ test =
 fuzzer : Fuzz.Fuzzer Playlist.Playlist
 fuzzer =
     Fuzz.map Playlist.Playlist
-        (Fuzz.list PI.fuzzer)
+        (Fuzz.listOfLengthBetween 0 2 PI.fuzzer)
