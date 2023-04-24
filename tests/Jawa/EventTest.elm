@@ -21,6 +21,7 @@ import Jawa.Event.PipLeaveTest as PipLeave
 import Jawa.Event.PlayTest as Play
 import Jawa.Event.PlaybackRateChangedTest as PlaybackRateChanged
 import Jawa.Event.PlaylistCompleteTest as PlaylistComplete
+import Jawa.Event.PlaylistItemTest as PlaylistItem
 import Jawa.Event.PlaylistTest as Playlist
 import Jawa.Event.ProviderFirstFrameTest as ProviderFirstFrame
 import Jawa.Event.ReadyTest as Ready
@@ -39,6 +40,7 @@ import Jawa.MediaType as MT
 import Jawa.Metadata as M
 import Jawa.PauseReason as PaR
 import Jawa.PlayReason as PlR
+import Jawa.Preload as P
 import Jawa.QualityMode as QM
 import Jawa.QualityReason as QR
 import Jawa.State as S
@@ -278,6 +280,35 @@ test =
                 "type": "playlistComplete"
             } """
             (Event.PlaylistComplete {})
+        , TestExtra.testCodec "works with playlistItem"
+            Event.decoder
+            Event.encoder
+            """ {
+                "index": 0,
+                "item": {
+                    "allSources": [],
+                    "file": "a",
+                    "preload": "auto",
+                    "sources": [],
+                    "tracks": []
+                },
+                "type": "playlistItem"
+            } """
+            (Event.PlaylistItem
+                { index = 0
+                , item =
+                    { allSources = []
+                    , description = Nothing
+                    , file = "a"
+                    , image = Nothing
+                    , mediaId = Nothing
+                    , preload = P.Auto
+                    , sources = []
+                    , title = Nothing
+                    , tracks = []
+                    }
+                }
+            )
         , TestExtra.testCodec "works with providerFirstFrame"
             Event.decoder
             Event.encoder
@@ -481,6 +512,7 @@ fuzzer =
         , Fuzz.map Event.PlaybackRateChanged PlaybackRateChanged.fuzzer
         , Fuzz.map Event.Playlist Playlist.fuzzer
         , Fuzz.map Event.PlaylistComplete PlaylistComplete.fuzzer
+        , Fuzz.map Event.PlaylistItem PlaylistItem.fuzzer
         , Fuzz.map Event.ProviderFirstFrame ProviderFirstFrame.fuzzer
         , Fuzz.map Event.Ready Ready.fuzzer
         , Fuzz.map Event.Remove Remove.fuzzer

@@ -27,8 +27,6 @@ type alias PlaylistItem =
     , sources : List S.Source
     , title : Maybe String
     , tracks : List T.Track
-
-    -- , feedData : {} -- is anything ever in this?
     }
 
 

@@ -11,7 +11,7 @@ import Json.Decode
 import Json.Encode
 
 
-{-| This event is not documented.
+{-| <https://docs.jwplayer.com/players/reference/playlist-events#onplaylist>
 -}
 type alias Playlist =
     { playlist : List PI.PlaylistItem

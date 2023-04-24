@@ -25,6 +25,7 @@
         "Jawa.Event.PlaybackRateChanged",
         "Jawa.Event.Playlist",
         "Jawa.Event.PlaylistComplete",
+        "Jawa.Event.PlaylistItem",
         "Jawa.Event.ProviderFirstFrame",
         "Jawa.Event.Ready",
         "Jawa.Event.Remove",

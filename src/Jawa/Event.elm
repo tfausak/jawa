@@ -27,6 +27,7 @@ import Jawa.Event.Play as Play
 import Jawa.Event.PlaybackRateChanged as PlaybackRateChanged
 import Jawa.Event.Playlist as Playlist
 import Jawa.Event.PlaylistComplete as PlaylistComplete
+import Jawa.Event.PlaylistItem as PlaylistItem
 import Jawa.Event.ProviderFirstFrame as ProviderFirstFrame
 import Jawa.Event.Ready as Ready
 import Jawa.Event.Remove as Remove
@@ -67,6 +68,7 @@ type Event
     | PlaybackRateChanged PlaybackRateChanged.PlaybackRateChanged
     | Playlist Playlist.Playlist
     | PlaylistComplete PlaylistComplete.PlaylistComplete
+    | PlaylistItem PlaylistItem.PlaylistItem
     | ProviderFirstFrame ProviderFirstFrame.ProviderFirstFrame
     | Ready Ready.Ready
     | Remove Remove.Remove
@@ -152,6 +154,9 @@ decoderWith string =
 
         "playlistComplete" ->
             Json.Decode.map PlaylistComplete PlaylistComplete.decoder
+
+        "playlistItem" ->
+            Json.Decode.map PlaylistItem PlaylistItem.decoder
 
         "providerFirstFrame" ->
             Json.Decode.map ProviderFirstFrame ProviderFirstFrame.decoder
@@ -260,6 +265,9 @@ encoder event =
 
         PlaylistComplete x ->
             encoderWith "playlistComplete" PlaylistComplete.encoder x
+
+        PlaylistItem x ->
+            encoderWith "playlistItem" PlaylistItem.encoder x
 
         ProviderFirstFrame x ->
             encoderWith "providerFirstFrame" ProviderFirstFrame.encoder x
