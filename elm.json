@@ -5,6 +5,8 @@
     "license": "MIT",
     "version": "3.0.0",
     "exposed-modules": [
+        "Jawa.AudioTrack",
+        "Jawa.Event.AudioTracks",
         "Jawa.Event.BeforeComplete",
         "Jawa.Event.Breakpoint",
         "Jawa.Event.BufferChange",

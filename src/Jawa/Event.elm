@@ -7,6 +7,7 @@ module Jawa.Event exposing (Event(..), decoder, encoder)
 -}
 
 import Dict
+import Jawa.Event.AudioTracks as AudioTracks
 import Jawa.Event.BeforeComplete as BeforeComplete
 import Jawa.Event.Breakpoint as Breakpoint
 import Jawa.Event.BufferChange as BufferChange
@@ -48,7 +49,8 @@ import Json.Encode
 {-| <https://docs.jwplayer.com/players/reference/onall>
 -}
 type Event
-    = BeforeComplete BeforeComplete.BeforeComplete
+    = AudioTracks AudioTracks.AudioTracks
+    | BeforeComplete BeforeComplete.BeforeComplete
     | Breakpoint Breakpoint.Breakpoint
     | BufferChange BufferChange.BufferChange
     | BufferFull BufferFull.BufferFull
@@ -95,6 +97,9 @@ decoder =
 decoderWith : String -> Json.Decode.Decoder Event
 decoderWith string =
     case string of
+        "audioTracks" ->
+            Json.Decode.map AudioTracks AudioTracks.decoder
+
         "beforeComplete" ->
             Json.Decode.map BeforeComplete BeforeComplete.decoder
 
@@ -206,6 +211,9 @@ decoderWith string =
 encoder : Event -> Json.Encode.Value
 encoder event =
     case event of
+        AudioTracks x ->
+            encoderWith "audioTracks" AudioTracks.encoder x
+
         BeforeComplete x ->
             encoderWith "beforeComplete" BeforeComplete.encoder x
 

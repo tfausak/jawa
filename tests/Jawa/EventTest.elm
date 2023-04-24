@@ -2,6 +2,7 @@ module Jawa.EventTest exposing (test)
 
 import Fuzz
 import Jawa.Event as Event
+import Jawa.Event.AudioTracksTest as AudioTracks
 import Jawa.Event.BeforeCompleteTest as BeforeComplete
 import Jawa.Event.BreakpointTest as Breakpoint
 import Jawa.Event.BufferChangeTest as BufferChange
@@ -54,6 +55,19 @@ test : Test.Test
 test =
     Test.describe "Jawa.Event"
         [ TestExtra.fuzzCodec "round trips" Event.decoder Event.encoder fuzzer
+        , TestExtra.testCodec "works with audioTracks"
+            Event.decoder
+            Event.encoder
+            """ {
+                "currentTrack": 0,
+                "tracks": [],
+                "type": "audioTracks"
+            } """
+            (Event.AudioTracks
+                { currentTrack = 0
+                , tracks = []
+                }
+            )
         , TestExtra.testCodec "works with beforeComplete"
             Event.decoder
             Event.encoder
@@ -492,7 +506,8 @@ test =
 fuzzer : Fuzz.Fuzzer Event.Event
 fuzzer =
     Fuzz.oneOf
-        [ Fuzz.map Event.BeforeComplete BeforeComplete.fuzzer
+        [ Fuzz.map Event.AudioTracks AudioTracks.fuzzer
+        , Fuzz.map Event.BeforeComplete BeforeComplete.fuzzer
         , Fuzz.map Event.Breakpoint Breakpoint.fuzzer
         , Fuzz.map Event.BufferChange BufferChange.fuzzer
         , Fuzz.map Event.BufferFull BufferFull.fuzzer
