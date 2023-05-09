@@ -4,8 +4,10 @@
             "command": "sh -exc 'while sleep 1m; do :; done'",
             "image": "mcr.microsoft.com/devcontainers/javascript-node:18",
             "init": true,
+            "user": "node",
             "volumes": [
-                ".:/workspaces/jawa"
+                ".:/workspaces/jawa",
+                "./volumes/elm:/home/node/.elm"
             ],
             "working_dir": "/workspaces/jawa"
         }
