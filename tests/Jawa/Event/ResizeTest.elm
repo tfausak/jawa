@@ -4,18 +4,18 @@ module Jawa.Event.ResizeTest exposing
     )
 
 import Fuzz
-import Jawa.Event.Resize as Resize
-import Jawa.Test.Extra as TestExtra
+import Jawa.Event.Resize
+import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Resize"
-        [ TestExtra.fuzzCodec "round trips" Resize.decoder Resize.encoder fuzzer
-        , TestExtra.testCodec "works"
-            Resize.decoder
-            Resize.encoder
+        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.Resize.decoder Jawa.Event.Resize.encoder fuzzer
+        , Jawa.Test.Extra.testCodec "works"
+            Jawa.Event.Resize.decoder
+            Jawa.Event.Resize.encoder
             """ {
                 "height": 0,
                 "width": 1
@@ -26,8 +26,8 @@ test =
         ]
 
 
-fuzzer : Fuzz.Fuzzer Resize.Resize
+fuzzer : Fuzz.Fuzzer Jawa.Event.Resize.Resize
 fuzzer =
-    Fuzz.map2 Resize.Resize
+    Fuzz.map2 Jawa.Event.Resize.Resize
         Fuzz.int
         Fuzz.int

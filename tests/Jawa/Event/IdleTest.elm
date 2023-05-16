@@ -4,35 +4,35 @@ module Jawa.Event.IdleTest exposing
     )
 
 import Fuzz
-import Jawa.Event.Idle as Idle
-import Jawa.State as S
-import Jawa.StateTest as S
-import Jawa.Test.Extra as TestExtra
+import Jawa.Event.Idle
+import Jawa.State
+import Jawa.StateTest
+import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Idle"
-        [ TestExtra.fuzzCodec "round trips" Idle.decoder Idle.encoder fuzzer
-        , TestExtra.testCodec "works"
-            Idle.decoder
-            Idle.encoder
+        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.Idle.decoder Jawa.Event.Idle.encoder fuzzer
+        , Jawa.Test.Extra.testCodec "works"
+            Jawa.Event.Idle.decoder
+            Jawa.Event.Idle.encoder
             """ {
                 "newstate": "buffering",
                 "oldstate": "complete",
                 "reason": "error"
             } """
-            { newstate = S.Buffering
-            , oldstate = S.Complete
-            , reason = S.Error
+            { newstate = Jawa.State.Buffering
+            , oldstate = Jawa.State.Complete
+            , reason = Jawa.State.Error
             }
         ]
 
 
-fuzzer : Fuzz.Fuzzer Idle.Idle
+fuzzer : Fuzz.Fuzzer Jawa.Event.Idle.Idle
 fuzzer =
-    Fuzz.map3 Idle.Idle
-        S.fuzzer
-        S.fuzzer
-        S.fuzzer
+    Fuzz.map3 Jawa.Event.Idle.Idle
+        Jawa.StateTest.fuzzer
+        Jawa.StateTest.fuzzer
+        Jawa.StateTest.fuzzer

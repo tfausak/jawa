@@ -4,24 +4,24 @@ module Jawa.Event.ProviderFirstFrameTest exposing
     )
 
 import Fuzz
-import Jawa.Event.ProviderFirstFrame as ProviderFirstFrame
-import Jawa.Test.Extra as TestExtra
+import Jawa.Event.ProviderFirstFrame
+import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.ProviderFirstFrame"
-        [ TestExtra.fuzzCodec "round trips" ProviderFirstFrame.decoder ProviderFirstFrame.encoder fuzzer
-        , TestExtra.testCodec "works"
-            ProviderFirstFrame.decoder
-            ProviderFirstFrame.encoder
+        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.ProviderFirstFrame.decoder Jawa.Event.ProviderFirstFrame.encoder fuzzer
+        , Jawa.Test.Extra.testCodec "works"
+            Jawa.Event.ProviderFirstFrame.decoder
+            Jawa.Event.ProviderFirstFrame.encoder
             """ {
             } """
             {}
         ]
 
 
-fuzzer : Fuzz.Fuzzer ProviderFirstFrame.ProviderFirstFrame
+fuzzer : Fuzz.Fuzzer Jawa.Event.ProviderFirstFrame.ProviderFirstFrame
 fuzzer =
     Fuzz.constant {}

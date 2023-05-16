@@ -4,18 +4,18 @@ module Jawa.Event.ControlsTest exposing
     )
 
 import Fuzz
-import Jawa.Event.Controls as Controls
-import Jawa.Test.Extra as TestExtra
+import Jawa.Event.Controls
+import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Controls"
-        [ TestExtra.fuzzCodec "round trips" Controls.decoder Controls.encoder fuzzer
-        , TestExtra.testCodec "works"
-            Controls.decoder
-            Controls.encoder
+        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.Controls.decoder Jawa.Event.Controls.encoder fuzzer
+        , Jawa.Test.Extra.testCodec "works"
+            Jawa.Event.Controls.decoder
+            Jawa.Event.Controls.encoder
             """ {
                 "controls": false
             } """
@@ -24,7 +24,7 @@ test =
         ]
 
 
-fuzzer : Fuzz.Fuzzer Controls.Controls
+fuzzer : Fuzz.Fuzzer Jawa.Event.Controls.Controls
 fuzzer =
-    Fuzz.map Controls.Controls
+    Fuzz.map Jawa.Event.Controls.Controls
         Fuzz.bool

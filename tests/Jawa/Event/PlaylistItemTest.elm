@@ -4,20 +4,20 @@ module Jawa.Event.PlaylistItemTest exposing
     )
 
 import Fuzz
-import Jawa.Event.PlaylistItem as PlaylistItem
-import Jawa.PlaylistItemTest as PI
-import Jawa.Preload as P
-import Jawa.Test.Extra as TestExtra
+import Jawa.Event.PlaylistItem
+import Jawa.PlaylistItemTest
+import Jawa.Preload
+import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.PlaylistItem"
-        [ TestExtra.fuzzCodec "round trips" PlaylistItem.decoder PlaylistItem.encoder fuzzer
-        , TestExtra.testCodec "works"
-            PlaylistItem.decoder
-            PlaylistItem.encoder
+        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.PlaylistItem.decoder Jawa.Event.PlaylistItem.encoder fuzzer
+        , Jawa.Test.Extra.testCodec "works"
+            Jawa.Event.PlaylistItem.decoder
+            Jawa.Event.PlaylistItem.encoder
             """ {
                 "index": 0,
                 "item": {
@@ -35,7 +35,7 @@ test =
                 , file = "a"
                 , image = Nothing
                 , mediaId = Nothing
-                , preload = P.Auto
+                , preload = Jawa.Preload.Auto
                 , sources = []
                 , title = Nothing
                 , tracks = []
@@ -44,8 +44,8 @@ test =
         ]
 
 
-fuzzer : Fuzz.Fuzzer PlaylistItem.PlaylistItem
+fuzzer : Fuzz.Fuzzer Jawa.Event.PlaylistItem.PlaylistItem
 fuzzer =
-    Fuzz.map2 PlaylistItem.PlaylistItem
+    Fuzz.map2 Jawa.Event.PlaylistItem.PlaylistItem
         Fuzz.int
-        PI.fuzzer
+        Jawa.PlaylistItemTest.fuzzer

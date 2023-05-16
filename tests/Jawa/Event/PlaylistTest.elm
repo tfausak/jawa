@@ -4,19 +4,19 @@ module Jawa.Event.PlaylistTest exposing
     )
 
 import Fuzz
-import Jawa.Event.Playlist as Playlist
-import Jawa.PlaylistItemTest as PI
-import Jawa.Test.Extra as TestExtra
+import Jawa.Event.Playlist
+import Jawa.PlaylistItemTest
+import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Playlist"
-        [ TestExtra.fuzzCodec "round trips" Playlist.decoder Playlist.encoder fuzzer
-        , TestExtra.testCodec "works"
-            Playlist.decoder
-            Playlist.encoder
+        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.Playlist.decoder Jawa.Event.Playlist.encoder fuzzer
+        , Jawa.Test.Extra.testCodec "works"
+            Jawa.Event.Playlist.decoder
+            Jawa.Event.Playlist.encoder
             """ {
                 "playlist": []
             } """
@@ -25,7 +25,7 @@ test =
         ]
 
 
-fuzzer : Fuzz.Fuzzer Playlist.Playlist
+fuzzer : Fuzz.Fuzzer Jawa.Event.Playlist.Playlist
 fuzzer =
-    Fuzz.map Playlist.Playlist
-        (Fuzz.listOfLengthBetween 0 2 PI.fuzzer)
+    Fuzz.map Jawa.Event.Playlist.Playlist
+        (Fuzz.listOfLengthBetween 0 2 Jawa.PlaylistItemTest.fuzzer)

@@ -4,22 +4,22 @@ module Jawa.PlaylistItemTest exposing
     )
 
 import Fuzz
-import Jawa.PlaylistItem as PI
-import Jawa.Preload as P
-import Jawa.PreloadTest as P
-import Jawa.SourceTest as S
-import Jawa.Test.Extra as TestExtra
-import Jawa.TrackTest as T
+import Jawa.PlaylistItem
+import Jawa.Preload
+import Jawa.PreloadTest
+import Jawa.SourceTest
+import Jawa.Test.Extra
+import Jawa.TrackTest
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.PlaylistItem"
-        [ TestExtra.fuzzCodec "round trips" PI.decoder PI.encoder fuzzer
-        , TestExtra.testCodec "works with missing fields"
-            PI.decoder
-            PI.encoder
+        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.PlaylistItem.decoder Jawa.PlaylistItem.encoder fuzzer
+        , Jawa.Test.Extra.testCodec "works with missing fields"
+            Jawa.PlaylistItem.decoder
+            Jawa.PlaylistItem.encoder
             """ {
                 "allSources": [],
                 "file": "a",
@@ -32,14 +32,14 @@ test =
             , file = "a"
             , image = Nothing
             , mediaId = Nothing
-            , preload = P.Auto
+            , preload = Jawa.Preload.Auto
             , sources = []
             , title = Nothing
             , tracks = []
             }
-        , TestExtra.testCodec "works with null fields"
-            PI.decoder
-            PI.encoder
+        , Jawa.Test.Extra.testCodec "works with null fields"
+            Jawa.PlaylistItem.decoder
+            Jawa.PlaylistItem.encoder
             """ {
                 "allSources": [],
                 "description": null,
@@ -56,14 +56,14 @@ test =
             , file = "a"
             , image = Nothing
             , mediaId = Nothing
-            , preload = P.Auto
+            , preload = Jawa.Preload.Auto
             , sources = []
             , title = Nothing
             , tracks = []
             }
-        , TestExtra.testCodec "works with non-null fields"
-            PI.decoder
-            PI.encoder
+        , Jawa.Test.Extra.testCodec "works with non-null fields"
+            Jawa.PlaylistItem.decoder
+            Jawa.PlaylistItem.encoder
             """ {
                 "allSources": [],
                 "description": "a",
@@ -80,7 +80,7 @@ test =
             , file = "b"
             , image = Just "c"
             , mediaId = Just "d"
-            , preload = P.Auto
+            , preload = Jawa.Preload.Auto
             , sources = []
             , title = Just "e"
             , tracks = []
@@ -88,15 +88,15 @@ test =
         ]
 
 
-fuzzer : Fuzz.Fuzzer PI.PlaylistItem
+fuzzer : Fuzz.Fuzzer Jawa.PlaylistItem.PlaylistItem
 fuzzer =
-    Fuzz.constant PI.PlaylistItem
-        |> Fuzz.andMap (Fuzz.listOfLengthBetween 0 2 S.fuzzer)
+    Fuzz.constant Jawa.PlaylistItem.PlaylistItem
+        |> Fuzz.andMap (Fuzz.listOfLengthBetween 0 2 Jawa.SourceTest.fuzzer)
         |> Fuzz.andMap (Fuzz.maybe Fuzz.string)
         |> Fuzz.andMap Fuzz.string
         |> Fuzz.andMap (Fuzz.maybe Fuzz.string)
         |> Fuzz.andMap (Fuzz.maybe Fuzz.string)
-        |> Fuzz.andMap P.fuzzer
-        |> Fuzz.andMap (Fuzz.listOfLengthBetween 0 2 S.fuzzer)
+        |> Fuzz.andMap Jawa.PreloadTest.fuzzer
+        |> Fuzz.andMap (Fuzz.listOfLengthBetween 0 2 Jawa.SourceTest.fuzzer)
         |> Fuzz.andMap (Fuzz.maybe Fuzz.string)
-        |> Fuzz.andMap (Fuzz.listOfLengthBetween 0 2 T.fuzzer)
+        |> Fuzz.andMap (Fuzz.listOfLengthBetween 0 2 Jawa.TrackTest.fuzzer)

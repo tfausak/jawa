@@ -4,18 +4,18 @@ module Jawa.SourceTest exposing
     )
 
 import Fuzz
-import Jawa.Source as S
-import Jawa.Test.Extra as TestExtra
+import Jawa.Source
+import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Source"
-        [ TestExtra.fuzzCodec "round trips" S.decoder S.encoder fuzzer
-        , TestExtra.testCodec "works"
-            S.decoder
-            S.encoder
+        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Source.decoder Jawa.Source.encoder fuzzer
+        , Jawa.Test.Extra.testCodec "works"
+            Jawa.Source.decoder
+            Jawa.Source.encoder
             """ {
                 "default": false,
                 "file": "a",
@@ -30,9 +30,9 @@ test =
         ]
 
 
-fuzzer : Fuzz.Fuzzer S.Source
+fuzzer : Fuzz.Fuzzer Jawa.Source.Source
 fuzzer =
-    Fuzz.map4 S.Source
+    Fuzz.map4 Jawa.Source.Source
         Fuzz.bool
         Fuzz.string
         Fuzz.string

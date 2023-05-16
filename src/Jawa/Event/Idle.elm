@@ -6,7 +6,7 @@ module Jawa.Event.Idle exposing (Idle, decoder, encoder)
 
 -}
 
-import Jawa.State as S
+import Jawa.State
 import Json.Decode
 import Json.Encode
 
@@ -14,9 +14,9 @@ import Json.Encode
 {-| <https://docs.jwplayer.com/players/reference/playback-events-1#onidle>
 -}
 type alias Idle =
-    { newstate : S.State
-    , oldstate : S.State
-    , reason : S.State
+    { newstate : Jawa.State.State
+    , oldstate : Jawa.State.State
+    , reason : Jawa.State.State
     }
 
 
@@ -25,9 +25,9 @@ type alias Idle =
 decoder : Json.Decode.Decoder Idle
 decoder =
     Json.Decode.map3 Idle
-        (Json.Decode.field "newstate" S.decoder)
-        (Json.Decode.field "oldstate" S.decoder)
-        (Json.Decode.field "reason" S.decoder)
+        (Json.Decode.field "newstate" Jawa.State.decoder)
+        (Json.Decode.field "oldstate" Jawa.State.decoder)
+        (Json.Decode.field "reason" Jawa.State.decoder)
 
 
 {-| A JSON encoder.
@@ -35,7 +35,7 @@ decoder =
 encoder : Idle -> Json.Encode.Value
 encoder x =
     Json.Encode.object
-        [ ( "newstate", S.encoder x.newstate )
-        , ( "oldstate", S.encoder x.oldstate )
-        , ( "reason", S.encoder x.reason )
+        [ ( "newstate", Jawa.State.encoder x.newstate )
+        , ( "oldstate", Jawa.State.encoder x.oldstate )
+        , ( "reason", Jawa.State.encoder x.reason )
         ]

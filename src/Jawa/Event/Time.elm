@@ -6,9 +6,9 @@ module Jawa.Event.Time exposing (Time, decoder, encoder)
 
 -}
 
-import Jawa.Metadata as M
-import Jawa.SeekRange as SR
-import Jawa.Viewable as V
+import Jawa.Metadata
+import Jawa.SeekRange
+import Jawa.Viewable
 import Json.Decode
 import Json.Encode
 
@@ -18,10 +18,10 @@ import Json.Encode
 type alias Time =
     { currentTime : Float
     , duration : Float
-    , metadata : M.Metadata
+    , metadata : Jawa.Metadata.Metadata
     , position : Float
-    , seekRange : SR.SeekRange
-    , viewable : V.Viewable
+    , seekRange : Jawa.SeekRange.SeekRange
+    , viewable : Jawa.Viewable.Viewable
     }
 
 
@@ -32,10 +32,10 @@ decoder =
     Json.Decode.map6 Time
         (Json.Decode.field "currentTime" Json.Decode.float)
         (Json.Decode.field "duration" Json.Decode.float)
-        (Json.Decode.field "metadata" M.decoder)
+        (Json.Decode.field "metadata" Jawa.Metadata.decoder)
         (Json.Decode.field "position" Json.Decode.float)
-        (Json.Decode.field "seekRange" SR.decoder)
-        (Json.Decode.field "viewable" V.decoder)
+        (Json.Decode.field "seekRange" Jawa.SeekRange.decoder)
+        (Json.Decode.field "viewable" Jawa.Viewable.decoder)
 
 
 {-| A JSON encoder.
@@ -45,8 +45,8 @@ encoder x =
     Json.Encode.object
         [ ( "currentTime", Json.Encode.float x.currentTime )
         , ( "duration", Json.Encode.float x.duration )
-        , ( "metadata", M.encoder x.metadata )
+        , ( "metadata", Jawa.Metadata.encoder x.metadata )
         , ( "position", Json.Encode.float x.position )
-        , ( "seekRange", SR.encoder x.seekRange )
-        , ( "viewable", V.encoder x.viewable )
+        , ( "seekRange", Jawa.SeekRange.encoder x.seekRange )
+        , ( "viewable", Jawa.Viewable.encoder x.viewable )
         ]

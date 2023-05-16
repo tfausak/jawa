@@ -4,24 +4,24 @@ module Jawa.Event.BeforeCompleteTest exposing
     )
 
 import Fuzz
-import Jawa.Event.BeforeComplete as BeforeComplete
-import Jawa.Test.Extra as TestExtra
+import Jawa.Event.BeforeComplete
+import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.BeforeComplete"
-        [ TestExtra.fuzzCodec "round trips" BeforeComplete.decoder BeforeComplete.encoder fuzzer
-        , TestExtra.testCodec "works"
-            BeforeComplete.decoder
-            BeforeComplete.encoder
+        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.BeforeComplete.decoder Jawa.Event.BeforeComplete.encoder fuzzer
+        , Jawa.Test.Extra.testCodec "works"
+            Jawa.Event.BeforeComplete.decoder
+            Jawa.Event.BeforeComplete.encoder
             """ {
             } """
             {}
         ]
 
 
-fuzzer : Fuzz.Fuzzer BeforeComplete.BeforeComplete
+fuzzer : Fuzz.Fuzzer Jawa.Event.BeforeComplete.BeforeComplete
 fuzzer =
     Fuzz.constant {}

@@ -4,24 +4,24 @@ module Jawa.Event.PipLeaveTest exposing
     )
 
 import Fuzz
-import Jawa.Event.PipLeave as PipLeave
-import Jawa.Test.Extra as TestExtra
+import Jawa.Event.PipLeave
+import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.PipLeave"
-        [ TestExtra.fuzzCodec "round trips" PipLeave.decoder PipLeave.encoder fuzzer
-        , TestExtra.testCodec "works"
-            PipLeave.decoder
-            PipLeave.encoder
+        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.PipLeave.decoder Jawa.Event.PipLeave.encoder fuzzer
+        , Jawa.Test.Extra.testCodec "works"
+            Jawa.Event.PipLeave.decoder
+            Jawa.Event.PipLeave.encoder
             """ {
             } """
             {}
         ]
 
 
-fuzzer : Fuzz.Fuzzer PipLeave.PipLeave
+fuzzer : Fuzz.Fuzzer Jawa.Event.PipLeave.PipLeave
 fuzzer =
     Fuzz.constant {}

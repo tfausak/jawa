@@ -4,18 +4,18 @@ module Jawa.Event.FullscreenTest exposing
     )
 
 import Fuzz
-import Jawa.Event.Fullscreen as Fullscreen
-import Jawa.Test.Extra as TestExtra
+import Jawa.Event.Fullscreen
+import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Fullscreen"
-        [ TestExtra.fuzzCodec "round trips" Fullscreen.decoder Fullscreen.encoder fuzzer
-        , TestExtra.testCodec "works"
-            Fullscreen.decoder
-            Fullscreen.encoder
+        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.Fullscreen.decoder Jawa.Event.Fullscreen.encoder fuzzer
+        , Jawa.Test.Extra.testCodec "works"
+            Jawa.Event.Fullscreen.decoder
+            Jawa.Event.Fullscreen.encoder
             """ {
                 "fullscreen": false
             } """
@@ -24,7 +24,7 @@ test =
         ]
 
 
-fuzzer : Fuzz.Fuzzer Fullscreen.Fullscreen
+fuzzer : Fuzz.Fuzzer Jawa.Event.Fullscreen.Fullscreen
 fuzzer =
-    Fuzz.map Fullscreen.Fullscreen
+    Fuzz.map Jawa.Event.Fullscreen.Fullscreen
         Fuzz.bool

@@ -6,7 +6,7 @@ module Jawa.Track exposing (Track, decoder, encoder)
 
 -}
 
-import Jawa.TrackKind as TK
+import Jawa.TrackKind
 import Json.Decode
 import Json.Encode
 
@@ -15,7 +15,7 @@ import Json.Encode
 -}
 type alias Track =
     { file : String
-    , kind : TK.TrackKind
+    , kind : Jawa.TrackKind.TrackKind
     , label : String
     }
 
@@ -26,7 +26,7 @@ decoder : Json.Decode.Decoder Track
 decoder =
     Json.Decode.map3 Track
         (Json.Decode.field "file" Json.Decode.string)
-        (Json.Decode.field "kind" TK.decoder)
+        (Json.Decode.field "kind" Jawa.TrackKind.decoder)
         (Json.Decode.field "label" Json.Decode.string)
 
 
@@ -36,6 +36,6 @@ encoder : Track -> Json.Encode.Value
 encoder x =
     Json.Encode.object
         [ ( "file", Json.Encode.string x.file )
-        , ( "kind", TK.encoder x.kind )
+        , ( "kind", Jawa.TrackKind.encoder x.kind )
         , ( "label", Json.Encode.string x.label )
         ]

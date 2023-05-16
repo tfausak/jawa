@@ -4,24 +4,24 @@ module Jawa.Event.PlayTest exposing
     )
 
 import Fuzz
-import Jawa.Event.Play as Play
-import Jawa.PlayReason as PlR
-import Jawa.PlayReasonTest as PlR
-import Jawa.State as S
-import Jawa.StateTest as S
-import Jawa.Test.Extra as TestExtra
-import Jawa.Viewable as V
-import Jawa.ViewableTest as V
+import Jawa.Event.Play
+import Jawa.PlayReason
+import Jawa.PlayReasonTest
+import Jawa.State
+import Jawa.StateTest
+import Jawa.Test.Extra
+import Jawa.Viewable
+import Jawa.ViewableTest
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Play"
-        [ TestExtra.fuzzCodec "round trips" Play.decoder Play.encoder fuzzer
-        , TestExtra.testCodec "works"
-            Play.decoder
-            Play.encoder
+        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.Play.decoder Jawa.Event.Play.encoder fuzzer
+        , Jawa.Test.Extra.testCodec "works"
+            Jawa.Event.Play.decoder
+            Jawa.Event.Play.encoder
             """ {
                 "newstate": "buffering",
                 "oldstate": "complete",
@@ -29,20 +29,20 @@ test =
                 "reason": "error",
                 "viewable": 0
             } """
-            { newstate = S.Buffering
-            , oldstate = S.Complete
-            , playReason = PlR.External
-            , reason = S.Error
-            , viewable = V.Hidden
+            { newstate = Jawa.State.Buffering
+            , oldstate = Jawa.State.Complete
+            , playReason = Jawa.PlayReason.External
+            , reason = Jawa.State.Error
+            , viewable = Jawa.Viewable.Hidden
             }
         ]
 
 
-fuzzer : Fuzz.Fuzzer Play.Play
+fuzzer : Fuzz.Fuzzer Jawa.Event.Play.Play
 fuzzer =
-    Fuzz.map5 Play.Play
-        S.fuzzer
-        S.fuzzer
-        PlR.fuzzer
-        S.fuzzer
-        V.fuzzer
+    Fuzz.map5 Jawa.Event.Play.Play
+        Jawa.StateTest.fuzzer
+        Jawa.StateTest.fuzzer
+        Jawa.PlayReasonTest.fuzzer
+        Jawa.StateTest.fuzzer
+        Jawa.ViewableTest.fuzzer

@@ -4,18 +4,18 @@ module Jawa.QualityLevelTest exposing
     )
 
 import Fuzz
-import Jawa.QualityLevel as QL
-import Jawa.Test.Extra as TestExtra
+import Jawa.QualityLevel
+import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.QualityLevel"
-        [ TestExtra.fuzzCodec "round trips" QL.decoder QL.encoder fuzzer
-        , TestExtra.testCodec "works"
-            QL.decoder
-            QL.encoder
+        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.QualityLevel.decoder Jawa.QualityLevel.encoder fuzzer
+        , Jawa.Test.Extra.testCodec "works"
+            Jawa.QualityLevel.decoder
+            Jawa.QualityLevel.encoder
             """ {
                 "bitrate": 0,
                 "height": 1,
@@ -32,9 +32,9 @@ test =
         ]
 
 
-fuzzer : Fuzz.Fuzzer QL.QualityLevel
+fuzzer : Fuzz.Fuzzer Jawa.QualityLevel.QualityLevel
 fuzzer =
-    Fuzz.map5 QL.QualityLevel
+    Fuzz.map5 Jawa.QualityLevel.QualityLevel
         Fuzz.int
         Fuzz.int
         Fuzz.int

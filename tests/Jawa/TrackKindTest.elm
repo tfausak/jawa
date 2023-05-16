@@ -4,37 +4,37 @@ module Jawa.TrackKindTest exposing
     )
 
 import Fuzz
-import Jawa.Test.Extra as TestExtra
-import Jawa.TrackKind as TK
+import Jawa.Test.Extra
+import Jawa.TrackKind
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.TrackKind"
-        [ TestExtra.fuzzCodec "round trips" TK.decoder TK.encoder fuzzer
-        , TestExtra.testCodec "works with captions"
-            TK.decoder
-            TK.encoder
+        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.TrackKind.decoder Jawa.TrackKind.encoder fuzzer
+        , Jawa.Test.Extra.testCodec "works with captions"
+            Jawa.TrackKind.decoder
+            Jawa.TrackKind.encoder
             "\"captions\""
-            TK.Captions
-        , TestExtra.testCodec "works with chapters"
-            TK.decoder
-            TK.encoder
+            Jawa.TrackKind.Captions
+        , Jawa.Test.Extra.testCodec "works with chapters"
+            Jawa.TrackKind.decoder
+            Jawa.TrackKind.encoder
             "\"chapters\""
-            TK.Chapters
-        , TestExtra.testCodec "works with thumbnails"
-            TK.decoder
-            TK.encoder
+            Jawa.TrackKind.Chapters
+        , Jawa.Test.Extra.testCodec "works with thumbnails"
+            Jawa.TrackKind.decoder
+            Jawa.TrackKind.encoder
             "\"thumbnails\""
-            TK.Thumbnails
+            Jawa.TrackKind.Thumbnails
         ]
 
 
-fuzzer : Fuzz.Fuzzer TK.TrackKind
+fuzzer : Fuzz.Fuzzer Jawa.TrackKind.TrackKind
 fuzzer =
     Fuzz.oneOfValues
-        [ TK.Captions
-        , TK.Chapters
-        , TK.Thumbnails
+        [ Jawa.TrackKind.Captions
+        , Jawa.TrackKind.Chapters
+        , Jawa.TrackKind.Thumbnails
         ]

@@ -6,7 +6,7 @@ module Jawa.Event.AudioTracks exposing (AudioTracks, decoder, encoder)
 
 -}
 
-import Jawa.AudioTrack as AT
+import Jawa.AudioTrack
 import Json.Decode
 import Json.Encode
 
@@ -15,7 +15,7 @@ import Json.Encode
 -}
 type alias AudioTracks =
     { currentTrack : Int
-    , tracks : List AT.AudioTrack
+    , tracks : List Jawa.AudioTrack.AudioTrack
     }
 
 
@@ -25,7 +25,7 @@ decoder : Json.Decode.Decoder AudioTracks
 decoder =
     Json.Decode.map2 AudioTracks
         (Json.Decode.field "currentTrack" Json.Decode.int)
-        (Json.Decode.field "tracks" (Json.Decode.list AT.decoder))
+        (Json.Decode.field "tracks" (Json.Decode.list Jawa.AudioTrack.decoder))
 
 
 {-| A JSON encoder.
@@ -34,5 +34,5 @@ encoder : AudioTracks -> Json.Encode.Value
 encoder x =
     Json.Encode.object
         [ ( "currentTrack", Json.Encode.int x.currentTrack )
-        , ( "tracks", Json.Encode.list AT.encoder x.tracks )
+        , ( "tracks", Json.Encode.list Jawa.AudioTrack.encoder x.tracks )
         ]

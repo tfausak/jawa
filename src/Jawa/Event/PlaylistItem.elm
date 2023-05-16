@@ -6,7 +6,7 @@ module Jawa.Event.PlaylistItem exposing (PlaylistItem, decoder, encoder)
 
 -}
 
-import Jawa.PlaylistItem as PI
+import Jawa.PlaylistItem
 import Json.Decode
 import Json.Encode
 
@@ -15,7 +15,7 @@ import Json.Encode
 -}
 type alias PlaylistItem =
     { index : Int
-    , item : PI.PlaylistItem
+    , item : Jawa.PlaylistItem.PlaylistItem
     }
 
 
@@ -25,7 +25,7 @@ decoder : Json.Decode.Decoder PlaylistItem
 decoder =
     Json.Decode.map2 PlaylistItem
         (Json.Decode.field "index" Json.Decode.int)
-        (Json.Decode.field "item" PI.decoder)
+        (Json.Decode.field "item" Jawa.PlaylistItem.decoder)
 
 
 {-| A JSON encoder.
@@ -34,5 +34,5 @@ encoder : PlaylistItem -> Json.Encode.Value
 encoder x =
     Json.Encode.object
         [ ( "index", Json.Encode.int x.index )
-        , ( "item", PI.encoder x.item )
+        , ( "item", Jawa.PlaylistItem.encoder x.item )
         ]

@@ -1,8 +1,8 @@
 module Jawa.MetadataTest exposing (fuzzer, test)
 
 import Fuzz
-import Jawa.Metadata as M
-import Jawa.Test.Extra as TestExtra
+import Jawa.Metadata
+import Jawa.Test.Extra
 import Json.Encode
 import Test
 
@@ -10,18 +10,18 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.Metadata"
-        [ TestExtra.fuzzCodec "round trips" M.decoder M.encoder fuzzer
-        , TestExtra.testCodec "works"
-            M.decoder
-            M.encoder
+        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Metadata.decoder Jawa.Metadata.encoder fuzzer
+        , Jawa.Test.Extra.testCodec "works"
+            Jawa.Metadata.decoder
+            Jawa.Metadata.encoder
             "null"
-            (M.Metadata Json.Encode.null)
+            (Jawa.Metadata.Metadata Json.Encode.null)
         ]
 
 
-fuzzer : Fuzz.Fuzzer M.Metadata
+fuzzer : Fuzz.Fuzzer Jawa.Metadata.Metadata
 fuzzer =
-    Fuzz.map M.Metadata (fuzzerWith 32)
+    Fuzz.map Jawa.Metadata.Metadata (fuzzerWith 32)
 
 
 fuzzerWith : Int -> Fuzz.Fuzzer Json.Encode.Value

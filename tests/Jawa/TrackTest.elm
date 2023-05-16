@@ -4,35 +4,35 @@ module Jawa.TrackTest exposing
     )
 
 import Fuzz
-import Jawa.Test.Extra as TestExtra
-import Jawa.Track as T
-import Jawa.TrackKind as TK
-import Jawa.TrackKindTest as TK
+import Jawa.Test.Extra
+import Jawa.Track
+import Jawa.TrackKind
+import Jawa.TrackKindTest
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Track"
-        [ TestExtra.fuzzCodec "round trips" T.decoder T.encoder fuzzer
-        , TestExtra.testCodec "works"
-            T.decoder
-            T.encoder
+        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Track.decoder Jawa.Track.encoder fuzzer
+        , Jawa.Test.Extra.testCodec "works"
+            Jawa.Track.decoder
+            Jawa.Track.encoder
             """ {
                 "file": "a",
                 "kind": "captions",
                 "label": "b"
             } """
             { file = "a"
-            , kind = TK.Captions
+            , kind = Jawa.TrackKind.Captions
             , label = "b"
             }
         ]
 
 
-fuzzer : Fuzz.Fuzzer T.Track
+fuzzer : Fuzz.Fuzzer Jawa.Track.Track
 fuzzer =
-    Fuzz.map3 T.Track
+    Fuzz.map3 Jawa.Track.Track
         Fuzz.string
-        TK.fuzzer
+        Jawa.TrackKindTest.fuzzer
         Fuzz.string

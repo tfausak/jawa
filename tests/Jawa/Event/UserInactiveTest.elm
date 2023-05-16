@@ -4,24 +4,24 @@ module Jawa.Event.UserInactiveTest exposing
     )
 
 import Fuzz
-import Jawa.Event.UserInactive as UserInactive
-import Jawa.Test.Extra as TestExtra
+import Jawa.Event.UserInactive
+import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.UserInactive"
-        [ TestExtra.fuzzCodec "round trips" UserInactive.decoder UserInactive.encoder fuzzer
-        , TestExtra.testCodec "works"
-            UserInactive.decoder
-            UserInactive.encoder
+        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.UserInactive.decoder Jawa.Event.UserInactive.encoder fuzzer
+        , Jawa.Test.Extra.testCodec "works"
+            Jawa.Event.UserInactive.decoder
+            Jawa.Event.UserInactive.encoder
             """ {
             } """
             {}
         ]
 
 
-fuzzer : Fuzz.Fuzzer UserInactive.UserInactive
+fuzzer : Fuzz.Fuzzer Jawa.Event.UserInactive.UserInactive
 fuzzer =
     Fuzz.constant {}

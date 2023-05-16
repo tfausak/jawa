@@ -4,37 +4,37 @@ module Jawa.QualityReasonTest exposing
     )
 
 import Fuzz
-import Jawa.QualityReason as QR
-import Jawa.Test.Extra as TestExtra
+import Jawa.QualityReason
+import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.QualityReason"
-        [ TestExtra.fuzzCodec "round trips" QR.decoder QR.encoder fuzzer
-        , TestExtra.testCodec "works with api"
-            QR.decoder
-            QR.encoder
+        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.QualityReason.decoder Jawa.QualityReason.encoder fuzzer
+        , Jawa.Test.Extra.testCodec "works with api"
+            Jawa.QualityReason.decoder
+            Jawa.QualityReason.encoder
             "\"api\""
-            QR.Api
-        , TestExtra.testCodec "works with auto"
-            QR.decoder
-            QR.encoder
+            Jawa.QualityReason.Api
+        , Jawa.Test.Extra.testCodec "works with auto"
+            Jawa.QualityReason.decoder
+            Jawa.QualityReason.encoder
             "\"auto\""
-            QR.Auto
-        , TestExtra.testCodec "works with initial choice"
-            QR.decoder
-            QR.encoder
+            Jawa.QualityReason.Auto
+        , Jawa.Test.Extra.testCodec "works with initial choice"
+            Jawa.QualityReason.decoder
+            Jawa.QualityReason.encoder
             "\"initial choice\""
-            QR.InitialChoice
+            Jawa.QualityReason.InitialChoice
         ]
 
 
-fuzzer : Fuzz.Fuzzer QR.QualityReason
+fuzzer : Fuzz.Fuzzer Jawa.QualityReason.QualityReason
 fuzzer =
     Fuzz.oneOfValues
-        [ QR.Api
-        , QR.Auto
-        , QR.InitialChoice
+        [ Jawa.QualityReason.Api
+        , Jawa.QualityReason.Auto
+        , Jawa.QualityReason.InitialChoice
         ]

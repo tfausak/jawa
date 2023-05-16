@@ -4,67 +4,67 @@ module Jawa.StateTest exposing
     )
 
 import Fuzz
-import Jawa.State as S
-import Jawa.Test.Extra as TestExtra
+import Jawa.State
+import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.State"
-        [ TestExtra.fuzzCodec "round trips" S.decoder S.encoder fuzzer
-        , TestExtra.testCodec "works with buffering"
-            S.decoder
-            S.encoder
+        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.State.decoder Jawa.State.encoder fuzzer
+        , Jawa.Test.Extra.testCodec "works with buffering"
+            Jawa.State.decoder
+            Jawa.State.encoder
             "\"buffering\""
-            S.Buffering
-        , TestExtra.testCodec "works with complete"
-            S.decoder
-            S.encoder
+            Jawa.State.Buffering
+        , Jawa.Test.Extra.testCodec "works with complete"
+            Jawa.State.decoder
+            Jawa.State.encoder
             "\"complete\""
-            S.Complete
-        , TestExtra.testCodec "works with error"
-            S.decoder
-            S.encoder
+            Jawa.State.Complete
+        , Jawa.Test.Extra.testCodec "works with error"
+            Jawa.State.decoder
+            Jawa.State.encoder
             "\"error\""
-            S.Error
-        , TestExtra.testCodec "works with idle"
-            S.decoder
-            S.encoder
+            Jawa.State.Error
+        , Jawa.Test.Extra.testCodec "works with idle"
+            Jawa.State.decoder
+            Jawa.State.encoder
             "\"idle\""
-            S.Idle
-        , TestExtra.testCodec "works with loading"
-            S.decoder
-            S.encoder
+            Jawa.State.Idle
+        , Jawa.Test.Extra.testCodec "works with loading"
+            Jawa.State.decoder
+            Jawa.State.encoder
             "\"loading\""
-            S.Loading
-        , TestExtra.testCodec "works with paused"
-            S.decoder
-            S.encoder
+            Jawa.State.Loading
+        , Jawa.Test.Extra.testCodec "works with paused"
+            Jawa.State.decoder
+            Jawa.State.encoder
             "\"paused\""
-            S.Paused
-        , TestExtra.testCodec "works with playing"
-            S.decoder
-            S.encoder
+            Jawa.State.Paused
+        , Jawa.Test.Extra.testCodec "works with playing"
+            Jawa.State.decoder
+            Jawa.State.encoder
             "\"playing\""
-            S.Playing
-        , TestExtra.testCodec "works with stalled"
-            S.decoder
-            S.encoder
+            Jawa.State.Playing
+        , Jawa.Test.Extra.testCodec "works with stalled"
+            Jawa.State.decoder
+            Jawa.State.encoder
             "\"stalled\""
-            S.Stalled
+            Jawa.State.Stalled
         ]
 
 
-fuzzer : Fuzz.Fuzzer S.State
+fuzzer : Fuzz.Fuzzer Jawa.State.State
 fuzzer =
     Fuzz.oneOfValues
-        [ S.Buffering
-        , S.Complete
-        , S.Error
-        , S.Idle
-        , S.Loading
-        , S.Paused
-        , S.Playing
-        , S.Stalled
+        [ Jawa.State.Buffering
+        , Jawa.State.Complete
+        , Jawa.State.Error
+        , Jawa.State.Idle
+        , Jawa.State.Loading
+        , Jawa.State.Paused
+        , Jawa.State.Playing
+        , Jawa.State.Stalled
         ]

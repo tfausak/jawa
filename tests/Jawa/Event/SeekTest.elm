@@ -4,11 +4,11 @@ module Jawa.Event.SeekTest exposing
     )
 
 import Fuzz
-import Jawa.Event.Seek as Seek
-import Jawa.Metadata as M
-import Jawa.MetadataTest as M
-import Jawa.SeekRangeTest as SR
-import Jawa.Test.Extra as TestExtra
+import Jawa.Event.Seek
+import Jawa.Metadata
+import Jawa.MetadataTest
+import Jawa.SeekRangeTest
+import Jawa.Test.Extra
 import Json.Encode
 import Test
 
@@ -16,10 +16,10 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Seek"
-        [ TestExtra.fuzzCodec "round trips" Seek.decoder Seek.encoder fuzzer
-        , TestExtra.testCodec "works"
-            Seek.decoder
-            Seek.encoder
+        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.Seek.decoder Jawa.Event.Seek.encoder fuzzer
+        , Jawa.Test.Extra.testCodec "works"
+            Jawa.Event.Seek.decoder
+            Jawa.Event.Seek.encoder
             """ {
                 "currentTime": 0.1,
                 "duration": 0.2,
@@ -33,7 +33,7 @@ test =
             } """
             { currentTime = 0.1
             , duration = 0.2
-            , metadata = M.Metadata Json.Encode.null
+            , metadata = Jawa.Metadata.Metadata Json.Encode.null
             , offset = 0.3
             , position = 0.4
             , seekRange =
@@ -44,12 +44,12 @@ test =
         ]
 
 
-fuzzer : Fuzz.Fuzzer Seek.Seek
+fuzzer : Fuzz.Fuzzer Jawa.Event.Seek.Seek
 fuzzer =
-    Fuzz.map6 Seek.Seek
+    Fuzz.map6 Jawa.Event.Seek.Seek
         Fuzz.niceFloat
         Fuzz.niceFloat
-        M.fuzzer
+        Jawa.MetadataTest.fuzzer
         Fuzz.niceFloat
         Fuzz.niceFloat
-        SR.fuzzer
+        Jawa.SeekRangeTest.fuzzer

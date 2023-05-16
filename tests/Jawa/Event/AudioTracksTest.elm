@@ -4,19 +4,19 @@ module Jawa.Event.AudioTracksTest exposing
     )
 
 import Fuzz
-import Jawa.AudioTrackTest as AT
-import Jawa.Event.AudioTracks as AudioTracks
-import Jawa.Test.Extra as TestExtra
+import Jawa.AudioTrackTest
+import Jawa.Event.AudioTracks
+import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.AudioTracks"
-        [ TestExtra.fuzzCodec "round trips" AudioTracks.decoder AudioTracks.encoder fuzzer
-        , TestExtra.testCodec "works"
-            AudioTracks.decoder
-            AudioTracks.encoder
+        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.AudioTracks.decoder Jawa.Event.AudioTracks.encoder fuzzer
+        , Jawa.Test.Extra.testCodec "works"
+            Jawa.Event.AudioTracks.decoder
+            Jawa.Event.AudioTracks.encoder
             """ {
                 "currentTrack": 0,
                 "tracks": []
@@ -27,8 +27,8 @@ test =
         ]
 
 
-fuzzer : Fuzz.Fuzzer AudioTracks.AudioTracks
+fuzzer : Fuzz.Fuzzer Jawa.Event.AudioTracks.AudioTracks
 fuzzer =
-    Fuzz.map2 AudioTracks.AudioTracks
+    Fuzz.map2 Jawa.Event.AudioTracks.AudioTracks
         Fuzz.int
-        (Fuzz.listOfLengthBetween 0 2 AT.fuzzer)
+        (Fuzz.listOfLengthBetween 0 2 Jawa.AudioTrackTest.fuzzer)
