@@ -5,11 +5,11 @@ module Jawa.Event.PauseTest exposing
 
 import Fuzz
 import Jawa.Event.Pause
+import Jawa.Extra.Test
 import Jawa.PauseReason
 import Jawa.PauseReasonTest
 import Jawa.State
 import Jawa.StateTest
-import Jawa.Test.Extra
 import Jawa.Viewable
 import Jawa.ViewableTest
 import Test
@@ -18,8 +18,8 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Pause"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.Pause.decoder Jawa.Event.Pause.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.Pause.decoder Jawa.Event.Pause.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.Pause.decoder
             Jawa.Event.Pause.encoder
             """ {

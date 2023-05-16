@@ -5,17 +5,17 @@ module Jawa.Event.IdleTest exposing
 
 import Fuzz
 import Jawa.Event.Idle
+import Jawa.Extra.Test
 import Jawa.State
 import Jawa.StateTest
-import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Idle"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.Idle.decoder Jawa.Event.Idle.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.Idle.decoder Jawa.Event.Idle.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.Idle.decoder
             Jawa.Event.Idle.encoder
             """ {

@@ -5,16 +5,16 @@ module Jawa.Event.BufferChangeTest exposing
 
 import Fuzz
 import Jawa.Event.BufferChange
+import Jawa.Extra.Test
 import Jawa.SeekRangeTest
-import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.BufferChange"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.BufferChange.decoder Jawa.Event.BufferChange.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.BufferChange.decoder Jawa.Event.BufferChange.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.BufferChange.decoder
             Jawa.Event.BufferChange.encoder
             """ {

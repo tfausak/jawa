@@ -5,15 +5,15 @@ module Jawa.Event.SeekedTest exposing
 
 import Fuzz
 import Jawa.Event.Seeked
-import Jawa.Test.Extra
+import Jawa.Extra.Test
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Seeked"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.Seeked.decoder Jawa.Event.Seeked.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.Seeked.decoder Jawa.Event.Seeked.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.Seeked.decoder
             Jawa.Event.Seeked.encoder
             """ {

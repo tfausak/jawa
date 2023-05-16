@@ -4,41 +4,41 @@ module Jawa.PlayReasonTest exposing
     )
 
 import Fuzz
+import Jawa.Extra.Test
 import Jawa.PlayReason
-import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.PlayReason"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.PlayReason.decoder Jawa.PlayReason.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works with autostart"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.PlayReason.decoder Jawa.PlayReason.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works with autostart"
             Jawa.PlayReason.decoder
             Jawa.PlayReason.encoder
             "\"autostart\""
             Jawa.PlayReason.Autostart
-        , Jawa.Test.Extra.testCodec "works with external"
+        , Jawa.Extra.Test.testCodec "works with external"
             Jawa.PlayReason.decoder
             Jawa.PlayReason.encoder
             "\"external\""
             Jawa.PlayReason.External
-        , Jawa.Test.Extra.testCodec "works with interaction"
+        , Jawa.Extra.Test.testCodec "works with interaction"
             Jawa.PlayReason.decoder
             Jawa.PlayReason.encoder
             "\"interaction\""
             Jawa.PlayReason.Interaction
-        , Jawa.Test.Extra.testCodec "works with playlist"
+        , Jawa.Extra.Test.testCodec "works with playlist"
             Jawa.PlayReason.decoder
             Jawa.PlayReason.encoder
             "\"playlist\""
             Jawa.PlayReason.Playlist
-        , Jawa.Test.Extra.testCodec "works with related-auto"
+        , Jawa.Extra.Test.testCodec "works with related-auto"
             Jawa.PlayReason.decoder
             Jawa.PlayReason.encoder
             "\"related-auto\""
             Jawa.PlayReason.RelatedAuto
-        , Jawa.Test.Extra.testCodec "works with related-interaction"
+        , Jawa.Extra.Test.testCodec "works with related-interaction"
             Jawa.PlayReason.decoder
             Jawa.PlayReason.encoder
             "\"related-interaction\""

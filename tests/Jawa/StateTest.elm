@@ -4,51 +4,51 @@ module Jawa.StateTest exposing
     )
 
 import Fuzz
+import Jawa.Extra.Test
 import Jawa.State
-import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.State"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.State.decoder Jawa.State.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works with buffering"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.State.decoder Jawa.State.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works with buffering"
             Jawa.State.decoder
             Jawa.State.encoder
             "\"buffering\""
             Jawa.State.Buffering
-        , Jawa.Test.Extra.testCodec "works with complete"
+        , Jawa.Extra.Test.testCodec "works with complete"
             Jawa.State.decoder
             Jawa.State.encoder
             "\"complete\""
             Jawa.State.Complete
-        , Jawa.Test.Extra.testCodec "works with error"
+        , Jawa.Extra.Test.testCodec "works with error"
             Jawa.State.decoder
             Jawa.State.encoder
             "\"error\""
             Jawa.State.Error
-        , Jawa.Test.Extra.testCodec "works with idle"
+        , Jawa.Extra.Test.testCodec "works with idle"
             Jawa.State.decoder
             Jawa.State.encoder
             "\"idle\""
             Jawa.State.Idle
-        , Jawa.Test.Extra.testCodec "works with loading"
+        , Jawa.Extra.Test.testCodec "works with loading"
             Jawa.State.decoder
             Jawa.State.encoder
             "\"loading\""
             Jawa.State.Loading
-        , Jawa.Test.Extra.testCodec "works with paused"
+        , Jawa.Extra.Test.testCodec "works with paused"
             Jawa.State.decoder
             Jawa.State.encoder
             "\"paused\""
             Jawa.State.Paused
-        , Jawa.Test.Extra.testCodec "works with playing"
+        , Jawa.Extra.Test.testCodec "works with playing"
             Jawa.State.decoder
             Jawa.State.encoder
             "\"playing\""
             Jawa.State.Playing
-        , Jawa.Test.Extra.testCodec "works with stalled"
+        , Jawa.Extra.Test.testCodec "works with stalled"
             Jawa.State.decoder
             Jawa.State.encoder
             "\"stalled\""

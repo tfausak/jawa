@@ -6,15 +6,15 @@ module Jawa.Event.AudioTracksTest exposing
 import Fuzz
 import Jawa.AudioTrackTest
 import Jawa.Event.AudioTracks
-import Jawa.Test.Extra
+import Jawa.Extra.Test
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.AudioTracks"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.AudioTracks.decoder Jawa.Event.AudioTracks.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.AudioTracks.decoder Jawa.Event.AudioTracks.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.AudioTracks.decoder
             Jawa.Event.AudioTracks.encoder
             """ {

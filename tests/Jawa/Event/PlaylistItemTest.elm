@@ -5,17 +5,17 @@ module Jawa.Event.PlaylistItemTest exposing
 
 import Fuzz
 import Jawa.Event.PlaylistItem
+import Jawa.Extra.Test
 import Jawa.PlaylistItemTest
 import Jawa.Preload
-import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.PlaylistItem"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.PlaylistItem.decoder Jawa.Event.PlaylistItem.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.PlaylistItem.decoder Jawa.Event.PlaylistItem.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.PlaylistItem.decoder
             Jawa.Event.PlaylistItem.encoder
             """ {

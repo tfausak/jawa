@@ -5,15 +5,15 @@ module Jawa.Event.BreakpointTest exposing
 
 import Fuzz
 import Jawa.Event.Breakpoint
-import Jawa.Test.Extra
+import Jawa.Extra.Test
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Breakpoint"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.Breakpoint.decoder Jawa.Event.Breakpoint.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.Breakpoint.decoder Jawa.Event.Breakpoint.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.Breakpoint.decoder
             Jawa.Event.Breakpoint.encoder
             """ {

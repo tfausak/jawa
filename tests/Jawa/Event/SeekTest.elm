@@ -5,10 +5,10 @@ module Jawa.Event.SeekTest exposing
 
 import Fuzz
 import Jawa.Event.Seek
+import Jawa.Extra.Test
 import Jawa.Metadata
 import Jawa.MetadataTest
 import Jawa.SeekRangeTest
-import Jawa.Test.Extra
 import Json.Encode
 import Test
 
@@ -16,8 +16,8 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Seek"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.Seek.decoder Jawa.Event.Seek.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.Seek.decoder Jawa.Event.Seek.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.Seek.decoder
             Jawa.Event.Seek.encoder
             """ {

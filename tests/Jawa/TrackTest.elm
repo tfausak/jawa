@@ -4,7 +4,7 @@ module Jawa.TrackTest exposing
     )
 
 import Fuzz
-import Jawa.Test.Extra
+import Jawa.Extra.Test
 import Jawa.Track
 import Jawa.TrackKind
 import Jawa.TrackKindTest
@@ -14,8 +14,8 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.Track"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Track.decoder Jawa.Track.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Track.decoder Jawa.Track.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
             Jawa.Track.decoder
             Jawa.Track.encoder
             """ {

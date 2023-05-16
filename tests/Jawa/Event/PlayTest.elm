@@ -5,11 +5,11 @@ module Jawa.Event.PlayTest exposing
 
 import Fuzz
 import Jawa.Event.Play
+import Jawa.Extra.Test
 import Jawa.PlayReason
 import Jawa.PlayReasonTest
 import Jawa.State
 import Jawa.StateTest
-import Jawa.Test.Extra
 import Jawa.Viewable
 import Jawa.ViewableTest
 import Test
@@ -18,8 +18,8 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Play"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.Play.decoder Jawa.Event.Play.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.Play.decoder Jawa.Event.Play.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.Play.decoder
             Jawa.Event.Play.encoder
             """ {

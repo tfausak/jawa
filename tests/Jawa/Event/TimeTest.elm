@@ -5,10 +5,10 @@ module Jawa.Event.TimeTest exposing
 
 import Fuzz
 import Jawa.Event.Time
+import Jawa.Extra.Test
 import Jawa.Metadata
 import Jawa.MetadataTest
 import Jawa.SeekRangeTest
-import Jawa.Test.Extra
 import Jawa.Viewable
 import Jawa.ViewableTest
 import Json.Encode
@@ -18,8 +18,8 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Time"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.Time.decoder Jawa.Event.Time.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.Time.decoder Jawa.Event.Time.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.Time.decoder
             Jawa.Event.Time.encoder
             """ {

@@ -5,15 +5,15 @@ module Jawa.Event.PipLeaveTest exposing
 
 import Fuzz
 import Jawa.Event.PipLeave
-import Jawa.Test.Extra
+import Jawa.Extra.Test
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.PipLeave"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.PipLeave.decoder Jawa.Event.PipLeave.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.PipLeave.decoder Jawa.Event.PipLeave.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.PipLeave.decoder
             Jawa.Event.PipLeave.encoder
             """ {

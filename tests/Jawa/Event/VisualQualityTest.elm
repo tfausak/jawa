@@ -5,20 +5,20 @@ module Jawa.Event.VisualQualityTest exposing
 
 import Fuzz
 import Jawa.Event.VisualQuality
+import Jawa.Extra.Test
 import Jawa.QualityLevelTest
 import Jawa.QualityMode
 import Jawa.QualityModeTest
 import Jawa.QualityReason
 import Jawa.QualityReasonTest
-import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.VisualQuality"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.VisualQuality.decoder Jawa.Event.VisualQuality.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.VisualQuality.decoder Jawa.Event.VisualQuality.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.VisualQuality.decoder
             Jawa.Event.VisualQuality.encoder
             """ {

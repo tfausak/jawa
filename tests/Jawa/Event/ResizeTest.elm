@@ -5,15 +5,15 @@ module Jawa.Event.ResizeTest exposing
 
 import Fuzz
 import Jawa.Event.Resize
-import Jawa.Test.Extra
+import Jawa.Extra.Test
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Resize"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.Resize.decoder Jawa.Event.Resize.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.Resize.decoder Jawa.Event.Resize.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.Resize.decoder
             Jawa.Event.Resize.encoder
             """ {

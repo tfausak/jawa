@@ -4,21 +4,21 @@ module Jawa.QualityModeTest exposing
     )
 
 import Fuzz
+import Jawa.Extra.Test
 import Jawa.QualityMode
-import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.QualityMode"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.QualityMode.decoder Jawa.QualityMode.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works with auto"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.QualityMode.decoder Jawa.QualityMode.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works with auto"
             Jawa.QualityMode.decoder
             Jawa.QualityMode.encoder
             "\"auto\""
             Jawa.QualityMode.Auto
-        , Jawa.Test.Extra.testCodec "works with manual"
+        , Jawa.Extra.Test.testCodec "works with manual"
             Jawa.QualityMode.decoder
             Jawa.QualityMode.encoder
             "\"manual\""

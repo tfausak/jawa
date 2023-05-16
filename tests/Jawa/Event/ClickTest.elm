@@ -5,15 +5,15 @@ module Jawa.Event.ClickTest exposing
 
 import Fuzz
 import Jawa.Event.Click
-import Jawa.Test.Extra
+import Jawa.Extra.Test
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Click"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.Click.decoder Jawa.Event.Click.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.Click.decoder Jawa.Event.Click.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.Click.decoder
             Jawa.Event.Click.encoder
             """ {

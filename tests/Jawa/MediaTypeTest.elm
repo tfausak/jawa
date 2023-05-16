@@ -4,21 +4,21 @@ module Jawa.MediaTypeTest exposing
     )
 
 import Fuzz
+import Jawa.Extra.Test
 import Jawa.MediaType
-import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.MediaType"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.MediaType.decoder Jawa.MediaType.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works with audio"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.MediaType.decoder Jawa.MediaType.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works with audio"
             Jawa.MediaType.decoder
             Jawa.MediaType.encoder
             "\"audio\""
             Jawa.MediaType.Audio
-        , Jawa.Test.Extra.testCodec "works with video"
+        , Jawa.Extra.Test.testCodec "works with video"
             Jawa.MediaType.decoder
             Jawa.MediaType.encoder
             "\"video\""

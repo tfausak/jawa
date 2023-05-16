@@ -5,7 +5,7 @@ module Jawa.Event.ReadyTest exposing
 
 import Fuzz
 import Jawa.Event.Ready
-import Jawa.Test.Extra
+import Jawa.Extra.Test
 import Jawa.Viewable
 import Jawa.ViewableTest
 import Test
@@ -14,8 +14,8 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Ready"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.Ready.decoder Jawa.Event.Ready.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.Ready.decoder Jawa.Event.Ready.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.Ready.decoder
             Jawa.Event.Ready.encoder
             """ {

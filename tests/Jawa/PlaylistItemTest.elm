@@ -4,11 +4,11 @@ module Jawa.PlaylistItemTest exposing
     )
 
 import Fuzz
+import Jawa.Extra.Test
 import Jawa.PlaylistItem
 import Jawa.Preload
 import Jawa.PreloadTest
 import Jawa.SourceTest
-import Jawa.Test.Extra
 import Jawa.TrackTest
 import Test
 
@@ -16,8 +16,8 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.PlaylistItem"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.PlaylistItem.decoder Jawa.PlaylistItem.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works with missing fields"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.PlaylistItem.decoder Jawa.PlaylistItem.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works with missing fields"
             Jawa.PlaylistItem.decoder
             Jawa.PlaylistItem.encoder
             """ {
@@ -37,7 +37,7 @@ test =
             , title = Nothing
             , tracks = []
             }
-        , Jawa.Test.Extra.testCodec "works with null fields"
+        , Jawa.Extra.Test.testCodec "works with null fields"
             Jawa.PlaylistItem.decoder
             Jawa.PlaylistItem.encoder
             """ {
@@ -61,7 +61,7 @@ test =
             , title = Nothing
             , tracks = []
             }
-        , Jawa.Test.Extra.testCodec "works with non-null fields"
+        , Jawa.Extra.Test.testCodec "works with non-null fields"
             Jawa.PlaylistItem.decoder
             Jawa.PlaylistItem.encoder
             """ {

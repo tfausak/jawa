@@ -5,15 +5,15 @@ module Jawa.Event.ControlsTest exposing
 
 import Fuzz
 import Jawa.Event.Controls
-import Jawa.Test.Extra
+import Jawa.Extra.Test
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Controls"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.Controls.decoder Jawa.Event.Controls.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.Controls.decoder Jawa.Event.Controls.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.Controls.decoder
             Jawa.Event.Controls.encoder
             """ {

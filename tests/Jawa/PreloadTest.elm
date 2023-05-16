@@ -4,26 +4,26 @@ module Jawa.PreloadTest exposing
     )
 
 import Fuzz
+import Jawa.Extra.Test
 import Jawa.Preload
-import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Preload"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Preload.decoder Jawa.Preload.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works with auto"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Preload.decoder Jawa.Preload.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works with auto"
             Jawa.Preload.decoder
             Jawa.Preload.encoder
             "\"auto\""
             Jawa.Preload.Auto
-        , Jawa.Test.Extra.testCodec "works with metadata"
+        , Jawa.Extra.Test.testCodec "works with metadata"
             Jawa.Preload.decoder
             Jawa.Preload.encoder
             "\"metadata\""
             Jawa.Preload.Metadata
-        , Jawa.Test.Extra.testCodec "works with none"
+        , Jawa.Extra.Test.testCodec "works with none"
             Jawa.Preload.decoder
             Jawa.Preload.encoder
             "\"none\""

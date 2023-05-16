@@ -5,17 +5,17 @@ module Jawa.Event.MediaTypeTest exposing
 
 import Fuzz
 import Jawa.Event.MediaType
+import Jawa.Extra.Test
 import Jawa.MediaType
 import Jawa.MediaTypeTest
-import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.MediaType"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.MediaType.decoder Jawa.Event.MediaType.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.MediaType.decoder Jawa.Event.MediaType.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.MediaType.decoder
             Jawa.Event.MediaType.encoder
             """ {

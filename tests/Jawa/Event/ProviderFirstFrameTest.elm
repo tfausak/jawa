@@ -5,15 +5,15 @@ module Jawa.Event.ProviderFirstFrameTest exposing
 
 import Fuzz
 import Jawa.Event.ProviderFirstFrame
-import Jawa.Test.Extra
+import Jawa.Extra.Test
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.ProviderFirstFrame"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.ProviderFirstFrame.decoder Jawa.Event.ProviderFirstFrame.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.ProviderFirstFrame.decoder Jawa.Event.ProviderFirstFrame.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.ProviderFirstFrame.decoder
             Jawa.Event.ProviderFirstFrame.encoder
             """ {

@@ -4,16 +4,16 @@ module Jawa.SeekRangeTest exposing
     )
 
 import Fuzz
+import Jawa.Extra.Test
 import Jawa.SeekRange
-import Jawa.Test.Extra
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.SeekRange"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.SeekRange.decoder Jawa.SeekRange.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.SeekRange.decoder Jawa.SeekRange.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
             Jawa.SeekRange.decoder
             Jawa.SeekRange.encoder
             """ {

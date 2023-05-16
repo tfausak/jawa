@@ -5,15 +5,15 @@ module Jawa.Event.CompleteTest exposing
 
 import Fuzz
 import Jawa.Event.Complete
-import Jawa.Test.Extra
+import Jawa.Extra.Test
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Complete"
-        [ Jawa.Test.Extra.fuzzCodec "round trips" Jawa.Event.Complete.decoder Jawa.Event.Complete.encoder fuzzer
-        , Jawa.Test.Extra.testCodec "works"
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.Complete.decoder Jawa.Event.Complete.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.Complete.decoder
             Jawa.Event.Complete.encoder
             """ {
