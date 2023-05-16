@@ -4,18 +4,18 @@ module Jawa.Event.SetupErrorTest exposing
     )
 
 import Fuzz
-import Jawa.Event.SetupError as SetupError
-import Jawa.Test.Extra as TestExtra
+import Jawa.Event.SetupError
+import Jawa.Extra.Test
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.SetupError"
-        [ TestExtra.fuzzCodec "round trips" SetupError.decoder SetupError.encoder fuzzer
-        , TestExtra.testCodec "works"
-            SetupError.decoder
-            SetupError.encoder
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.SetupError.decoder Jawa.Event.SetupError.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
+            Jawa.Event.SetupError.decoder
+            Jawa.Event.SetupError.encoder
             """ {
                 "code": 0,
                 "message": ""
@@ -26,8 +26,8 @@ test =
         ]
 
 
-fuzzer : Fuzz.Fuzzer SetupError.SetupError
+fuzzer : Fuzz.Fuzzer Jawa.Event.SetupError.SetupError
 fuzzer =
-    Fuzz.map2 SetupError.SetupError
+    Fuzz.map2 Jawa.Event.SetupError.SetupError
         Fuzz.int
         Fuzz.string

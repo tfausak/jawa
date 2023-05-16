@@ -4,24 +4,24 @@ module Jawa.Event.BufferFullTest exposing
     )
 
 import Fuzz
-import Jawa.Event.BufferFull as BufferFull
-import Jawa.Test.Extra as TestExtra
+import Jawa.Event.BufferFull
+import Jawa.Extra.Test
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.BufferFull"
-        [ TestExtra.fuzzCodec "round trips" BufferFull.decoder BufferFull.encoder fuzzer
-        , TestExtra.testCodec "works"
-            BufferFull.decoder
-            BufferFull.encoder
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.BufferFull.decoder Jawa.Event.BufferFull.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
+            Jawa.Event.BufferFull.decoder
+            Jawa.Event.BufferFull.encoder
             """ {
             } """
             {}
         ]
 
 
-fuzzer : Fuzz.Fuzzer BufferFull.BufferFull
+fuzzer : Fuzz.Fuzzer Jawa.Event.BufferFull.BufferFull
 fuzzer =
     Fuzz.constant {}

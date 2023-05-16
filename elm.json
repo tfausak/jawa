@@ -5,6 +5,8 @@
     "license": "MIT",
     "version": "3.0.0",
     "exposed-modules": [
+        "Jawa.AudioTrack",
+        "Jawa.Event.AudioTracks",
         "Jawa.Event.BeforeComplete",
         "Jawa.Event.Breakpoint",
         "Jawa.Event.BufferChange",
@@ -19,9 +21,13 @@
         "Jawa.Event.MediaType",
         "Jawa.Event.Mute",
         "Jawa.Event.Pause",
+        "Jawa.Event.PipEnter",
+        "Jawa.Event.PipLeave",
         "Jawa.Event.Play",
         "Jawa.Event.PlaybackRateChanged",
+        "Jawa.Event.Playlist",
         "Jawa.Event.PlaylistComplete",
+        "Jawa.Event.PlaylistItem",
         "Jawa.Event.ProviderFirstFrame",
         "Jawa.Event.Ready",
         "Jawa.Event.Remove",
@@ -39,18 +45,24 @@
         "Jawa.MediaType",
         "Jawa.Metadata",
         "Jawa.PauseReason",
+        "Jawa.PlaylistItem",
         "Jawa.PlayReason",
+        "Jawa.Preload",
         "Jawa.QualityLevel",
         "Jawa.QualityMode",
         "Jawa.QualityReason",
         "Jawa.SeekRange",
+        "Jawa.Source",
         "Jawa.State",
+        "Jawa.Track",
+        "Jawa.TrackKind",
         "Jawa.Viewable"
     ],
     "elm-version": "0.19.1 <= v < 0.20.0",
     "dependencies": {
         "elm/core": "1.0.5 <= v < 2.0.0",
-        "elm/json": "1.1.3 <= v < 2.0.0"
+        "elm/json": "1.1.3 <= v < 2.0.0",
+        "elm-community/json-extra": "4.3.0 <= v < 5.0.0"
     },
     "test-dependencies": {
         "elm-explorations/test": "2.1.1 <= v < 3.0.0"

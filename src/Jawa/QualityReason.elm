@@ -7,6 +7,7 @@ module Jawa.QualityReason exposing (QualityReason(..), decoder, encoder)
 -}
 
 import Json.Decode
+import Json.Decode.Extra
 import Json.Encode
 
 
@@ -23,33 +24,40 @@ type QualityReason
 decoder : Json.Decode.Decoder QualityReason
 decoder =
     Json.Decode.string
-        |> Json.Decode.andThen
-            (\string ->
-                case string of
-                    "api" ->
-                        Json.Decode.succeed Api
+        |> Json.Decode.andThen (fromString >> Json.Decode.Extra.fromResult)
 
-                    "auto" ->
-                        Json.Decode.succeed Auto
 
-                    "initial choice" ->
-                        Json.Decode.succeed InitialChoice
+fromString : String -> Result String QualityReason
+fromString string =
+    case string of
+        "api" ->
+            Ok Api
 
-                    _ ->
-                        Json.Decode.fail <| "invalid QualityReason: " ++ string
-            )
+        "auto" ->
+            Ok Auto
+
+        "initial choice" ->
+            Ok InitialChoice
+
+        _ ->
+            Err <| "invalid QualityReason: " ++ string
 
 
 {-| A JSON encoder.
 -}
 encoder : QualityReason -> Json.Encode.Value
-encoder viewable =
-    case viewable of
+encoder =
+    toString >> Json.Encode.string
+
+
+toString : QualityReason -> String
+toString x =
+    case x of
         Api ->
-            Json.Encode.string "api"
+            "api"
 
         Auto ->
-            Json.Encode.string "auto"
+            "auto"
 
         InitialChoice ->
-            Json.Encode.string "initial choice"
+            "initial choice"

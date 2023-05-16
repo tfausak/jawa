@@ -4,18 +4,18 @@ module Jawa.Event.MuteTest exposing
     )
 
 import Fuzz
-import Jawa.Event.Mute as Mute
-import Jawa.Test.Extra as TestExtra
+import Jawa.Event.Mute
+import Jawa.Extra.Test
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Mute"
-        [ TestExtra.fuzzCodec "round trips" Mute.decoder Mute.encoder fuzzer
-        , TestExtra.testCodec "works"
-            Mute.decoder
-            Mute.encoder
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.Mute.decoder Jawa.Event.Mute.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
+            Jawa.Event.Mute.decoder
+            Jawa.Event.Mute.encoder
             """ {
                 "mute": false
             } """
@@ -24,7 +24,7 @@ test =
         ]
 
 
-fuzzer : Fuzz.Fuzzer Mute.Mute
+fuzzer : Fuzz.Fuzzer Jawa.Event.Mute.Mute
 fuzzer =
-    Fuzz.map Mute.Mute
+    Fuzz.map Jawa.Event.Mute.Mute
         Fuzz.bool

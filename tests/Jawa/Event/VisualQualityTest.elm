@@ -4,23 +4,23 @@ module Jawa.Event.VisualQualityTest exposing
     )
 
 import Fuzz
-import Jawa.Event.VisualQuality as VisualQuality
-import Jawa.QualityLevelTest as QL
-import Jawa.QualityMode as QM
-import Jawa.QualityModeTest as QM
-import Jawa.QualityReason as QR
-import Jawa.QualityReasonTest as QR
-import Jawa.Test.Extra as TestExtra
+import Jawa.Event.VisualQuality
+import Jawa.Extra.Test
+import Jawa.QualityLevelTest
+import Jawa.QualityMode
+import Jawa.QualityModeTest
+import Jawa.QualityReason
+import Jawa.QualityReasonTest
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.VisualQuality"
-        [ TestExtra.fuzzCodec "round trips" VisualQuality.decoder VisualQuality.encoder fuzzer
-        , TestExtra.testCodec "works"
-            VisualQuality.decoder
-            VisualQuality.encoder
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.VisualQuality.decoder Jawa.Event.VisualQuality.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
+            Jawa.Event.VisualQuality.decoder
+            Jawa.Event.VisualQuality.encoder
             """ {
                 "level": {
                     "bitrate": 0,
@@ -39,15 +39,15 @@ test =
                 , label = "a"
                 , width = 3
                 }
-            , mode = QM.Auto
-            , reason = QR.Api
+            , mode = Jawa.QualityMode.Auto
+            , reason = Jawa.QualityReason.Api
             }
         ]
 
 
-fuzzer : Fuzz.Fuzzer VisualQuality.VisualQuality
+fuzzer : Fuzz.Fuzzer Jawa.Event.VisualQuality.VisualQuality
 fuzzer =
-    Fuzz.map3 VisualQuality.VisualQuality
-        QL.fuzzer
-        QM.fuzzer
-        QR.fuzzer
+    Fuzz.map3 Jawa.Event.VisualQuality.VisualQuality
+        Jawa.QualityLevelTest.fuzzer
+        Jawa.QualityModeTest.fuzzer
+        Jawa.QualityReasonTest.fuzzer

@@ -4,29 +4,29 @@ module Jawa.Event.MediaTypeTest exposing
     )
 
 import Fuzz
-import Jawa.Event.MediaType as MediaType
-import Jawa.MediaType as MT
-import Jawa.MediaTypeTest as MT
-import Jawa.Test.Extra as TestExtra
+import Jawa.Event.MediaType
+import Jawa.Extra.Test
+import Jawa.MediaType
+import Jawa.MediaTypeTest
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.MediaType"
-        [ TestExtra.fuzzCodec "round trips" MediaType.decoder MediaType.encoder fuzzer
-        , TestExtra.testCodec "works"
-            MediaType.decoder
-            MediaType.encoder
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.MediaType.decoder Jawa.Event.MediaType.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
+            Jawa.Event.MediaType.decoder
+            Jawa.Event.MediaType.encoder
             """ {
                 "mediaType": "audio"
             } """
-            { mediaType = MT.Audio
+            { mediaType = Jawa.MediaType.Audio
             }
         ]
 
 
-fuzzer : Fuzz.Fuzzer MediaType.MediaType
+fuzzer : Fuzz.Fuzzer Jawa.Event.MediaType.MediaType
 fuzzer =
-    Fuzz.map MediaType.MediaType
-        MT.fuzzer
+    Fuzz.map Jawa.Event.MediaType.MediaType
+        Jawa.MediaTypeTest.fuzzer

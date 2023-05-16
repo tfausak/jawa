@@ -4,37 +4,37 @@ module Jawa.PauseReasonTest exposing
     )
 
 import Fuzz
-import Jawa.PauseReason as PaR
-import Jawa.Test.Extra as TestExtra
+import Jawa.Extra.Test
+import Jawa.PauseReason
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.PauseReason"
-        [ TestExtra.fuzzCodec "round trips" PaR.decoder PaR.encoder fuzzer
-        , TestExtra.testCodec "works with external"
-            PaR.decoder
-            PaR.encoder
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.PauseReason.decoder Jawa.PauseReason.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works with external"
+            Jawa.PauseReason.decoder
+            Jawa.PauseReason.encoder
             "\"external\""
-            PaR.External
-        , TestExtra.testCodec "works with interaction"
-            PaR.decoder
-            PaR.encoder
+            Jawa.PauseReason.External
+        , Jawa.Extra.Test.testCodec "works with interaction"
+            Jawa.PauseReason.decoder
+            Jawa.PauseReason.encoder
             "\"interaction\""
-            PaR.Interaction
-        , TestExtra.testCodec "works with viewable"
-            PaR.decoder
-            PaR.encoder
+            Jawa.PauseReason.Interaction
+        , Jawa.Extra.Test.testCodec "works with viewable"
+            Jawa.PauseReason.decoder
+            Jawa.PauseReason.encoder
             "\"viewable\""
-            PaR.Viewable
+            Jawa.PauseReason.Viewable
         ]
 
 
-fuzzer : Fuzz.Fuzzer PaR.PauseReason
+fuzzer : Fuzz.Fuzzer Jawa.PauseReason.PauseReason
 fuzzer =
     Fuzz.oneOfValues
-        [ PaR.External
-        , PaR.Interaction
-        , PaR.Viewable
+        [ Jawa.PauseReason.External
+        , Jawa.PauseReason.Interaction
+        , Jawa.PauseReason.Viewable
         ]

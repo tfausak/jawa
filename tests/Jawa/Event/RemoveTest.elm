@@ -4,24 +4,24 @@ module Jawa.Event.RemoveTest exposing
     )
 
 import Fuzz
-import Jawa.Event.Remove as Remove
-import Jawa.Test.Extra as TestExtra
+import Jawa.Event.Remove
+import Jawa.Extra.Test
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Remove"
-        [ TestExtra.fuzzCodec "round trips" Remove.decoder Remove.encoder fuzzer
-        , TestExtra.testCodec "works"
-            Remove.decoder
-            Remove.encoder
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.Remove.decoder Jawa.Event.Remove.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
+            Jawa.Event.Remove.decoder
+            Jawa.Event.Remove.encoder
             """ {
             } """
             {}
         ]
 
 
-fuzzer : Fuzz.Fuzzer Remove.Remove
+fuzzer : Fuzz.Fuzzer Jawa.Event.Remove.Remove
 fuzzer =
     Fuzz.constant {}

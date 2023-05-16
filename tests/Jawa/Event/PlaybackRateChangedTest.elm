@@ -4,18 +4,18 @@ module Jawa.Event.PlaybackRateChangedTest exposing
     )
 
 import Fuzz
-import Jawa.Event.PlaybackRateChanged as PlaybackRateChanged
-import Jawa.Test.Extra as TestExtra
+import Jawa.Event.PlaybackRateChanged
+import Jawa.Extra.Test
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.PlaybackRateChanged"
-        [ TestExtra.fuzzCodec "round trips" PlaybackRateChanged.decoder PlaybackRateChanged.encoder fuzzer
-        , TestExtra.testCodec "works"
-            PlaybackRateChanged.decoder
-            PlaybackRateChanged.encoder
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.PlaybackRateChanged.decoder Jawa.Event.PlaybackRateChanged.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
+            Jawa.Event.PlaybackRateChanged.decoder
+            Jawa.Event.PlaybackRateChanged.encoder
             """ {
                 "playbackRate": 0.1
             } """
@@ -24,7 +24,7 @@ test =
         ]
 
 
-fuzzer : Fuzz.Fuzzer PlaybackRateChanged.PlaybackRateChanged
+fuzzer : Fuzz.Fuzzer Jawa.Event.PlaybackRateChanged.PlaybackRateChanged
 fuzzer =
-    Fuzz.map PlaybackRateChanged.PlaybackRateChanged
+    Fuzz.map Jawa.Event.PlaybackRateChanged.PlaybackRateChanged
         Fuzz.niceFloat

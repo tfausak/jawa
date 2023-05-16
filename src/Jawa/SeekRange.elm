@@ -10,7 +10,7 @@ import Json.Decode
 import Json.Encode
 
 
-{-| This event is not documented.
+{-| This type is not documented.
 -}
 type alias SeekRange =
     { end : Float

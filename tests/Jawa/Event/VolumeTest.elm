@@ -4,18 +4,18 @@ module Jawa.Event.VolumeTest exposing
     )
 
 import Fuzz
-import Jawa.Event.Volume as Volume
-import Jawa.Test.Extra as TestExtra
+import Jawa.Event.Volume
+import Jawa.Extra.Test
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Volume"
-        [ TestExtra.fuzzCodec "round trips" Volume.decoder Volume.encoder fuzzer
-        , TestExtra.testCodec "works"
-            Volume.decoder
-            Volume.encoder
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.Volume.decoder Jawa.Event.Volume.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works"
+            Jawa.Event.Volume.decoder
+            Jawa.Event.Volume.encoder
             """ {
                 "volume": 0.1
             } """
@@ -24,7 +24,7 @@ test =
         ]
 
 
-fuzzer : Fuzz.Fuzzer Volume.Volume
+fuzzer : Fuzz.Fuzzer Jawa.Event.Volume.Volume
 fuzzer =
-    Fuzz.map Volume.Volume
+    Fuzz.map Jawa.Event.Volume.Volume
         Fuzz.niceFloat

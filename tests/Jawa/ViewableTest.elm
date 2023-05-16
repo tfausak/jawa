@@ -4,31 +4,31 @@ module Jawa.ViewableTest exposing
     )
 
 import Fuzz
-import Jawa.Test.Extra as TestExtra
-import Jawa.Viewable as V
+import Jawa.Extra.Test
+import Jawa.Viewable
 import Test
 
 
 test : Test.Test
 test =
     Test.describe "Jawa.Viewable"
-        [ TestExtra.fuzzCodec "round trips" V.decoder V.encoder fuzzer
-        , TestExtra.testCodec "works with hidden"
-            V.decoder
-            V.encoder
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Viewable.decoder Jawa.Viewable.encoder fuzzer
+        , Jawa.Extra.Test.testCodec "works with hidden"
+            Jawa.Viewable.decoder
+            Jawa.Viewable.encoder
             "0"
-            V.Hidden
-        , TestExtra.testCodec "works with visible"
-            V.decoder
-            V.encoder
+            Jawa.Viewable.Hidden
+        , Jawa.Extra.Test.testCodec "works with visible"
+            Jawa.Viewable.decoder
+            Jawa.Viewable.encoder
             "1"
-            V.Visible
+            Jawa.Viewable.Visible
         ]
 
 
-fuzzer : Fuzz.Fuzzer V.Viewable
+fuzzer : Fuzz.Fuzzer Jawa.Viewable.Viewable
 fuzzer =
     Fuzz.oneOfValues
-        [ V.Hidden
-        , V.Visible
+        [ Jawa.Viewable.Hidden
+        , Jawa.Viewable.Visible
         ]

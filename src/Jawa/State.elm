@@ -7,6 +7,7 @@ module Jawa.State exposing (State(..), decoder, encoder)
 -}
 
 import Json.Decode
+import Json.Decode.Extra
 import Json.Encode
 
 
@@ -28,63 +29,70 @@ type State
 decoder : Json.Decode.Decoder State
 decoder =
     Json.Decode.string
-        |> Json.Decode.andThen
-            (\string ->
-                case string of
-                    "buffering" ->
-                        Json.Decode.succeed Buffering
+        |> Json.Decode.andThen (fromString >> Json.Decode.Extra.fromResult)
 
-                    "complete" ->
-                        Json.Decode.succeed Complete
 
-                    "error" ->
-                        Json.Decode.succeed Error
+fromString : String -> Result String State
+fromString string =
+    case string of
+        "buffering" ->
+            Ok Buffering
 
-                    "idle" ->
-                        Json.Decode.succeed Idle
+        "complete" ->
+            Ok Complete
 
-                    "loading" ->
-                        Json.Decode.succeed Loading
+        "error" ->
+            Ok Error
 
-                    "paused" ->
-                        Json.Decode.succeed Paused
+        "idle" ->
+            Ok Idle
 
-                    "playing" ->
-                        Json.Decode.succeed Playing
+        "loading" ->
+            Ok Loading
 
-                    "stalled" ->
-                        Json.Decode.succeed Stalled
+        "paused" ->
+            Ok Paused
 
-                    _ ->
-                        Json.Decode.fail <| "invalid State: " ++ string
-            )
+        "playing" ->
+            Ok Playing
+
+        "stalled" ->
+            Ok Stalled
+
+        _ ->
+            Err <| "invalid State: " ++ string
 
 
 {-| A JSON encoder.
 -}
 encoder : State -> Json.Encode.Value
-encoder viewable =
-    case viewable of
+encoder =
+    toString >> Json.Encode.string
+
+
+toString : State -> String
+toString x =
+    case x of
         Buffering ->
-            Json.Encode.string "buffering"
+            "buffering"
 
         Complete ->
-            Json.Encode.string "complete"
+            "complete"
 
         Error ->
-            Json.Encode.string "error"
+            "error"
 
         Idle ->
-            Json.Encode.string "idle"
+            "idle"
 
         Loading ->
-            Json.Encode.string "loading"
+            "loading"
 
         Paused ->
-            Json.Encode.string "paused"
+            "paused"
 
         Playing ->
-            Json.Encode.string "playing"
+            "playing"
 
         Stalled ->
-            Json.Encode.string "stalled"
+            "stalled"

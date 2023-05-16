@@ -7,6 +7,7 @@ module Jawa.PlayReason exposing (PlayReason(..), decoder, encoder)
 -}
 
 import Json.Decode
+import Json.Decode.Extra
 import Json.Encode
 
 
@@ -26,51 +27,58 @@ type PlayReason
 decoder : Json.Decode.Decoder PlayReason
 decoder =
     Json.Decode.string
-        |> Json.Decode.andThen
-            (\string ->
-                case string of
-                    "autostart" ->
-                        Json.Decode.succeed Autostart
+        |> Json.Decode.andThen (fromString >> Json.Decode.Extra.fromResult)
 
-                    "external" ->
-                        Json.Decode.succeed External
 
-                    "interaction" ->
-                        Json.Decode.succeed Interaction
+fromString : String -> Result String PlayReason
+fromString string =
+    case string of
+        "autostart" ->
+            Ok Autostart
 
-                    "playlist" ->
-                        Json.Decode.succeed Playlist
+        "external" ->
+            Ok External
 
-                    "related-auto" ->
-                        Json.Decode.succeed RelatedAuto
+        "interaction" ->
+            Ok Interaction
 
-                    "related-interaction" ->
-                        Json.Decode.succeed RelatedInteraction
+        "playlist" ->
+            Ok Playlist
 
-                    _ ->
-                        Json.Decode.fail <| "invalid PlayReason: " ++ string
-            )
+        "related-auto" ->
+            Ok RelatedAuto
+
+        "related-interaction" ->
+            Ok RelatedInteraction
+
+        _ ->
+            Err <| "invalid PlayReason: " ++ string
 
 
 {-| A JSON encoder.
 -}
 encoder : PlayReason -> Json.Encode.Value
-encoder viewable =
-    case viewable of
+encoder =
+    toString >> Json.Encode.string
+
+
+toString : PlayReason -> String
+toString x =
+    case x of
         Autostart ->
-            Json.Encode.string "autostart"
+            "autostart"
 
         External ->
-            Json.Encode.string "external"
+            "external"
 
         Interaction ->
-            Json.Encode.string "interaction"
+            "interaction"
 
         Playlist ->
-            Json.Encode.string "playlist"
+            "playlist"
 
         RelatedAuto ->
-            Json.Encode.string "related-auto"
+            "related-auto"
 
         RelatedInteraction ->
-            Json.Encode.string "related-interaction"
+            "related-interaction"

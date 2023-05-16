@@ -6,9 +6,9 @@ module Jawa.Event.VisualQuality exposing (VisualQuality, decoder, encoder)
 
 -}
 
-import Jawa.QualityLevel as QL
-import Jawa.QualityMode as QM
-import Jawa.QualityReason as QR
+import Jawa.QualityLevel
+import Jawa.QualityMode
+import Jawa.QualityReason
 import Json.Decode
 import Json.Encode
 
@@ -16,9 +16,9 @@ import Json.Encode
 {-| <https://docs.jwplayer.com/players/reference/quality-events-1#onvisualquality>
 -}
 type alias VisualQuality =
-    { level : QL.QualityLevel
-    , mode : QM.QualityMode
-    , reason : QR.QualityReason
+    { level : Jawa.QualityLevel.QualityLevel
+    , mode : Jawa.QualityMode.QualityMode
+    , reason : Jawa.QualityReason.QualityReason
     }
 
 
@@ -27,9 +27,9 @@ type alias VisualQuality =
 decoder : Json.Decode.Decoder VisualQuality
 decoder =
     Json.Decode.map3 VisualQuality
-        (Json.Decode.field "level" QL.decoder)
-        (Json.Decode.field "mode" QM.decoder)
-        (Json.Decode.field "reason" QR.decoder)
+        (Json.Decode.field "level" Jawa.QualityLevel.decoder)
+        (Json.Decode.field "mode" Jawa.QualityMode.decoder)
+        (Json.Decode.field "reason" Jawa.QualityReason.decoder)
 
 
 {-| A JSON encoder.
@@ -37,7 +37,7 @@ decoder =
 encoder : VisualQuality -> Json.Encode.Value
 encoder x =
     Json.Encode.object
-        [ ( "level", QL.encoder x.level )
-        , ( "mode", QM.encoder x.mode )
-        , ( "reason", QR.encoder x.reason )
+        [ ( "level", Jawa.QualityLevel.encoder x.level )
+        , ( "mode", Jawa.QualityMode.encoder x.mode )
+        , ( "reason", Jawa.QualityReason.encoder x.reason )
         ]

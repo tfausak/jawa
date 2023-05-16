@@ -6,7 +6,7 @@ module Jawa.Event.BufferChange exposing (BufferChange, decoder, encoder)
 
 -}
 
-import Jawa.SeekRange as SR
+import Jawa.SeekRange
 import Json.Decode
 import Json.Encode
 
@@ -18,7 +18,7 @@ type alias BufferChange =
     , currentTime : Float
     , duration : Float
     , position : Float
-    , seekRange : SR.SeekRange
+    , seekRange : Jawa.SeekRange.SeekRange
     }
 
 
@@ -31,7 +31,7 @@ decoder =
         (Json.Decode.field "currentTime" Json.Decode.float)
         (Json.Decode.field "duration" Json.Decode.float)
         (Json.Decode.field "position" Json.Decode.float)
-        (Json.Decode.field "seekRange" SR.decoder)
+        (Json.Decode.field "seekRange" Jawa.SeekRange.decoder)
 
 
 {-| A JSON encoder.
@@ -43,5 +43,5 @@ encoder x =
         , ( "currentTime", Json.Encode.float x.currentTime )
         , ( "duration", Json.Encode.float x.duration )
         , ( "position", Json.Encode.float x.position )
-        , ( "seekRange", SR.encoder x.seekRange )
+        , ( "seekRange", Jawa.SeekRange.encoder x.seekRange )
         ]
