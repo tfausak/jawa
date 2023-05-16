@@ -7,6 +7,7 @@ module Jawa.MediaType exposing (MediaType(..), decoder, encoder)
 -}
 
 import Json.Decode
+import Json.Decode.Extra
 import Json.Encode
 
 
@@ -22,27 +23,34 @@ type MediaType
 decoder : Json.Decode.Decoder MediaType
 decoder =
     Json.Decode.string
-        |> Json.Decode.andThen
-            (\string ->
-                case string of
-                    "audio" ->
-                        Json.Decode.succeed Audio
+        |> Json.Decode.andThen (fromString >> Json.Decode.Extra.fromResult)
 
-                    "video" ->
-                        Json.Decode.succeed Video
 
-                    _ ->
-                        Json.Decode.fail <| "invalid MediaType: " ++ string
-            )
+fromString : String -> Result String MediaType
+fromString string =
+    case string of
+        "audio" ->
+            Ok Audio
+
+        "video" ->
+            Ok Video
+
+        _ ->
+            Err <| "invalid MediaType: " ++ string
 
 
 {-| A JSON encoder.
 -}
 encoder : MediaType -> Json.Encode.Value
-encoder viewable =
-    case viewable of
+encoder =
+    toString >> Json.Encode.string
+
+
+toString : MediaType -> String
+toString x =
+    case x of
         Audio ->
-            Json.Encode.string "audio"
+            "audio"
 
         Video ->
-            Json.Encode.string "video"
+            "video"

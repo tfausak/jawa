@@ -7,6 +7,7 @@ module Jawa.TrackKind exposing (TrackKind(..), decoder, encoder)
 -}
 
 import Json.Decode
+import Json.Decode.Extra
 import Json.Encode
 
 
@@ -23,33 +24,40 @@ type TrackKind
 decoder : Json.Decode.Decoder TrackKind
 decoder =
     Json.Decode.string
-        |> Json.Decode.andThen
-            (\string ->
-                case string of
-                    "captions" ->
-                        Json.Decode.succeed Captions
+        |> Json.Decode.andThen (fromString >> Json.Decode.Extra.fromResult)
 
-                    "chapters" ->
-                        Json.Decode.succeed Chapters
 
-                    "thumbnails" ->
-                        Json.Decode.succeed Thumbnails
+fromString : String -> Result String TrackKind
+fromString string =
+    case string of
+        "captions" ->
+            Ok Captions
 
-                    _ ->
-                        Json.Decode.fail <| "invalid TrackKind: " ++ string
-            )
+        "chapters" ->
+            Ok Chapters
+
+        "thumbnails" ->
+            Ok Thumbnails
+
+        _ ->
+            Err <| "invalid TrackKind: " ++ string
 
 
 {-| A JSON encoder.
 -}
 encoder : TrackKind -> Json.Encode.Value
-encoder viewable =
-    case viewable of
+encoder =
+    toString >> Json.Encode.string
+
+
+toString : TrackKind -> String
+toString x =
+    case x of
         Captions ->
-            Json.Encode.string "captions"
+            "captions"
 
         Chapters ->
-            Json.Encode.string "chapters"
+            "chapters"
 
         Thumbnails ->
-            Json.Encode.string "thumbnails"
+            "thumbnails"

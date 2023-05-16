@@ -7,6 +7,7 @@ module Jawa.QualityMode exposing (QualityMode(..), decoder, encoder)
 -}
 
 import Json.Decode
+import Json.Decode.Extra
 import Json.Encode
 
 
@@ -22,27 +23,34 @@ type QualityMode
 decoder : Json.Decode.Decoder QualityMode
 decoder =
     Json.Decode.string
-        |> Json.Decode.andThen
-            (\string ->
-                case string of
-                    "auto" ->
-                        Json.Decode.succeed Auto
+        |> Json.Decode.andThen (fromString >> Json.Decode.Extra.fromResult)
 
-                    "manual" ->
-                        Json.Decode.succeed Manual
 
-                    _ ->
-                        Json.Decode.fail <| "invalid QualityMode: " ++ string
-            )
+fromString : String -> Result String QualityMode
+fromString string =
+    case string of
+        "auto" ->
+            Ok Auto
+
+        "manual" ->
+            Ok Manual
+
+        _ ->
+            Err <| "invalid QualityMode: " ++ string
 
 
 {-| A JSON encoder.
 -}
 encoder : QualityMode -> Json.Encode.Value
-encoder viewable =
-    case viewable of
+encoder =
+    toString >> Json.Encode.string
+
+
+toString : QualityMode -> String
+toString x =
+    case x of
         Auto ->
-            Json.Encode.string "auto"
+            "auto"
 
         Manual ->
-            Json.Encode.string "manual"
+            "manual"

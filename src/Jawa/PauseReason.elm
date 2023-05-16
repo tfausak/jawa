@@ -7,6 +7,7 @@ module Jawa.PauseReason exposing (PauseReason(..), decoder, encoder)
 -}
 
 import Json.Decode
+import Json.Decode.Extra
 import Json.Encode
 
 
@@ -23,33 +24,40 @@ type PauseReason
 decoder : Json.Decode.Decoder PauseReason
 decoder =
     Json.Decode.string
-        |> Json.Decode.andThen
-            (\string ->
-                case string of
-                    "external" ->
-                        Json.Decode.succeed External
+        |> Json.Decode.andThen (fromString >> Json.Decode.Extra.fromResult)
 
-                    "interaction" ->
-                        Json.Decode.succeed Interaction
 
-                    "viewable" ->
-                        Json.Decode.succeed Viewable
+fromString : String -> Result String PauseReason
+fromString string =
+    case string of
+        "external" ->
+            Ok External
 
-                    _ ->
-                        Json.Decode.fail <| "invalid PauseReason: " ++ string
-            )
+        "interaction" ->
+            Ok Interaction
+
+        "viewable" ->
+            Ok Viewable
+
+        _ ->
+            Err <| "invalid PauseReason: " ++ string
 
 
 {-| A JSON encoder.
 -}
 encoder : PauseReason -> Json.Encode.Value
-encoder viewable =
-    case viewable of
+encoder =
+    toString >> Json.Encode.string
+
+
+toString : PauseReason -> String
+toString x =
+    case x of
         External ->
-            Json.Encode.string "external"
+            "external"
 
         Interaction ->
-            Json.Encode.string "interaction"
+            "interaction"
 
         Viewable ->
-            Json.Encode.string "viewable"
+            "viewable"

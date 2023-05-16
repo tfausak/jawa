@@ -7,6 +7,7 @@ module Jawa.Preload exposing (Preload(..), decoder, encoder)
 -}
 
 import Json.Decode
+import Json.Decode.Extra
 import Json.Encode
 
 
@@ -23,33 +24,40 @@ type Preload
 decoder : Json.Decode.Decoder Preload
 decoder =
     Json.Decode.string
-        |> Json.Decode.andThen
-            (\string ->
-                case string of
-                    "auto" ->
-                        Json.Decode.succeed Auto
+        |> Json.Decode.andThen (fromString >> Json.Decode.Extra.fromResult)
 
-                    "metadata" ->
-                        Json.Decode.succeed Metadata
 
-                    "none" ->
-                        Json.Decode.succeed None
+fromString : String -> Result String Preload
+fromString string =
+    case string of
+        "auto" ->
+            Ok Auto
 
-                    _ ->
-                        Json.Decode.fail <| "invalid Preload: " ++ string
-            )
+        "metadata" ->
+            Ok Metadata
+
+        "none" ->
+            Ok None
+
+        _ ->
+            Err <| "invalid Preload: " ++ string
 
 
 {-| A JSON encoder.
 -}
 encoder : Preload -> Json.Encode.Value
-encoder viewable =
-    case viewable of
+encoder =
+    toString >> Json.Encode.string
+
+
+toString : Preload -> String
+toString x =
+    case x of
         Auto ->
-            Json.Encode.string "auto"
+            "auto"
 
         Metadata ->
-            Json.Encode.string "metadata"
+            "metadata"
 
         None ->
-            Json.Encode.string "none"
+            "none"
