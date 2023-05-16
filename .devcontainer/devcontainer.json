@@ -10,7 +10,7 @@
         }
     },
     "dockerComposeFile": "compose.yaml",
-    "postCreateCommand": "yarn install",
+    "postStartCommand": ".devcontainer/post-start.sh",
     "service": "devcontainer",
     "workspaceFolder": "/workspaces/jawa"
 }

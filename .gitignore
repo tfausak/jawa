@@ -1,5 +1,5 @@
+/.devcontainer/volumes/
 /.vscode/
 /elm-stuff/
 /node_modules/
-/volumes/
 /yarn.lock
