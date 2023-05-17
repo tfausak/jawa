@@ -6,11 +6,13 @@
     "version": "4.0.0",
     "exposed-modules": [
         "Jawa.AudioTrack",
+        "Jawa.CaptionTrack",
         "Jawa.Event.AudioTracks",
         "Jawa.Event.BeforeComplete",
         "Jawa.Event.Breakpoint",
         "Jawa.Event.BufferChange",
         "Jawa.Event.BufferFull",
+        "Jawa.Event.CaptionsList",
         "Jawa.Event.Click",
         "Jawa.Event.Complete",
         "Jawa.Event.Controls",
