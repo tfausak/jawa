@@ -4,10 +4,12 @@ import Fuzz
 import Jawa.Event
 import Jawa.Event.AudioTracksTest
 import Jawa.Event.BeforeCompleteTest
+import Jawa.Event.BeforePlayTest
 import Jawa.Event.BreakpointTest
 import Jawa.Event.BufferChangeTest
 import Jawa.Event.BufferFullTest
 import Jawa.Event.BufferTest
+import Jawa.Event.CaptionsListTest
 import Jawa.Event.ClickTest
 import Jawa.Event.CompleteTest
 import Jawa.Event.ControlsTest
@@ -76,6 +78,19 @@ test =
                 "type": "beforeComplete"
             } """
             (Jawa.Event.BeforeComplete {})
+        , Jawa.Extra.Test.testCodec "works with beforePlay"
+            Jawa.Event.decoder
+            Jawa.Event.encoder
+            """ {
+                "playReason": "autostart",
+                "type": "beforePlay",
+                "viewable": 0
+            } """
+            (Jawa.Event.BeforePlay
+                { playReason = Jawa.PlayReason.Autostart
+                , viewable = Jawa.Viewable.Hidden
+                }
+            )
         , Jawa.Extra.Test.testCodec "works with breakpoint"
             Jawa.Event.decoder
             Jawa.Event.encoder
@@ -134,6 +149,19 @@ test =
                 "type": "bufferFull"
             } """
             (Jawa.Event.BufferFull {})
+        , Jawa.Extra.Test.testCodec "works with captionsList"
+            Jawa.Event.decoder
+            Jawa.Event.encoder
+            """ {
+                "track": 0,
+                "tracks": [],
+                "type": "captionsList"
+            } """
+            (Jawa.Event.CaptionsList
+                { track = 0
+                , tracks = []
+                }
+            )
         , Jawa.Extra.Test.testCodec "works with click"
             Jawa.Event.decoder
             Jawa.Event.encoder
@@ -524,10 +552,12 @@ fuzzer =
     Fuzz.oneOf
         [ Fuzz.map Jawa.Event.AudioTracks Jawa.Event.AudioTracksTest.fuzzer
         , Fuzz.map Jawa.Event.BeforeComplete Jawa.Event.BeforeCompleteTest.fuzzer
+        , Fuzz.map Jawa.Event.BeforePlay Jawa.Event.BeforePlayTest.fuzzer
         , Fuzz.map Jawa.Event.Breakpoint Jawa.Event.BreakpointTest.fuzzer
         , Fuzz.map Jawa.Event.Buffer Jawa.Event.BufferTest.fuzzer
         , Fuzz.map Jawa.Event.BufferChange Jawa.Event.BufferChangeTest.fuzzer
         , Fuzz.map Jawa.Event.BufferFull Jawa.Event.BufferFullTest.fuzzer
+        , Fuzz.map Jawa.Event.CaptionsList Jawa.Event.CaptionsListTest.fuzzer
         , Fuzz.map Jawa.Event.Click Jawa.Event.ClickTest.fuzzer
         , Fuzz.map Jawa.Event.Complete Jawa.Event.CompleteTest.fuzzer
         , Fuzz.map Jawa.Event.Controls Jawa.Event.ControlsTest.fuzzer

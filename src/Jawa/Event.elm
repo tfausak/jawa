@@ -9,10 +9,12 @@ module Jawa.Event exposing (Event(..), decoder, encoder)
 import Dict
 import Jawa.Event.AudioTracks
 import Jawa.Event.BeforeComplete
+import Jawa.Event.BeforePlay
 import Jawa.Event.Breakpoint
 import Jawa.Event.Buffer
 import Jawa.Event.BufferChange
 import Jawa.Event.BufferFull
+import Jawa.Event.CaptionsList
 import Jawa.Event.Click
 import Jawa.Event.Complete
 import Jawa.Event.Controls
@@ -52,10 +54,12 @@ import Json.Encode
 type Event
     = AudioTracks Jawa.Event.AudioTracks.AudioTracks
     | BeforeComplete Jawa.Event.BeforeComplete.BeforeComplete
+    | BeforePlay Jawa.Event.BeforePlay.BeforePlay
     | Breakpoint Jawa.Event.Breakpoint.Breakpoint
     | Buffer Jawa.Event.Buffer.Buffer
     | BufferChange Jawa.Event.BufferChange.BufferChange
     | BufferFull Jawa.Event.BufferFull.BufferFull
+    | CaptionsList Jawa.Event.CaptionsList.CaptionsList
     | Click Jawa.Event.Click.Click
     | Complete Jawa.Event.Complete.Complete
     | Controls Jawa.Event.Controls.Controls
@@ -105,6 +109,9 @@ decoderWith string =
         "beforeComplete" ->
             Json.Decode.map BeforeComplete Jawa.Event.BeforeComplete.decoder
 
+        "beforePlay" ->
+            Json.Decode.map BeforePlay Jawa.Event.BeforePlay.decoder
+
         "breakpoint" ->
             Json.Decode.map Breakpoint Jawa.Event.Breakpoint.decoder
 
@@ -116,6 +123,9 @@ decoderWith string =
 
         "bufferFull" ->
             Json.Decode.map BufferFull Jawa.Event.BufferFull.decoder
+
+        "captionsList" ->
+            Json.Decode.map CaptionsList Jawa.Event.CaptionsList.decoder
 
         "click" ->
             Json.Decode.map Click Jawa.Event.Click.decoder
@@ -222,6 +232,9 @@ encoder event =
         BeforeComplete x ->
             encoderWith "beforeComplete" Jawa.Event.BeforeComplete.encoder x
 
+        BeforePlay x ->
+            encoderWith "beforePlay" Jawa.Event.BeforePlay.encoder x
+
         Breakpoint x ->
             encoderWith "breakpoint" Jawa.Event.Breakpoint.encoder x
 
@@ -233,6 +246,9 @@ encoder event =
 
         BufferFull x ->
             encoderWith "bufferFull" Jawa.Event.BufferFull.encoder x
+
+        CaptionsList x ->
+            encoderWith "captionsList" Jawa.Event.CaptionsList.encoder x
 
         Click x ->
             encoderWith "click" Jawa.Event.Click.encoder x
