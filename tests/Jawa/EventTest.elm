@@ -7,6 +7,7 @@ import Jawa.Event.BeforeCompleteTest
 import Jawa.Event.BreakpointTest
 import Jawa.Event.BufferChangeTest
 import Jawa.Event.BufferFullTest
+import Jawa.Event.BufferTest
 import Jawa.Event.ClickTest
 import Jawa.Event.CompleteTest
 import Jawa.Event.ControlsTest
@@ -84,6 +85,21 @@ test =
             } """
             (Jawa.Event.Breakpoint
                 { breakpoint = 0
+                }
+            )
+        , Jawa.Extra.Test.testCodec "works with buffer"
+            Jawa.Event.decoder
+            Jawa.Event.encoder
+            """ {
+                "oldstate": "idle",
+                "newstate": "buffering",
+                "reason": "loading",
+                "type": "buffer"
+            } """
+            (Jawa.Event.Buffer
+                { oldstate = Jawa.State.Idle
+                , newstate = Jawa.State.Buffering
+                , reason = Jawa.State.Loading
                 }
             )
         , Jawa.Extra.Test.testCodec "works with bufferChange"
@@ -509,6 +525,7 @@ fuzzer =
         [ Fuzz.map Jawa.Event.AudioTracks Jawa.Event.AudioTracksTest.fuzzer
         , Fuzz.map Jawa.Event.BeforeComplete Jawa.Event.BeforeCompleteTest.fuzzer
         , Fuzz.map Jawa.Event.Breakpoint Jawa.Event.BreakpointTest.fuzzer
+        , Fuzz.map Jawa.Event.Buffer Jawa.Event.BufferTest.fuzzer
         , Fuzz.map Jawa.Event.BufferChange Jawa.Event.BufferChangeTest.fuzzer
         , Fuzz.map Jawa.Event.BufferFull Jawa.Event.BufferFullTest.fuzzer
         , Fuzz.map Jawa.Event.Click Jawa.Event.ClickTest.fuzzer
