@@ -14,7 +14,7 @@ expectCodec : Json.Decode.Decoder a -> (a -> Json.Encode.Value) -> String -> a -
 expectCodec decoder encode string =
     Expect.all
         [ expectDecoder decoder string
-        , expectEncoder encode string
+        , expectEncode encode string
         ]
 
 
@@ -25,8 +25,8 @@ expectDecoder decoder string value =
         (Ok value)
 
 
-expectEncoder : (a -> Json.Encode.Value) -> String -> a -> Expect.Expectation
-expectEncoder encode string value =
+expectEncode : (a -> Json.Encode.Value) -> String -> a -> Expect.Expectation
+expectEncode encode string value =
     case Json.Decode.decodeString Json.Decode.value string of
         Err message ->
             Expect.fail (Json.Decode.errorToString message)
