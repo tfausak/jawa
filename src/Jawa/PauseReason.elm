@@ -40,7 +40,7 @@ fromString string =
             Ok Viewable
 
         _ ->
-            Err <| "invalid PauseReason: " ++ string
+            Err <| "unknown PauseReason: " ++ string
 
 
 {-| A JSON encoder.

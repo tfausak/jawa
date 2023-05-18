@@ -40,7 +40,7 @@ fromString string =
             Ok None
 
         _ ->
-            Err <| "invalid Preload: " ++ string
+            Err <| "unknown Preload: " ++ string
 
 
 {-| A JSON encoder.

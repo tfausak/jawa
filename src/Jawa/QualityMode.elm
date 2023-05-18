@@ -36,7 +36,7 @@ fromString string =
             Ok Manual
 
         _ ->
-            Err <| "invalid QualityMode: " ++ string
+            Err <| "unknown QualityMode: " ++ string
 
 
 {-| A JSON encoder.

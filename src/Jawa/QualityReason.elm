@@ -40,7 +40,7 @@ fromString string =
             Ok InitialChoice
 
         _ ->
-            Err <| "invalid QualityReason: " ++ string
+            Err <| "unknown QualityReason: " ++ string
 
 
 {-| A JSON encoder.

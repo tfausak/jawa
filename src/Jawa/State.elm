@@ -60,7 +60,7 @@ fromString string =
             Ok Stalled
 
         _ ->
-            Err <| "invalid State: " ++ string
+            Err <| "unknown State: " ++ string
 
 
 {-| A JSON encoder.
