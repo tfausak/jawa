@@ -14,6 +14,7 @@
         "Jawa.Event.Buffer",
         "Jawa.Event.BufferChange",
         "Jawa.Event.BufferFull",
+        "Jawa.Event.CaptionsChanged",
         "Jawa.Event.CaptionsList",
         "Jawa.Event.Click",
         "Jawa.Event.Complete",

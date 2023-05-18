@@ -13,7 +13,18 @@ test : Test.Test
 test =
     Test.describe "Jawa.CaptionTrack"
         [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.CaptionTrack.decoder Jawa.CaptionTrack.encoder fuzzer
-        , Jawa.Extra.Test.testCodec "works"
+        , Jawa.Extra.Test.testCodec "works without language"
+            Jawa.CaptionTrack.decoder
+            Jawa.CaptionTrack.encoder
+            """ {
+                "id": "a",
+                "label": "b"
+            } """
+            { id = "a"
+            , label = "b"
+            , language = Nothing
+            }
+        , Jawa.Extra.Test.testCodec "works with language"
             Jawa.CaptionTrack.decoder
             Jawa.CaptionTrack.encoder
             """ {
@@ -23,7 +34,7 @@ test =
             } """
             { id = "a"
             , label = "b"
-            , language = "c"
+            , language = Just "c"
             }
         ]
 
@@ -33,4 +44,4 @@ fuzzer =
     Fuzz.map3 Jawa.CaptionTrack.CaptionTrack
         Fuzz.string
         Fuzz.string
-        Fuzz.string
+        (Fuzz.maybe Fuzz.string)

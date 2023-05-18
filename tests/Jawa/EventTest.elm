@@ -9,6 +9,7 @@ import Jawa.Event.BreakpointTest
 import Jawa.Event.BufferChangeTest
 import Jawa.Event.BufferFullTest
 import Jawa.Event.BufferTest
+import Jawa.Event.CaptionsChangedTest
 import Jawa.Event.CaptionsListTest
 import Jawa.Event.ClickTest
 import Jawa.Event.CompleteTest
@@ -149,6 +150,19 @@ test =
                 "type": "bufferFull"
             } """
             (Jawa.Event.BufferFull {})
+        , Jawa.Extra.Test.testCodec "works with captionsChanged"
+            Jawa.Event.decoder
+            Jawa.Event.encoder
+            """ {
+                "track": 0,
+                "tracks": [],
+                "type": "captionsChanged"
+            } """
+            (Jawa.Event.CaptionsChanged
+                { track = 0
+                , tracks = []
+                }
+            )
         , Jawa.Extra.Test.testCodec "works with captionsList"
             Jawa.Event.decoder
             Jawa.Event.encoder
@@ -557,6 +571,7 @@ fuzzer =
         , Fuzz.map Jawa.Event.Buffer Jawa.Event.BufferTest.fuzzer
         , Fuzz.map Jawa.Event.BufferChange Jawa.Event.BufferChangeTest.fuzzer
         , Fuzz.map Jawa.Event.BufferFull Jawa.Event.BufferFullTest.fuzzer
+        , Fuzz.map Jawa.Event.CaptionsChanged Jawa.Event.CaptionsChangedTest.fuzzer
         , Fuzz.map Jawa.Event.CaptionsList Jawa.Event.CaptionsListTest.fuzzer
         , Fuzz.map Jawa.Event.Click Jawa.Event.ClickTest.fuzzer
         , Fuzz.map Jawa.Event.Complete Jawa.Event.CompleteTest.fuzzer
