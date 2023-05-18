@@ -15,6 +15,7 @@ import Jawa.Event.FirstFrameTest
 import Jawa.Event.FullscreenTest
 import Jawa.Event.IdleTest
 import Jawa.Event.MediaTypeTest
+import Jawa.Event.MetaTest
 import Jawa.Event.MuteTest
 import Jawa.Event.PauseTest
 import Jawa.Event.PipEnterTest
@@ -202,6 +203,13 @@ test =
                 { mediaType = Jawa.MediaType.Audio
                 }
             )
+        , Jawa.Extra.Test.testCodec "works with meta"
+            Jawa.Event.decoder
+            Jawa.Event.encoder
+            """ {
+                "type": "meta"
+            } """
+            (Jawa.Event.Meta <| Jawa.Metadata.Metadata <| Json.Encode.object [ ( "type", Json.Encode.string "meta" ) ])
         , Jawa.Extra.Test.testCodec "works with mute"
             Jawa.Event.decoder
             Jawa.Event.encoder
@@ -519,6 +527,7 @@ fuzzer =
         , Fuzz.map Jawa.Event.Fullscreen Jawa.Event.FullscreenTest.fuzzer
         , Fuzz.map Jawa.Event.Idle Jawa.Event.IdleTest.fuzzer
         , Fuzz.map Jawa.Event.MediaType Jawa.Event.MediaTypeTest.fuzzer
+        , Fuzz.map Jawa.Event.Meta Jawa.Event.MetaTest.fuzzer
         , Fuzz.map Jawa.Event.Mute Jawa.Event.MuteTest.fuzzer
         , Fuzz.map Jawa.Event.Pause Jawa.Event.PauseTest.fuzzer
         , Fuzz.map Jawa.Event.PipEnter Jawa.Event.PipEnterTest.fuzzer
