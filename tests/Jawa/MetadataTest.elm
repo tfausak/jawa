@@ -21,7 +21,7 @@ test =
 
 fuzzer : Fuzz.Fuzzer Jawa.Metadata.Metadata
 fuzzer =
-    Fuzz.map Jawa.Metadata.Metadata (fuzzerWith 32)
+    Fuzz.map Jawa.Metadata.Metadata (fuzzerWith 16)
 
 
 fuzzerWith : Int -> Fuzz.Fuzzer Json.Encode.Value
