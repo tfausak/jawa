@@ -13,6 +13,7 @@ import Jawa.Event.BeforePlay
 import Jawa.Event.Breakpoint
 import Jawa.Event.BufferChange
 import Jawa.Event.BufferFull
+import Jawa.Event.CaptionsList
 import Jawa.Event.Click
 import Jawa.Event.Complete
 import Jawa.Event.Controls
@@ -56,6 +57,7 @@ type Event
     | Breakpoint Jawa.Event.Breakpoint.Breakpoint
     | BufferChange Jawa.Event.BufferChange.BufferChange
     | BufferFull Jawa.Event.BufferFull.BufferFull
+    | CaptionsList Jawa.Event.CaptionsList.CaptionsList
     | Click Jawa.Event.Click.Click
     | Complete Jawa.Event.Complete.Complete
     | Controls Jawa.Event.Controls.Controls
@@ -116,6 +118,9 @@ decoderWith string =
 
         "bufferFull" ->
             Json.Decode.map BufferFull Jawa.Event.BufferFull.decoder
+
+        "captionsList" ->
+            Json.Decode.map CaptionsList Jawa.Event.CaptionsList.decoder
 
         "click" ->
             Json.Decode.map Click Jawa.Event.Click.decoder
@@ -233,6 +238,9 @@ encoder event =
 
         BufferFull x ->
             encoderWith "bufferFull" Jawa.Event.BufferFull.encoder x
+
+        CaptionsList x ->
+            encoderWith "captionsList" Jawa.Event.CaptionsList.encoder x
 
         Click x ->
             encoderWith "click" Jawa.Event.Click.encoder x
