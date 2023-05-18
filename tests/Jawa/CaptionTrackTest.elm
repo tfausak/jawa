@@ -12,10 +12,10 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.CaptionTrack"
-        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.CaptionTrack.decoder Jawa.CaptionTrack.encoder fuzzer
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.CaptionTrack.decoder Jawa.CaptionTrack.encode fuzzer
         , Jawa.Extra.Test.testCodec "works without language"
             Jawa.CaptionTrack.decoder
-            Jawa.CaptionTrack.encoder
+            Jawa.CaptionTrack.encode
             """ {
                 "id": "a",
                 "label": "b"
@@ -26,7 +26,7 @@ test =
             }
         , Jawa.Extra.Test.testCodec "works with language"
             Jawa.CaptionTrack.decoder
-            Jawa.CaptionTrack.encoder
+            Jawa.CaptionTrack.encode
             """ {
                 "id": "a",
                 "label": "b",

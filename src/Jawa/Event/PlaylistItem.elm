@@ -1,8 +1,8 @@
-module Jawa.Event.PlaylistItem exposing (PlaylistItem, decoder, encoder)
+module Jawa.Event.PlaylistItem exposing (PlaylistItem, decoder, encode)
 
 {-|
 
-@docs PlaylistItem, decoder, encoder
+@docs PlaylistItem, decoder, encode
 
 -}
 
@@ -30,9 +30,9 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : PlaylistItem -> Json.Encode.Value
-encoder x =
+encode : PlaylistItem -> Json.Encode.Value
+encode x =
     Json.Encode.object
         [ ( "index", Json.Encode.int x.index )
-        , ( "item", Jawa.PlaylistItem.encoder x.item )
+        , ( "item", Jawa.PlaylistItem.encode x.item )
         ]

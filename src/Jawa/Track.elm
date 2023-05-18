@@ -1,8 +1,8 @@
-module Jawa.Track exposing (Track, decoder, encoder)
+module Jawa.Track exposing (Track, decoder, encode)
 
 {-|
 
-@docs Track, decoder, encoder
+@docs Track, decoder, encode
 
 -}
 
@@ -32,10 +32,10 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : Track -> Json.Encode.Value
-encoder x =
+encode : Track -> Json.Encode.Value
+encode x =
     Json.Encode.object
         [ ( "file", Json.Encode.string x.file )
-        , ( "kind", Jawa.TrackKind.encoder x.kind )
+        , ( "kind", Jawa.TrackKind.encode x.kind )
         , ( "label", Json.Encode.string x.label )
         ]

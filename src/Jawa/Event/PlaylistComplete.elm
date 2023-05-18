@@ -1,8 +1,8 @@
-module Jawa.Event.PlaylistComplete exposing (PlaylistComplete, decoder, encoder)
+module Jawa.Event.PlaylistComplete exposing (PlaylistComplete, decoder, encode)
 
 {-|
 
-@docs PlaylistComplete, decoder, encoder
+@docs PlaylistComplete, decoder, encode
 
 -}
 
@@ -26,7 +26,7 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : PlaylistComplete -> Json.Encode.Value
-encoder _ =
+encode : PlaylistComplete -> Json.Encode.Value
+encode _ =
     Json.Encode.object
         []

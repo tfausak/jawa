@@ -1,8 +1,8 @@
-module Jawa.Event.FirstFrame exposing (FirstFrame, decoder, encoder)
+module Jawa.Event.FirstFrame exposing (FirstFrame, decoder, encode)
 
 {-|
 
-@docs FirstFrame, decoder, encoder
+@docs FirstFrame, decoder, encode
 
 -}
 
@@ -27,8 +27,8 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : FirstFrame -> Json.Encode.Value
-encoder x =
+encode : FirstFrame -> Json.Encode.Value
+encode x =
     Json.Encode.object
         [ ( "loadTime", Json.Encode.float x.loadTime )
         ]

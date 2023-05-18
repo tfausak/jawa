@@ -1,8 +1,8 @@
-module Jawa.Event.Ready exposing (Ready, decoder, encoder)
+module Jawa.Event.Ready exposing (Ready, decoder, encode)
 
 {-|
 
-@docs Ready, decoder, encoder
+@docs Ready, decoder, encode
 
 -}
 
@@ -30,9 +30,9 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : Ready -> Json.Encode.Value
-encoder x =
+encode : Ready -> Json.Encode.Value
+encode x =
     Json.Encode.object
         [ ( "setupTime", Json.Encode.float x.setupTime )
-        , ( "viewable", Jawa.Viewable.encoder x.viewable )
+        , ( "viewable", Jawa.Viewable.encode x.viewable )
         ]

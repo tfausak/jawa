@@ -14,10 +14,10 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.Track"
-        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Track.decoder Jawa.Track.encoder fuzzer
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Track.decoder Jawa.Track.encode fuzzer
         , Jawa.Extra.Test.testCodec "works"
             Jawa.Track.decoder
-            Jawa.Track.encoder
+            Jawa.Track.encode
             """ {
                 "file": "a",
                 "kind": "captions",

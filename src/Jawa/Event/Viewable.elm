@@ -1,8 +1,8 @@
-module Jawa.Event.Viewable exposing (Viewable, decoder, encoder)
+module Jawa.Event.Viewable exposing (Viewable, decoder, encode)
 
 {-|
 
-@docs Viewable, decoder, encoder
+@docs Viewable, decoder, encode
 
 -}
 
@@ -28,8 +28,8 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : Viewable -> Json.Encode.Value
-encoder x =
+encode : Viewable -> Json.Encode.Value
+encode x =
     Json.Encode.object
-        [ ( "viewable", Jawa.Viewable.encoder x.viewable )
+        [ ( "viewable", Jawa.Viewable.encode x.viewable )
         ]

@@ -1,8 +1,8 @@
-module Jawa.Event.BeforeComplete exposing (BeforeComplete, decoder, encoder)
+module Jawa.Event.BeforeComplete exposing (BeforeComplete, decoder, encode)
 
 {-|
 
-@docs BeforeComplete, decoder, encoder
+@docs BeforeComplete, decoder, encode
 
 -}
 
@@ -26,7 +26,7 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : BeforeComplete -> Json.Encode.Value
-encoder _ =
+encode : BeforeComplete -> Json.Encode.Value
+encode _ =
     Json.Encode.object
         []

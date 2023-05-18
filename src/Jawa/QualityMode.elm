@@ -1,8 +1,8 @@
-module Jawa.QualityMode exposing (QualityMode(..), decoder, encoder)
+module Jawa.QualityMode exposing (QualityMode(..), decoder, encode)
 
 {-|
 
-@docs QualityMode, decoder, encoder
+@docs QualityMode, decoder, encode
 
 -}
 
@@ -41,8 +41,8 @@ fromString string =
 
 {-| A JSON encoder.
 -}
-encoder : QualityMode -> Json.Encode.Value
-encoder =
+encode : QualityMode -> Json.Encode.Value
+encode =
     toString >> Json.Encode.string
 
 

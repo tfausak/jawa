@@ -10,10 +10,10 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.Metadata"
-        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Metadata.decoder Jawa.Metadata.encoder fuzzer
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Metadata.decoder Jawa.Metadata.encode fuzzer
         , Jawa.Extra.Test.testCodec "works"
             Jawa.Metadata.decoder
-            Jawa.Metadata.encoder
+            Jawa.Metadata.encode
             "null"
             (Jawa.Metadata.Metadata Json.Encode.null)
         ]

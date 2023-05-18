@@ -12,20 +12,20 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.TrackKind"
-        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.TrackKind.decoder Jawa.TrackKind.encoder fuzzer
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.TrackKind.decoder Jawa.TrackKind.encode fuzzer
         , Jawa.Extra.Test.testCodec "works with captions"
             Jawa.TrackKind.decoder
-            Jawa.TrackKind.encoder
+            Jawa.TrackKind.encode
             "\"captions\""
             Jawa.TrackKind.Captions
         , Jawa.Extra.Test.testCodec "works with chapters"
             Jawa.TrackKind.decoder
-            Jawa.TrackKind.encoder
+            Jawa.TrackKind.encode
             "\"chapters\""
             Jawa.TrackKind.Chapters
         , Jawa.Extra.Test.testCodec "works with thumbnails"
             Jawa.TrackKind.decoder
-            Jawa.TrackKind.encoder
+            Jawa.TrackKind.encode
             "\"thumbnails\""
             Jawa.TrackKind.Thumbnails
         ]

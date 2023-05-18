@@ -1,8 +1,8 @@
-module Jawa.QualityReason exposing (QualityReason(..), decoder, encoder)
+module Jawa.QualityReason exposing (QualityReason(..), decoder, encode)
 
 {-|
 
-@docs QualityReason, decoder, encoder
+@docs QualityReason, decoder, encode
 
 -}
 
@@ -45,8 +45,8 @@ fromString string =
 
 {-| A JSON encoder.
 -}
-encoder : QualityReason -> Json.Encode.Value
-encoder =
+encode : QualityReason -> Json.Encode.Value
+encode =
     toString >> Json.Encode.string
 
 

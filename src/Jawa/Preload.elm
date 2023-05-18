@@ -1,8 +1,8 @@
-module Jawa.Preload exposing (Preload(..), decoder, encoder)
+module Jawa.Preload exposing (Preload(..), decoder, encode)
 
 {-|
 
-@docs Preload, decoder, encoder
+@docs Preload, decoder, encode
 
 -}
 
@@ -45,8 +45,8 @@ fromString string =
 
 {-| A JSON encoder.
 -}
-encoder : Preload -> Json.Encode.Value
-encoder =
+encode : Preload -> Json.Encode.Value
+encode =
     toString >> Json.Encode.string
 
 

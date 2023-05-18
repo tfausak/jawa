@@ -1,8 +1,8 @@
-module Jawa.Event.UserInactive exposing (UserInactive, decoder, encoder)
+module Jawa.Event.UserInactive exposing (UserInactive, decoder, encode)
 
 {-|
 
-@docs UserInactive, decoder, encoder
+@docs UserInactive, decoder, encode
 
 -}
 
@@ -26,7 +26,7 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : UserInactive -> Json.Encode.Value
-encoder _ =
+encode : UserInactive -> Json.Encode.Value
+encode _ =
     Json.Encode.object
         []

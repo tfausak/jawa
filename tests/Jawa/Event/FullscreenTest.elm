@@ -12,10 +12,10 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Fullscreen"
-        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.Fullscreen.decoder Jawa.Event.Fullscreen.encoder fuzzer
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.Fullscreen.decoder Jawa.Event.Fullscreen.encode fuzzer
         , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.Fullscreen.decoder
-            Jawa.Event.Fullscreen.encoder
+            Jawa.Event.Fullscreen.encode
             """ {
                 "fullscreen": false
             } """

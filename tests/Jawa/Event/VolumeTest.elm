@@ -12,10 +12,10 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Volume"
-        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.Volume.decoder Jawa.Event.Volume.encoder fuzzer
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.Volume.decoder Jawa.Event.Volume.encode fuzzer
         , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.Volume.decoder
-            Jawa.Event.Volume.encoder
+            Jawa.Event.Volume.encode
             """ {
                 "volume": 0.1
             } """

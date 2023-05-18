@@ -16,10 +16,10 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.PlaylistItem"
-        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.PlaylistItem.decoder Jawa.PlaylistItem.encoder fuzzer
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.PlaylistItem.decoder Jawa.PlaylistItem.encode fuzzer
         , Jawa.Extra.Test.testCodec "works with missing fields"
             Jawa.PlaylistItem.decoder
-            Jawa.PlaylistItem.encoder
+            Jawa.PlaylistItem.encode
             """ {
                 "allSources": [],
                 "file": "a",
@@ -39,7 +39,7 @@ test =
             }
         , Jawa.Extra.Test.testCodec "works with null fields"
             Jawa.PlaylistItem.decoder
-            Jawa.PlaylistItem.encoder
+            Jawa.PlaylistItem.encode
             """ {
                 "allSources": [],
                 "description": null,
@@ -63,7 +63,7 @@ test =
             }
         , Jawa.Extra.Test.testCodec "works with non-null fields"
             Jawa.PlaylistItem.decoder
-            Jawa.PlaylistItem.encoder
+            Jawa.PlaylistItem.encode
             """ {
                 "allSources": [],
                 "description": "a",

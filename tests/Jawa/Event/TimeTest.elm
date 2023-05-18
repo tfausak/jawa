@@ -18,10 +18,10 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Time"
-        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.Time.decoder Jawa.Event.Time.encoder fuzzer
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.Time.decoder Jawa.Event.Time.encode fuzzer
         , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.Time.decoder
-            Jawa.Event.Time.encoder
+            Jawa.Event.Time.encode
             """ {
                 "currentTime": 0.1,
                 "duration": 0.2,

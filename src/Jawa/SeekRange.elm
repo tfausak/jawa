@@ -1,8 +1,8 @@
-module Jawa.SeekRange exposing (SeekRange, decoder, encoder)
+module Jawa.SeekRange exposing (SeekRange, decoder, encode)
 
 {-|
 
-@docs SeekRange, decoder, encoder
+@docs SeekRange, decoder, encode
 
 -}
 
@@ -29,8 +29,8 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : SeekRange -> Json.Encode.Value
-encoder x =
+encode : SeekRange -> Json.Encode.Value
+encode x =
     Json.Encode.object
         [ ( "end", Json.Encode.float x.end )
         , ( "start", Json.Encode.float x.start )

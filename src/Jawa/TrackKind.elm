@@ -1,8 +1,8 @@
-module Jawa.TrackKind exposing (TrackKind(..), decoder, encoder)
+module Jawa.TrackKind exposing (TrackKind(..), decoder, encode)
 
 {-|
 
-@docs TrackKind, decoder, encoder
+@docs TrackKind, decoder, encode
 
 -}
 
@@ -45,8 +45,8 @@ fromString string =
 
 {-| A JSON encoder.
 -}
-encoder : TrackKind -> Json.Encode.Value
-encoder =
+encode : TrackKind -> Json.Encode.Value
+encode =
     toString >> Json.Encode.string
 
 

@@ -1,8 +1,8 @@
-module Jawa.Event.BufferFull exposing (BufferFull, decoder, encoder)
+module Jawa.Event.BufferFull exposing (BufferFull, decoder, encode)
 
 {-|
 
-@docs BufferFull, decoder, encoder
+@docs BufferFull, decoder, encode
 
 -}
 
@@ -26,7 +26,7 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : BufferFull -> Json.Encode.Value
-encoder _ =
+encode : BufferFull -> Json.Encode.Value
+encode _ =
     Json.Encode.object
         []

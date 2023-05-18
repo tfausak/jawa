@@ -1,8 +1,8 @@
-module Jawa.Event.ProviderFirstFrame exposing (ProviderFirstFrame, decoder, encoder)
+module Jawa.Event.ProviderFirstFrame exposing (ProviderFirstFrame, decoder, encode)
 
 {-|
 
-@docs ProviderFirstFrame, decoder, encoder
+@docs ProviderFirstFrame, decoder, encode
 
 -}
 
@@ -26,7 +26,7 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : ProviderFirstFrame -> Json.Encode.Value
-encoder _ =
+encode : ProviderFirstFrame -> Json.Encode.Value
+encode _ =
     Json.Encode.object
         []

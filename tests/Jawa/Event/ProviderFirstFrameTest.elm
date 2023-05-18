@@ -12,10 +12,10 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.Event.ProviderFirstFrame"
-        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.ProviderFirstFrame.decoder Jawa.Event.ProviderFirstFrame.encoder fuzzer
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.ProviderFirstFrame.decoder Jawa.Event.ProviderFirstFrame.encode fuzzer
         , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.ProviderFirstFrame.decoder
-            Jawa.Event.ProviderFirstFrame.encoder
+            Jawa.Event.ProviderFirstFrame.encode
             """ {
             } """
             {}

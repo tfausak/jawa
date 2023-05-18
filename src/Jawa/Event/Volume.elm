@@ -1,8 +1,8 @@
-module Jawa.Event.Volume exposing (Volume, decoder, encoder)
+module Jawa.Event.Volume exposing (Volume, decoder, encode)
 
 {-|
 
-@docs Volume, decoder, encoder
+@docs Volume, decoder, encode
 
 -}
 
@@ -27,8 +27,8 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : Volume -> Json.Encode.Value
-encoder x =
+encode : Volume -> Json.Encode.Value
+encode x =
     Json.Encode.object
         [ ( "volume", Json.Encode.float x.volume )
         ]

@@ -12,10 +12,10 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Breakpoint"
-        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.Breakpoint.decoder Jawa.Event.Breakpoint.encoder fuzzer
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.Breakpoint.decoder Jawa.Event.Breakpoint.encode fuzzer
         , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.Breakpoint.decoder
-            Jawa.Event.Breakpoint.encoder
+            Jawa.Event.Breakpoint.encode
             """ {
                 "breakpoint": 0
             } """

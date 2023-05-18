@@ -14,10 +14,10 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.Event.Idle"
-        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.Idle.decoder Jawa.Event.Idle.encoder fuzzer
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.Idle.decoder Jawa.Event.Idle.encode fuzzer
         , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.Idle.decoder
-            Jawa.Event.Idle.encoder
+            Jawa.Event.Idle.encode
             """ {
                 "newstate": "buffering",
                 "oldstate": "complete",

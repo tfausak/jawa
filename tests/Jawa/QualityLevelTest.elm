@@ -12,10 +12,10 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.QualityLevel"
-        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.QualityLevel.decoder Jawa.QualityLevel.encoder fuzzer
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.QualityLevel.decoder Jawa.QualityLevel.encode fuzzer
         , Jawa.Extra.Test.testCodec "works"
             Jawa.QualityLevel.decoder
-            Jawa.QualityLevel.encoder
+            Jawa.QualityLevel.encode
             """ {
                 "bitrate": 0,
                 "height": 1,

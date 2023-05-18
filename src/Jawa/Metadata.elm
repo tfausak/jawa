@@ -1,8 +1,8 @@
-module Jawa.Metadata exposing (Metadata(..), decoder, encoder)
+module Jawa.Metadata exposing (Metadata(..), decoder, encode)
 
 {-|
 
-@docs Metadata, decoder, encoder
+@docs Metadata, decoder, encode
 
 -}
 
@@ -25,6 +25,6 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : Metadata -> Json.Encode.Value
-encoder (Metadata value) =
+encode : Metadata -> Json.Encode.Value
+encode (Metadata value) =
     value
