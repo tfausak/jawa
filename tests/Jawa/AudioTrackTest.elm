@@ -12,10 +12,10 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.AudioTrack"
-        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.AudioTrack.decoder Jawa.AudioTrack.encoder fuzzer
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.AudioTrack.decoder Jawa.AudioTrack.encode fuzzer
         , Jawa.Extra.Test.testCodec "works"
             Jawa.AudioTrack.decoder
-            Jawa.AudioTrack.encoder
+            Jawa.AudioTrack.encode
             """ {
                 "autoselect": false,
                 "defaulttrack": true,

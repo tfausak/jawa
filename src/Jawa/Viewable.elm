@@ -1,8 +1,8 @@
-module Jawa.Viewable exposing (Viewable(..), decoder, encoder)
+module Jawa.Viewable exposing (Viewable(..), decoder, encode)
 
 {-|
 
-@docs Viewable, decoder, encoder
+@docs Viewable, decoder, encode
 
 -}
 
@@ -41,8 +41,8 @@ fromInt int =
 
 {-| A JSON encoder.
 -}
-encoder : Viewable -> Json.Encode.Value
-encoder =
+encode : Viewable -> Json.Encode.Value
+encode =
     toInt >> Json.Encode.int
 
 

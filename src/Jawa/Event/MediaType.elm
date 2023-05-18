@@ -1,8 +1,8 @@
-module Jawa.Event.MediaType exposing (MediaType, decoder, encoder)
+module Jawa.Event.MediaType exposing (MediaType, decoder, encode)
 
 {-|
 
-@docs MediaType, decoder, encoder
+@docs MediaType, decoder, encode
 
 -}
 
@@ -28,8 +28,8 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : MediaType -> Json.Encode.Value
-encoder x =
+encode : MediaType -> Json.Encode.Value
+encode x =
     Json.Encode.object
-        [ ( "mediaType", Jawa.MediaType.encoder x.mediaType )
+        [ ( "mediaType", Jawa.MediaType.encode x.mediaType )
         ]

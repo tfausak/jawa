@@ -1,8 +1,8 @@
-module Jawa.Event.Resize exposing (Resize, decoder, encoder)
+module Jawa.Event.Resize exposing (Resize, decoder, encode)
 
 {-|
 
-@docs Resize, decoder, encoder
+@docs Resize, decoder, encode
 
 -}
 
@@ -29,8 +29,8 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : Resize -> Json.Encode.Value
-encoder x =
+encode : Resize -> Json.Encode.Value
+encode x =
     Json.Encode.object
         [ ( "height", Json.Encode.int x.height )
         , ( "width", Json.Encode.int x.width )

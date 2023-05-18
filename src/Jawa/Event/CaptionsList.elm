@@ -1,8 +1,8 @@
-module Jawa.Event.CaptionsList exposing (CaptionsList, decoder, encoder)
+module Jawa.Event.CaptionsList exposing (CaptionsList, decoder, encode)
 
 {-|
 
-@docs CaptionsList, decoder, encoder
+@docs CaptionsList, decoder, encode
 
 -}
 
@@ -30,9 +30,9 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : CaptionsList -> Json.Encode.Value
-encoder x =
+encode : CaptionsList -> Json.Encode.Value
+encode x =
     Json.Encode.object
         [ ( "track", Json.Encode.int x.track )
-        , ( "tracks", Json.Encode.list Jawa.CaptionTrack.encoder x.tracks )
+        , ( "tracks", Json.Encode.list Jawa.CaptionTrack.encode x.tracks )
         ]

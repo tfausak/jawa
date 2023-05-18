@@ -1,8 +1,8 @@
-module Jawa.Event.Buffer exposing (Buffer, decoder, encoder)
+module Jawa.Event.Buffer exposing (Buffer, decoder, encode)
 
 {-|
 
-@docs Buffer, decoder, encoder
+@docs Buffer, decoder, encode
 
 -}
 
@@ -32,10 +32,10 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : Buffer -> Json.Encode.Value
-encoder x =
+encode : Buffer -> Json.Encode.Value
+encode x =
     Json.Encode.object
-        [ ( "newstate", Jawa.State.encoder x.newstate )
-        , ( "oldstate", Jawa.State.encoder x.oldstate )
-        , ( "reason", Jawa.State.encoder x.reason )
+        [ ( "newstate", Jawa.State.encode x.newstate )
+        , ( "oldstate", Jawa.State.encode x.oldstate )
+        , ( "reason", Jawa.State.encode x.reason )
         ]

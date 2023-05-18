@@ -1,8 +1,8 @@
-module Jawa.Event.PipLeave exposing (PipLeave, decoder, encoder)
+module Jawa.Event.PipLeave exposing (PipLeave, decoder, encode)
 
 {-|
 
-@docs PipLeave, decoder, encoder
+@docs PipLeave, decoder, encode
 
 -}
 
@@ -26,7 +26,7 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : PipLeave -> Json.Encode.Value
-encoder _ =
+encode : PipLeave -> Json.Encode.Value
+encode _ =
     Json.Encode.object
         []

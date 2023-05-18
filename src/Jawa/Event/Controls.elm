@@ -1,8 +1,8 @@
-module Jawa.Event.Controls exposing (Controls, decoder, encoder)
+module Jawa.Event.Controls exposing (Controls, decoder, encode)
 
 {-|
 
-@docs Controls, decoder, encoder
+@docs Controls, decoder, encode
 
 -}
 
@@ -27,8 +27,8 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : Controls -> Json.Encode.Value
-encoder x =
+encode : Controls -> Json.Encode.Value
+encode x =
     Json.Encode.object
         [ ( "controls", Json.Encode.bool x.controls )
         ]

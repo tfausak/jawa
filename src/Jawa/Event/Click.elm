@@ -1,8 +1,8 @@
-module Jawa.Event.Click exposing (Click, decoder, encoder)
+module Jawa.Event.Click exposing (Click, decoder, encode)
 
 {-|
 
-@docs Click, decoder, encoder
+@docs Click, decoder, encode
 
 -}
 
@@ -27,8 +27,8 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : Click -> Json.Encode.Value
-encoder x =
+encode : Click -> Json.Encode.Value
+encode x =
     Json.Encode.object
         [ ( "isTrusted", Json.Encode.bool x.isTrusted )
         ]

@@ -1,8 +1,8 @@
-module Jawa.AudioTrack exposing (AudioTrack, decoder, encoder)
+module Jawa.AudioTrack exposing (AudioTrack, decoder, encode)
 
 {-|
 
-@docs AudioTrack, decoder, encoder
+@docs AudioTrack, decoder, encode
 
 -}
 
@@ -33,8 +33,8 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : AudioTrack -> Json.Encode.Value
-encoder x =
+encode : AudioTrack -> Json.Encode.Value
+encode x =
     Json.Encode.object
         [ ( "autoselect", Json.Encode.bool x.autoselect )
         , ( "defaulttrack", Json.Encode.bool x.defaulttrack )

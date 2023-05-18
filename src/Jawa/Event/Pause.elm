@@ -1,8 +1,8 @@
-module Jawa.Event.Pause exposing (Pause, decoder, encoder)
+module Jawa.Event.Pause exposing (Pause, decoder, encode)
 
 {-|
 
-@docs Pause, decoder, encoder
+@docs Pause, decoder, encode
 
 -}
 
@@ -38,12 +38,12 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : Pause -> Json.Encode.Value
-encoder x =
+encode : Pause -> Json.Encode.Value
+encode x =
     Json.Encode.object
-        [ ( "newstate", Jawa.State.encoder x.newstate )
-        , ( "oldstate", Jawa.State.encoder x.oldstate )
-        , ( "pauseReason", Jawa.PauseReason.encoder x.pauseReason )
-        , ( "reason", Jawa.State.encoder x.reason )
-        , ( "viewable", Jawa.Viewable.encoder x.viewable )
+        [ ( "newstate", Jawa.State.encode x.newstate )
+        , ( "oldstate", Jawa.State.encode x.oldstate )
+        , ( "pauseReason", Jawa.PauseReason.encode x.pauseReason )
+        , ( "reason", Jawa.State.encode x.reason )
+        , ( "viewable", Jawa.Viewable.encode x.viewable )
         ]

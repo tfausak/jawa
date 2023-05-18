@@ -1,8 +1,8 @@
-module Jawa.Event.Complete exposing (Complete, decoder, encoder)
+module Jawa.Event.Complete exposing (Complete, decoder, encode)
 
 {-|
 
-@docs Complete, decoder, encoder
+@docs Complete, decoder, encode
 
 -}
 
@@ -26,7 +26,7 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : Complete -> Json.Encode.Value
-encoder _ =
+encode : Complete -> Json.Encode.Value
+encode _ =
     Json.Encode.object
         []

@@ -1,8 +1,8 @@
-module Jawa.Event.Mute exposing (Mute, decoder, encoder)
+module Jawa.Event.Mute exposing (Mute, decoder, encode)
 
 {-|
 
-@docs Mute, decoder, encoder
+@docs Mute, decoder, encode
 
 -}
 
@@ -27,8 +27,8 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : Mute -> Json.Encode.Value
-encoder x =
+encode : Mute -> Json.Encode.Value
+encode x =
     Json.Encode.object
         [ ( "mute", Json.Encode.bool x.mute )
         ]

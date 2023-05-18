@@ -1,8 +1,8 @@
-module Jawa.Event.Fullscreen exposing (Fullscreen, decoder, encoder)
+module Jawa.Event.Fullscreen exposing (Fullscreen, decoder, encode)
 
 {-|
 
-@docs Fullscreen, decoder, encoder
+@docs Fullscreen, decoder, encode
 
 -}
 
@@ -27,8 +27,8 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : Fullscreen -> Json.Encode.Value
-encoder x =
+encode : Fullscreen -> Json.Encode.Value
+encode x =
     Json.Encode.object
         [ ( "fullscreen", Json.Encode.bool x.fullscreen )
         ]

@@ -14,10 +14,10 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.Event.PlaylistItem"
-        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.PlaylistItem.decoder Jawa.Event.PlaylistItem.encoder fuzzer
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.PlaylistItem.decoder Jawa.Event.PlaylistItem.encode fuzzer
         , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.PlaylistItem.decoder
-            Jawa.Event.PlaylistItem.encoder
+            Jawa.Event.PlaylistItem.encode
             """ {
                 "index": 0,
                 "item": {

@@ -1,8 +1,8 @@
-module Jawa.Event.Seeked exposing (Seeked, decoder, encoder)
+module Jawa.Event.Seeked exposing (Seeked, decoder, encode)
 
 {-|
 
-@docs Seeked, decoder, encoder
+@docs Seeked, decoder, encode
 
 -}
 
@@ -26,7 +26,7 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : Seeked -> Json.Encode.Value
-encoder _ =
+encode : Seeked -> Json.Encode.Value
+encode _ =
     Json.Encode.object
         []

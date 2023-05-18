@@ -12,10 +12,10 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.Event.SetupError"
-        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.SetupError.decoder Jawa.Event.SetupError.encoder fuzzer
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.SetupError.decoder Jawa.Event.SetupError.encode fuzzer
         , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.SetupError.decoder
-            Jawa.Event.SetupError.encoder
+            Jawa.Event.SetupError.encode
             """ {
                 "code": 0,
                 "message": ""

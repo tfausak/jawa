@@ -1,8 +1,8 @@
-module Jawa.Event.Seek exposing (Seek, decoder, encoder)
+module Jawa.Event.Seek exposing (Seek, decoder, encode)
 
 {-|
 
-@docs Seek, decoder, encoder
+@docs Seek, decoder, encode
 
 -}
 
@@ -39,13 +39,13 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : Seek -> Json.Encode.Value
-encoder x =
+encode : Seek -> Json.Encode.Value
+encode x =
     Json.Encode.object
         [ ( "currentTime", Json.Encode.float x.currentTime )
         , ( "duration", Json.Encode.float x.duration )
-        , ( "metadata", Jawa.Metadata.encoder x.metadata )
+        , ( "metadata", Jawa.Metadata.encode x.metadata )
         , ( "offset", Json.Encode.float x.offset )
         , ( "position", Json.Encode.float x.position )
-        , ( "seekRange", Jawa.SeekRange.encoder x.seekRange )
+        , ( "seekRange", Jawa.SeekRange.encode x.seekRange )
         ]

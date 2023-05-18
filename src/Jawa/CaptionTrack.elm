@@ -1,8 +1,8 @@
-module Jawa.CaptionTrack exposing (CaptionTrack, decoder, encoder)
+module Jawa.CaptionTrack exposing (CaptionTrack, decoder, encode)
 
 {-|
 
-@docs CaptionTrack, decoder, encoder
+@docs CaptionTrack, decoder, encode
 
 -}
 
@@ -33,8 +33,8 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : CaptionTrack -> Json.Encode.Value
-encoder x =
+encode : CaptionTrack -> Json.Encode.Value
+encode x =
     Json.Encode.object
         [ ( "id", Json.Encode.string x.id )
         , ( "label", Json.Encode.string x.label )

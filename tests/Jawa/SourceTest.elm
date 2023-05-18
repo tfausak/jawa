@@ -12,10 +12,10 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.Source"
-        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Source.decoder Jawa.Source.encoder fuzzer
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Source.decoder Jawa.Source.encode fuzzer
         , Jawa.Extra.Test.testCodec "works"
             Jawa.Source.decoder
-            Jawa.Source.encoder
+            Jawa.Source.encode
             """ {
                 "default": false,
                 "file": "a",

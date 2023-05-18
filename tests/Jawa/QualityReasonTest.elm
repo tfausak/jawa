@@ -12,20 +12,20 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.QualityReason"
-        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.QualityReason.decoder Jawa.QualityReason.encoder fuzzer
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.QualityReason.decoder Jawa.QualityReason.encode fuzzer
         , Jawa.Extra.Test.testCodec "works with api"
             Jawa.QualityReason.decoder
-            Jawa.QualityReason.encoder
+            Jawa.QualityReason.encode
             "\"api\""
             Jawa.QualityReason.Api
         , Jawa.Extra.Test.testCodec "works with auto"
             Jawa.QualityReason.decoder
-            Jawa.QualityReason.encoder
+            Jawa.QualityReason.encode
             "\"auto\""
             Jawa.QualityReason.Auto
         , Jawa.Extra.Test.testCodec "works with initial choice"
             Jawa.QualityReason.decoder
-            Jawa.QualityReason.encoder
+            Jawa.QualityReason.encode
             "\"initial choice\""
             Jawa.QualityReason.InitialChoice
         ]

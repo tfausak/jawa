@@ -1,8 +1,8 @@
-module Jawa.PauseReason exposing (PauseReason(..), decoder, encoder)
+module Jawa.PauseReason exposing (PauseReason(..), decoder, encode)
 
 {-|
 
-@docs PauseReason, decoder, encoder
+@docs PauseReason, decoder, encode
 
 -}
 
@@ -45,8 +45,8 @@ fromString string =
 
 {-| A JSON encoder.
 -}
-encoder : PauseReason -> Json.Encode.Value
-encoder =
+encode : PauseReason -> Json.Encode.Value
+encode =
     toString >> Json.Encode.string
 
 

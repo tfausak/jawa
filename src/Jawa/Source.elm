@@ -1,8 +1,8 @@
-module Jawa.Source exposing (Source, decoder, encoder)
+module Jawa.Source exposing (Source, decoder, encode)
 
 {-|
 
-@docs Source, decoder, encoder
+@docs Source, decoder, encode
 
 -}
 
@@ -33,8 +33,8 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : Source -> Json.Encode.Value
-encoder x =
+encode : Source -> Json.Encode.Value
+encode x =
     Json.Encode.object
         [ ( "default", Json.Encode.bool x.default )
         , ( "file", Json.Encode.string x.file )

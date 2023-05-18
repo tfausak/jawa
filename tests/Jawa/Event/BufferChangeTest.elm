@@ -13,10 +13,10 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.Event.BufferChange"
-        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.BufferChange.decoder Jawa.Event.BufferChange.encoder fuzzer
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.BufferChange.decoder Jawa.Event.BufferChange.encode fuzzer
         , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.BufferChange.decoder
-            Jawa.Event.BufferChange.encoder
+            Jawa.Event.BufferChange.encode
             """ {
                 "bufferPercent": 0.1,
                 "currentTime": 0.2,

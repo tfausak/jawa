@@ -1,8 +1,8 @@
-module Jawa.PlaylistItem exposing (PlaylistItem, decoder, encoder)
+module Jawa.PlaylistItem exposing (PlaylistItem, decoder, encode)
 
 {-|
 
-@docs PlaylistItem, decoder, encoder
+@docs PlaylistItem, decoder, encode
 
 -}
 
@@ -48,16 +48,16 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : PlaylistItem -> Json.Encode.Value
-encoder x =
+encode : PlaylistItem -> Json.Encode.Value
+encode x =
     Json.Encode.object
-        [ ( "allSources", Json.Encode.list Jawa.Source.encoder x.allSources )
+        [ ( "allSources", Json.Encode.list Jawa.Source.encode x.allSources )
         , ( "description", Json.Encode.Extra.maybe Json.Encode.string x.description )
         , ( "file", Json.Encode.string x.file )
         , ( "image", Json.Encode.Extra.maybe Json.Encode.string x.image )
         , ( "mediaId", Json.Encode.Extra.maybe Json.Encode.string x.mediaId )
-        , ( "preload", Jawa.Preload.encoder x.preload )
-        , ( "sources", Json.Encode.list Jawa.Source.encoder x.sources )
+        , ( "preload", Jawa.Preload.encode x.preload )
+        , ( "sources", Json.Encode.list Jawa.Source.encode x.sources )
         , ( "title", Json.Encode.Extra.maybe Json.Encode.string x.title )
-        , ( "tracks", Json.Encode.list Jawa.Track.encoder x.tracks )
+        , ( "tracks", Json.Encode.list Jawa.Track.encode x.tracks )
         ]

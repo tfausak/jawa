@@ -1,8 +1,8 @@
-module Jawa.Event.VisualQuality exposing (VisualQuality, decoder, encoder)
+module Jawa.Event.VisualQuality exposing (VisualQuality, decoder, encode)
 
 {-|
 
-@docs VisualQuality, decoder, encoder
+@docs VisualQuality, decoder, encode
 
 -}
 
@@ -34,10 +34,10 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : VisualQuality -> Json.Encode.Value
-encoder x =
+encode : VisualQuality -> Json.Encode.Value
+encode x =
     Json.Encode.object
-        [ ( "level", Jawa.QualityLevel.encoder x.level )
-        , ( "mode", Jawa.QualityMode.encoder x.mode )
-        , ( "reason", Jawa.QualityReason.encoder x.reason )
+        [ ( "level", Jawa.QualityLevel.encode x.level )
+        , ( "mode", Jawa.QualityMode.encode x.mode )
+        , ( "reason", Jawa.QualityReason.encode x.reason )
         ]

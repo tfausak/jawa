@@ -1,8 +1,8 @@
-module Jawa.Event.Breakpoint exposing (Breakpoint, decoder, encoder)
+module Jawa.Event.Breakpoint exposing (Breakpoint, decoder, encode)
 
 {-|
 
-@docs Breakpoint, decoder, encoder
+@docs Breakpoint, decoder, encode
 
 -}
 
@@ -27,8 +27,8 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : Breakpoint -> Json.Encode.Value
-encoder x =
+encode : Breakpoint -> Json.Encode.Value
+encode x =
     Json.Encode.object
         [ ( "breakpoint", Json.Encode.int x.breakpoint )
         ]

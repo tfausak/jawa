@@ -12,10 +12,10 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.SeekRange"
-        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.SeekRange.decoder Jawa.SeekRange.encoder fuzzer
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.SeekRange.decoder Jawa.SeekRange.encode fuzzer
         , Jawa.Extra.Test.testCodec "works"
             Jawa.SeekRange.decoder
-            Jawa.SeekRange.encoder
+            Jawa.SeekRange.encode
             """ {
                 "end": 0.1,
                 "start": 0.2

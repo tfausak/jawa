@@ -1,8 +1,8 @@
-module Jawa.Event.Remove exposing (Remove, decoder, encoder)
+module Jawa.Event.Remove exposing (Remove, decoder, encode)
 
 {-|
 
-@docs Remove, decoder, encoder
+@docs Remove, decoder, encode
 
 -}
 
@@ -26,7 +26,7 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : Remove -> Json.Encode.Value
-encoder _ =
+encode : Remove -> Json.Encode.Value
+encode _ =
     Json.Encode.object
         []

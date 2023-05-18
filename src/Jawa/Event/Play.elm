@@ -1,8 +1,8 @@
-module Jawa.Event.Play exposing (Play, decoder, encoder)
+module Jawa.Event.Play exposing (Play, decoder, encode)
 
 {-|
 
-@docs Play, decoder, encoder
+@docs Play, decoder, encode
 
 -}
 
@@ -38,12 +38,12 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : Play -> Json.Encode.Value
-encoder x =
+encode : Play -> Json.Encode.Value
+encode x =
     Json.Encode.object
-        [ ( "newstate", Jawa.State.encoder x.newstate )
-        , ( "oldstate", Jawa.State.encoder x.oldstate )
-        , ( "playReason", Jawa.PlayReason.encoder x.playReason )
-        , ( "reason", Jawa.State.encoder x.reason )
-        , ( "viewable", Jawa.Viewable.encoder x.viewable )
+        [ ( "newstate", Jawa.State.encode x.newstate )
+        , ( "oldstate", Jawa.State.encode x.oldstate )
+        , ( "playReason", Jawa.PlayReason.encode x.playReason )
+        , ( "reason", Jawa.State.encode x.reason )
+        , ( "viewable", Jawa.Viewable.encode x.viewable )
         ]

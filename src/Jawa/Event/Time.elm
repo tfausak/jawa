@@ -1,8 +1,8 @@
-module Jawa.Event.Time exposing (Time, decoder, encoder)
+module Jawa.Event.Time exposing (Time, decoder, encode)
 
 {-|
 
-@docs Time, decoder, encoder
+@docs Time, decoder, encode
 
 -}
 
@@ -40,13 +40,13 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : Time -> Json.Encode.Value
-encoder x =
+encode : Time -> Json.Encode.Value
+encode x =
     Json.Encode.object
         [ ( "currentTime", Json.Encode.float x.currentTime )
         , ( "duration", Json.Encode.float x.duration )
-        , ( "metadata", Jawa.Metadata.encoder x.metadata )
+        , ( "metadata", Jawa.Metadata.encode x.metadata )
         , ( "position", Json.Encode.float x.position )
-        , ( "seekRange", Jawa.SeekRange.encoder x.seekRange )
-        , ( "viewable", Jawa.Viewable.encoder x.viewable )
+        , ( "seekRange", Jawa.SeekRange.encode x.seekRange )
+        , ( "viewable", Jawa.Viewable.encode x.viewable )
         ]

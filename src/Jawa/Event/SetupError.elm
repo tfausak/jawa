@@ -1,8 +1,8 @@
-module Jawa.Event.SetupError exposing (SetupError, decoder, encoder)
+module Jawa.Event.SetupError exposing (SetupError, decoder, encode)
 
 {-|
 
-@docs SetupError, decoder, encoder
+@docs SetupError, decoder, encode
 
 -}
 
@@ -29,8 +29,8 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : SetupError -> Json.Encode.Value
-encoder x =
+encode : SetupError -> Json.Encode.Value
+encode x =
     Json.Encode.object
         [ ( "code", Json.Encode.int x.code )
         , ( "message", Json.Encode.string x.message )

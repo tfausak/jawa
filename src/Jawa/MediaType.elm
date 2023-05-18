@@ -1,8 +1,8 @@
-module Jawa.MediaType exposing (MediaType(..), decoder, encoder)
+module Jawa.MediaType exposing (MediaType(..), decoder, encode)
 
 {-|
 
-@docs MediaType, decoder, encoder
+@docs MediaType, decoder, encode
 
 -}
 
@@ -41,8 +41,8 @@ fromString string =
 
 {-| A JSON encoder.
 -}
-encoder : MediaType -> Json.Encode.Value
-encoder =
+encode : MediaType -> Json.Encode.Value
+encode =
     toString >> Json.Encode.string
 
 

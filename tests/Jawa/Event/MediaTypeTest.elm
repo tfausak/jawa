@@ -14,10 +14,10 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.Event.MediaType"
-        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.MediaType.decoder Jawa.Event.MediaType.encoder fuzzer
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.MediaType.decoder Jawa.Event.MediaType.encode fuzzer
         , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.MediaType.decoder
-            Jawa.Event.MediaType.encoder
+            Jawa.Event.MediaType.encode
             """ {
                 "mediaType": "audio"
             } """

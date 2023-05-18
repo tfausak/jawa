@@ -1,8 +1,8 @@
-module Jawa.State exposing (State(..), decoder, encoder)
+module Jawa.State exposing (State(..), decoder, encode)
 
 {-|
 
-@docs State, decoder, encoder
+@docs State, decoder, encode
 
 -}
 
@@ -65,8 +65,8 @@ fromString string =
 
 {-| A JSON encoder.
 -}
-encoder : State -> Json.Encode.Value
-encoder =
+encode : State -> Json.Encode.Value
+encode =
     toString >> Json.Encode.string
 
 

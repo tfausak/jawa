@@ -1,8 +1,8 @@
-module Jawa.Event.PlaybackRateChanged exposing (PlaybackRateChanged, decoder, encoder)
+module Jawa.Event.PlaybackRateChanged exposing (PlaybackRateChanged, decoder, encode)
 
 {-|
 
-@docs PlaybackRateChanged, decoder, encoder
+@docs PlaybackRateChanged, decoder, encode
 
 -}
 
@@ -27,8 +27,8 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : PlaybackRateChanged -> Json.Encode.Value
-encoder x =
+encode : PlaybackRateChanged -> Json.Encode.Value
+encode x =
     Json.Encode.object
         [ ( "playbackRate", Json.Encode.float x.playbackRate )
         ]

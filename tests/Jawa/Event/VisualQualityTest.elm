@@ -17,10 +17,10 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.Event.VisualQuality"
-        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.VisualQuality.decoder Jawa.Event.VisualQuality.encoder fuzzer
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.VisualQuality.decoder Jawa.Event.VisualQuality.encode fuzzer
         , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.VisualQuality.decoder
-            Jawa.Event.VisualQuality.encoder
+            Jawa.Event.VisualQuality.encode
             """ {
                 "level": {
                     "bitrate": 0,

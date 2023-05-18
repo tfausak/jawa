@@ -1,8 +1,8 @@
-module Jawa.Event.DisplayClick exposing (DisplayClick, decoder, encoder)
+module Jawa.Event.DisplayClick exposing (DisplayClick, decoder, encode)
 
 {-|
 
-@docs DisplayClick, decoder, encoder
+@docs DisplayClick, decoder, encode
 
 -}
 
@@ -26,7 +26,7 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : DisplayClick -> Json.Encode.Value
-encoder _ =
+encode : DisplayClick -> Json.Encode.Value
+encode _ =
     Json.Encode.object
         []

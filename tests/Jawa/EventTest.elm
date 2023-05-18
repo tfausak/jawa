@@ -58,10 +58,10 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.Event"
-        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.decoder Jawa.Event.encoder fuzzer
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.decoder Jawa.Event.encode fuzzer
         , Jawa.Extra.Test.testCodec "works with audioTracks"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "currentTrack": 0,
                 "tracks": [],
@@ -74,14 +74,14 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with beforeComplete"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "type": "beforeComplete"
             } """
             (Jawa.Event.BeforeComplete {})
         , Jawa.Extra.Test.testCodec "works with beforePlay"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "playReason": "autostart",
                 "type": "beforePlay",
@@ -94,7 +94,7 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with breakpoint"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "breakpoint": 0,
                 "type": "breakpoint"
@@ -105,7 +105,7 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with buffer"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "oldstate": "idle",
                 "newstate": "buffering",
@@ -120,7 +120,7 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with bufferChange"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "bufferPercent": 0.1,
                 "currentTime": 0.2,
@@ -145,14 +145,14 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with bufferFull"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "type": "bufferFull"
             } """
             (Jawa.Event.BufferFull {})
         , Jawa.Extra.Test.testCodec "works with captionsChanged"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "track": 0,
                 "tracks": [],
@@ -165,7 +165,7 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with captionsList"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "track": 0,
                 "tracks": [],
@@ -178,7 +178,7 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with click"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "isTrusted": false,
                 "type": "click"
@@ -189,14 +189,14 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with complete"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "type": "complete"
             } """
             (Jawa.Event.Complete {})
         , Jawa.Extra.Test.testCodec "works with controls"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "controls": false,
                 "type": "controls"
@@ -207,14 +207,14 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with displayClick"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "type": "displayClick"
             } """
             (Jawa.Event.DisplayClick {})
         , Jawa.Extra.Test.testCodec "works with firstFrame"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "loadTime": 0.1,
                 "type": "firstFrame"
@@ -225,7 +225,7 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with fullscreen"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "fullscreen": false,
                 "type": "fullscreen"
@@ -236,7 +236,7 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with idle"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "newstate": "buffering",
                 "oldstate": "complete",
@@ -251,7 +251,7 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with mediaType"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "mediaType": "audio",
                 "type": "mediaType"
@@ -262,7 +262,7 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with mute"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "mute": false,
                 "type": "mute"
@@ -273,7 +273,7 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with pause"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "newstate": "buffering",
                 "oldstate": "complete",
@@ -292,21 +292,21 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with pipEnter"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "type": "pipEnter"
             } """
             (Jawa.Event.PipEnter {})
         , Jawa.Extra.Test.testCodec "works with pipLeave"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "type": "pipLeave"
             } """
             (Jawa.Event.PipLeave {})
         , Jawa.Extra.Test.testCodec "works with play"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "newstate": "buffering",
                 "oldstate": "complete",
@@ -325,7 +325,7 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with playbackRateChanged"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "playbackRate": 0.1,
                 "type": "playbackRateChanged"
@@ -336,7 +336,7 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with playlist"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "playlist": [],
                 "type": "playlist"
@@ -347,14 +347,14 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with playlistComplete"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "type": "playlistComplete"
             } """
             (Jawa.Event.PlaylistComplete {})
         , Jawa.Extra.Test.testCodec "works with playlistItem"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "index": 0,
                 "item": {
@@ -383,14 +383,14 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with providerFirstFrame"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "type": "providerFirstFrame"
             } """
             (Jawa.Event.ProviderFirstFrame {})
         , Jawa.Extra.Test.testCodec "works with ready"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "setupTime": 0.1,
                 "viewable": 0,
@@ -403,14 +403,14 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with remove"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "type": "remove"
             } """
             (Jawa.Event.Remove {})
         , Jawa.Extra.Test.testCodec "works with resize"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "height": 0,
                 "type": "resize",
@@ -423,7 +423,7 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with seek"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "currentTime": 0.1,
                 "duration": 0.2,
@@ -450,14 +450,14 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with seeked"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "type": "seeked"
             } """
             (Jawa.Event.Seeked {})
         , Jawa.Extra.Test.testCodec "works with setupError"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "code": 0,
                 "message": "",
@@ -470,7 +470,7 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with time"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "currentTime": 0.1,
                 "duration": 0.2,
@@ -497,21 +497,21 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with userActive"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "type": "userActive"
             } """
             (Jawa.Event.UserActive {})
         , Jawa.Extra.Test.testCodec "works with userInactive"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "type": "userInactive"
             } """
             (Jawa.Event.UserInactive {})
         , Jawa.Extra.Test.testCodec "works with viewable"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "viewable": 0,
                 "type": "viewable"
@@ -522,7 +522,7 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with visualQuality"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "level": {
                     "bitrate": 0,
@@ -549,7 +549,7 @@ test =
             )
         , Jawa.Extra.Test.testCodec "works with volume"
             Jawa.Event.decoder
-            Jawa.Event.encoder
+            Jawa.Event.encode
             """ {
                 "type": "volume",
                 "volume": 0.1

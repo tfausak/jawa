@@ -12,10 +12,10 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.Event.PlaybackRateChanged"
-        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.PlaybackRateChanged.decoder Jawa.Event.PlaybackRateChanged.encoder fuzzer
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.PlaybackRateChanged.decoder Jawa.Event.PlaybackRateChanged.encode fuzzer
         , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.PlaybackRateChanged.decoder
-            Jawa.Event.PlaybackRateChanged.encoder
+            Jawa.Event.PlaybackRateChanged.encode
             """ {
                 "playbackRate": 0.1
             } """

@@ -1,8 +1,8 @@
-module Jawa.Event.BufferChange exposing (BufferChange, decoder, encoder)
+module Jawa.Event.BufferChange exposing (BufferChange, decoder, encode)
 
 {-|
 
-@docs BufferChange, decoder, encoder
+@docs BufferChange, decoder, encode
 
 -}
 
@@ -36,12 +36,12 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : BufferChange -> Json.Encode.Value
-encoder x =
+encode : BufferChange -> Json.Encode.Value
+encode x =
     Json.Encode.object
         [ ( "bufferPercent", Json.Encode.float x.bufferPercent )
         , ( "currentTime", Json.Encode.float x.currentTime )
         , ( "duration", Json.Encode.float x.duration )
         , ( "position", Json.Encode.float x.position )
-        , ( "seekRange", Jawa.SeekRange.encoder x.seekRange )
+        , ( "seekRange", Jawa.SeekRange.encode x.seekRange )
         ]

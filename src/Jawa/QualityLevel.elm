@@ -1,8 +1,8 @@
-module Jawa.QualityLevel exposing (QualityLevel, decoder, encoder)
+module Jawa.QualityLevel exposing (QualityLevel, decoder, encode)
 
 {-|
 
-@docs QualityLevel, decoder, encoder
+@docs QualityLevel, decoder, encode
 
 -}
 
@@ -35,8 +35,8 @@ decoder =
 
 {-| A JSON encoder.
 -}
-encoder : QualityLevel -> Json.Encode.Value
-encoder x =
+encode : QualityLevel -> Json.Encode.Value
+encode x =
     Json.Encode.object
         [ ( "bitrate", Json.Encode.int x.bitrate )
         , ( "height", Json.Encode.int x.height )

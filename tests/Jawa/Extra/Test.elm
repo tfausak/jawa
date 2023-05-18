@@ -11,10 +11,10 @@ import Test
 
 
 expectCodec : Json.Decode.Decoder a -> (a -> Json.Encode.Value) -> String -> a -> Expect.Expectation
-expectCodec decoder encoder string =
+expectCodec decoder encode string =
     Expect.all
         [ expectDecoder decoder string
-        , expectEncoder encoder string
+        , expectEncode encode string
         ]
 
 
@@ -25,29 +25,29 @@ expectDecoder decoder string value =
         (Ok value)
 
 
-expectEncoder : (a -> Json.Encode.Value) -> String -> a -> Expect.Expectation
-expectEncoder encoder string value =
+expectEncode : (a -> Json.Encode.Value) -> String -> a -> Expect.Expectation
+expectEncode encode string value =
     case Json.Decode.decodeString Json.Decode.value string of
         Err message ->
             Expect.fail (Json.Decode.errorToString message)
 
         Ok json ->
             Expect.equal
-                (encoder value)
+                (encode value)
                 json
 
 
 fuzzCodec : String -> Json.Decode.Decoder a -> (a -> Json.Encode.Value) -> Fuzz.Fuzzer a -> Test.Test
-fuzzCodec label decoder encoder fuzzer =
+fuzzCodec label decoder encode fuzzer =
     Test.fuzz fuzzer label <|
         \value ->
             expectCodec
                 decoder
-                encoder
-                (Json.Encode.encode 0 (encoder value))
+                encode
+                (Json.Encode.encode 0 (encode value))
                 value
 
 
 testCodec : String -> Json.Decode.Decoder a -> (a -> Json.Encode.Value) -> String -> a -> Test.Test
-testCodec label decoder encoder string value =
-    Test.test label <| \_ -> expectCodec decoder encoder string value
+testCodec label decoder encode string value =
+    Test.test label <| \_ -> expectCodec decoder encode string value

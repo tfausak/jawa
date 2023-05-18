@@ -1,8 +1,8 @@
-module Jawa.PlayReason exposing (PlayReason(..), decoder, encoder)
+module Jawa.PlayReason exposing (PlayReason(..), decoder, encode)
 
 {-|
 
-@docs PlayReason, decoder, encoder
+@docs PlayReason, decoder, encode
 
 -}
 
@@ -57,8 +57,8 @@ fromString string =
 
 {-| A JSON encoder.
 -}
-encoder : PlayReason -> Json.Encode.Value
-encoder =
+encode : PlayReason -> Json.Encode.Value
+encode =
     toString >> Json.Encode.string
 
 

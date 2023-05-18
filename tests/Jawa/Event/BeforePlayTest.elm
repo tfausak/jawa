@@ -16,10 +16,10 @@ import Test
 test : Test.Test
 test =
     Test.describe "Jawa.Event.BeforePlay"
-        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.BeforePlay.decoder Jawa.Event.BeforePlay.encoder fuzzer
+        [ Jawa.Extra.Test.fuzzCodec "round trips" Jawa.Event.BeforePlay.decoder Jawa.Event.BeforePlay.encode fuzzer
         , Jawa.Extra.Test.testCodec "works"
             Jawa.Event.BeforePlay.decoder
-            Jawa.Event.BeforePlay.encoder
+            Jawa.Event.BeforePlay.encode
             """ {
                 "playReason": "autostart",
                 "viewable": 0
