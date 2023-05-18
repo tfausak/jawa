@@ -1,8 +1,8 @@
-module Jawa.Event.Breakpoint exposing (Breakpoint, decoder, encode)
+module Jawa.Event.Breakpoint exposing (Breakpoint, decoder, encode, tag)
 
 {-|
 
-@docs Breakpoint, decoder, encode
+@docs Breakpoint, decoder, encode, tag
 
 -}
 
@@ -32,3 +32,10 @@ encode x =
     Json.Encode.object
         [ ( "breakpoint", Json.Encode.int x.breakpoint )
         ]
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "breakpoint"

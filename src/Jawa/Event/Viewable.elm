@@ -1,8 +1,8 @@
-module Jawa.Event.Viewable exposing (Viewable, decoder, encode)
+module Jawa.Event.Viewable exposing (Viewable, decoder, encode, tag)
 
 {-|
 
-@docs Viewable, decoder, encode
+@docs Viewable, decoder, encode, tag
 
 -}
 
@@ -33,3 +33,10 @@ encode x =
     Json.Encode.object
         [ ( "viewable", Jawa.Viewable.encode x.viewable )
         ]
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "viewable"

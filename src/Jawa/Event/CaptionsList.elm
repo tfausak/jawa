@@ -1,8 +1,8 @@
-module Jawa.Event.CaptionsList exposing (CaptionsList, decoder, encode)
+module Jawa.Event.CaptionsList exposing (CaptionsList, decoder, encode, tag)
 
 {-|
 
-@docs CaptionsList, decoder, encode
+@docs CaptionsList, decoder, encode, tag
 
 -}
 
@@ -36,3 +36,10 @@ encode x =
         [ ( "track", Json.Encode.int x.track )
         , ( "tracks", Json.Encode.list Jawa.CaptionTrack.encode x.tracks )
         ]
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "captionsList"

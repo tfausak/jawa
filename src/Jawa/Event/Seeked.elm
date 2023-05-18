@@ -1,8 +1,8 @@
-module Jawa.Event.Seeked exposing (Seeked, decoder, encode)
+module Jawa.Event.Seeked exposing (Seeked, decoder, encode, tag)
 
 {-|
 
-@docs Seeked, decoder, encode
+@docs Seeked, decoder, encode, tag
 
 -}
 
@@ -30,3 +30,10 @@ encode : Seeked -> Json.Encode.Value
 encode _ =
     Json.Encode.object
         []
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "seeked"

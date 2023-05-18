@@ -1,8 +1,8 @@
-module Jawa.Event.SetupError exposing (SetupError, decoder, encode)
+module Jawa.Event.SetupError exposing (SetupError, decoder, encode, tag)
 
 {-|
 
-@docs SetupError, decoder, encode
+@docs SetupError, decoder, encode, tag
 
 -}
 
@@ -35,3 +35,10 @@ encode x =
         [ ( "code", Json.Encode.int x.code )
         , ( "message", Json.Encode.string x.message )
         ]
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "setupError"

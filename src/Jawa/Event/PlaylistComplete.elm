@@ -1,8 +1,8 @@
-module Jawa.Event.PlaylistComplete exposing (PlaylistComplete, decoder, encode)
+module Jawa.Event.PlaylistComplete exposing (PlaylistComplete, decoder, encode, tag)
 
 {-|
 
-@docs PlaylistComplete, decoder, encode
+@docs PlaylistComplete, decoder, encode, tag
 
 -}
 
@@ -30,3 +30,10 @@ encode : PlaylistComplete -> Json.Encode.Value
 encode _ =
     Json.Encode.object
         []
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "playlistComplete"

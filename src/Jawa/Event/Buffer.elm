@@ -1,8 +1,8 @@
-module Jawa.Event.Buffer exposing (Buffer, decoder, encode)
+module Jawa.Event.Buffer exposing (Buffer, decoder, encode, tag)
 
 {-|
 
-@docs Buffer, decoder, encode
+@docs Buffer, decoder, encode, tag
 
 -}
 
@@ -39,3 +39,10 @@ encode x =
         , ( "oldstate", Jawa.State.encode x.oldstate )
         , ( "reason", Jawa.State.encode x.reason )
         ]
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "buffer"

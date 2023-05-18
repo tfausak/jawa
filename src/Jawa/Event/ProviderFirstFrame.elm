@@ -1,8 +1,8 @@
-module Jawa.Event.ProviderFirstFrame exposing (ProviderFirstFrame, decoder, encode)
+module Jawa.Event.ProviderFirstFrame exposing (ProviderFirstFrame, decoder, encode, tag)
 
 {-|
 
-@docs ProviderFirstFrame, decoder, encode
+@docs ProviderFirstFrame, decoder, encode, tag
 
 -}
 
@@ -30,3 +30,10 @@ encode : ProviderFirstFrame -> Json.Encode.Value
 encode _ =
     Json.Encode.object
         []
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "providerFirstFrame"

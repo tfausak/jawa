@@ -1,8 +1,8 @@
-module Jawa.Event.Play exposing (Play, decoder, encode)
+module Jawa.Event.Play exposing (Play, decoder, encode, tag)
 
 {-|
 
-@docs Play, decoder, encode
+@docs Play, decoder, encode, tag
 
 -}
 
@@ -47,3 +47,10 @@ encode x =
         , ( "reason", Jawa.State.encode x.reason )
         , ( "viewable", Jawa.Viewable.encode x.viewable )
         ]
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "play"

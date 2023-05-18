@@ -1,8 +1,8 @@
-module Jawa.Event.Remove exposing (Remove, decoder, encode)
+module Jawa.Event.Remove exposing (Remove, decoder, encode, tag)
 
 {-|
 
-@docs Remove, decoder, encode
+@docs Remove, decoder, encode, tag
 
 -}
 
@@ -30,3 +30,10 @@ encode : Remove -> Json.Encode.Value
 encode _ =
     Json.Encode.object
         []
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "remove"

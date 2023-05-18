@@ -1,8 +1,8 @@
-module Jawa.Event.DisplayClick exposing (DisplayClick, decoder, encode)
+module Jawa.Event.DisplayClick exposing (DisplayClick, decoder, encode, tag)
 
 {-|
 
-@docs DisplayClick, decoder, encode
+@docs DisplayClick, decoder, encode, tag
 
 -}
 
@@ -30,3 +30,10 @@ encode : DisplayClick -> Json.Encode.Value
 encode _ =
     Json.Encode.object
         []
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "displayClick"

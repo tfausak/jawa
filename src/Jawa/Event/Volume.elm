@@ -1,8 +1,8 @@
-module Jawa.Event.Volume exposing (Volume, decoder, encode)
+module Jawa.Event.Volume exposing (Volume, decoder, encode, tag)
 
 {-|
 
-@docs Volume, decoder, encode
+@docs Volume, decoder, encode, tag
 
 -}
 
@@ -32,3 +32,10 @@ encode x =
     Json.Encode.object
         [ ( "volume", Json.Encode.float x.volume )
         ]
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "volume"

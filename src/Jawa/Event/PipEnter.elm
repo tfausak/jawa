@@ -1,8 +1,8 @@
-module Jawa.Event.PipEnter exposing (PipEnter, decoder, encode)
+module Jawa.Event.PipEnter exposing (PipEnter, decoder, encode, tag)
 
 {-|
 
-@docs PipEnter, decoder, encode
+@docs PipEnter, decoder, encode, tag
 
 -}
 
@@ -30,3 +30,10 @@ encode : PipEnter -> Json.Encode.Value
 encode _ =
     Json.Encode.object
         []
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "pipEnter"

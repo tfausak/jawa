@@ -1,8 +1,8 @@
-module Jawa.Event.PipLeave exposing (PipLeave, decoder, encode)
+module Jawa.Event.PipLeave exposing (PipLeave, decoder, encode, tag)
 
 {-|
 
-@docs PipLeave, decoder, encode
+@docs PipLeave, decoder, encode, tag
 
 -}
 
@@ -30,3 +30,10 @@ encode : PipLeave -> Json.Encode.Value
 encode _ =
     Json.Encode.object
         []
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "pipLeave"

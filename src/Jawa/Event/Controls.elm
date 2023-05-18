@@ -1,8 +1,8 @@
-module Jawa.Event.Controls exposing (Controls, decoder, encode)
+module Jawa.Event.Controls exposing (Controls, decoder, encode, tag)
 
 {-|
 
-@docs Controls, decoder, encode
+@docs Controls, decoder, encode, tag
 
 -}
 
@@ -32,3 +32,10 @@ encode x =
     Json.Encode.object
         [ ( "controls", Json.Encode.bool x.controls )
         ]
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "controls"

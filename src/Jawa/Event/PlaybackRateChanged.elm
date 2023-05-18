@@ -1,8 +1,8 @@
-module Jawa.Event.PlaybackRateChanged exposing (PlaybackRateChanged, decoder, encode)
+module Jawa.Event.PlaybackRateChanged exposing (PlaybackRateChanged, decoder, encode, tag)
 
 {-|
 
-@docs PlaybackRateChanged, decoder, encode
+@docs PlaybackRateChanged, decoder, encode, tag
 
 -}
 
@@ -32,3 +32,10 @@ encode x =
     Json.Encode.object
         [ ( "playbackRate", Json.Encode.float x.playbackRate )
         ]
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "playbackRateChanged"

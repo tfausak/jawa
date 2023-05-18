@@ -1,8 +1,8 @@
-module Jawa.Event.FirstFrame exposing (FirstFrame, decoder, encode)
+module Jawa.Event.FirstFrame exposing (FirstFrame, decoder, encode, tag)
 
 {-|
 
-@docs FirstFrame, decoder, encode
+@docs FirstFrame, decoder, encode, tag
 
 -}
 
@@ -32,3 +32,10 @@ encode x =
     Json.Encode.object
         [ ( "loadTime", Json.Encode.float x.loadTime )
         ]
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "firstFrame"

@@ -1,8 +1,8 @@
-module Jawa.Event.UserInactive exposing (UserInactive, decoder, encode)
+module Jawa.Event.UserInactive exposing (UserInactive, decoder, encode, tag)
 
 {-|
 
-@docs UserInactive, decoder, encode
+@docs UserInactive, decoder, encode, tag
 
 -}
 
@@ -30,3 +30,10 @@ encode : UserInactive -> Json.Encode.Value
 encode _ =
     Json.Encode.object
         []
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "userInactive"

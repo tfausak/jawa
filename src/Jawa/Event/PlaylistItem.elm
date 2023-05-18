@@ -1,8 +1,8 @@
-module Jawa.Event.PlaylistItem exposing (PlaylistItem, decoder, encode)
+module Jawa.Event.PlaylistItem exposing (PlaylistItem, decoder, encode, tag)
 
 {-|
 
-@docs PlaylistItem, decoder, encode
+@docs PlaylistItem, decoder, encode, tag
 
 -}
 
@@ -36,3 +36,10 @@ encode x =
         [ ( "index", Json.Encode.int x.index )
         , ( "item", Jawa.PlaylistItem.encode x.item )
         ]
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "playlistItem"

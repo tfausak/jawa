@@ -1,8 +1,8 @@
-module Jawa.Event.MediaType exposing (MediaType, decoder, encode)
+module Jawa.Event.MediaType exposing (MediaType, decoder, encode, tag)
 
 {-|
 
-@docs MediaType, decoder, encode
+@docs MediaType, decoder, encode, tag
 
 -}
 
@@ -33,3 +33,10 @@ encode x =
     Json.Encode.object
         [ ( "mediaType", Jawa.MediaType.encode x.mediaType )
         ]
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "mediaType"

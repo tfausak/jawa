@@ -1,8 +1,8 @@
-module Jawa.Event.Complete exposing (Complete, decoder, encode)
+module Jawa.Event.Complete exposing (Complete, decoder, encode, tag)
 
 {-|
 
-@docs Complete, decoder, encode
+@docs Complete, decoder, encode, tag
 
 -}
 
@@ -30,3 +30,10 @@ encode : Complete -> Json.Encode.Value
 encode _ =
     Json.Encode.object
         []
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "complete"

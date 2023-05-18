@@ -1,8 +1,8 @@
-module Jawa.Event.Pause exposing (Pause, decoder, encode)
+module Jawa.Event.Pause exposing (Pause, decoder, encode, tag)
 
 {-|
 
-@docs Pause, decoder, encode
+@docs Pause, decoder, encode, tag
 
 -}
 
@@ -47,3 +47,10 @@ encode x =
         , ( "reason", Jawa.State.encode x.reason )
         , ( "viewable", Jawa.Viewable.encode x.viewable )
         ]
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "pause"
