@@ -11,6 +11,7 @@ import Jawa.Event.AudioTracks
 import Jawa.Event.BeforeComplete
 import Jawa.Event.BeforePlay
 import Jawa.Event.Breakpoint
+import Jawa.Event.Buffer
 import Jawa.Event.BufferChange
 import Jawa.Event.BufferFull
 import Jawa.Event.CaptionsList
@@ -55,6 +56,7 @@ type Event
     | BeforeComplete Jawa.Event.BeforeComplete.BeforeComplete
     | BeforePlay Jawa.Event.BeforePlay.BeforePlay
     | Breakpoint Jawa.Event.Breakpoint.Breakpoint
+    | Buffer Jawa.Event.Buffer.Buffer
     | BufferChange Jawa.Event.BufferChange.BufferChange
     | BufferFull Jawa.Event.BufferFull.BufferFull
     | CaptionsList Jawa.Event.CaptionsList.CaptionsList
@@ -112,6 +114,9 @@ decoderWith string =
 
         "breakpoint" ->
             Json.Decode.map Breakpoint Jawa.Event.Breakpoint.decoder
+
+        "buffer" ->
+            Json.Decode.map Buffer Jawa.Event.Buffer.decoder
 
         "bufferChange" ->
             Json.Decode.map BufferChange Jawa.Event.BufferChange.decoder
@@ -232,6 +237,9 @@ encoder event =
 
         Breakpoint x ->
             encoderWith "breakpoint" Jawa.Event.Breakpoint.encoder x
+
+        Buffer x ->
+            encoderWith "buffer" Jawa.Event.Buffer.encoder x
 
         BufferChange x ->
             encoderWith "bufferChange" Jawa.Event.BufferChange.encoder x

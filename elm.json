@@ -11,6 +11,7 @@
         "Jawa.Event.BeforeComplete",
         "Jawa.Event.BeforePlay",
         "Jawa.Event.Breakpoint",
+        "Jawa.Event.Buffer",
         "Jawa.Event.BufferChange",
         "Jawa.Event.BufferFull",
         "Jawa.Event.CaptionsList",
