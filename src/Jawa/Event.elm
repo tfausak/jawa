@@ -9,6 +9,7 @@ module Jawa.Event exposing (Event(..), decoder, encoder)
 import Dict
 import Jawa.Event.AudioTracks
 import Jawa.Event.BeforeComplete
+import Jawa.Event.BeforePlay
 import Jawa.Event.Breakpoint
 import Jawa.Event.BufferChange
 import Jawa.Event.BufferFull
@@ -51,6 +52,7 @@ import Json.Encode
 type Event
     = AudioTracks Jawa.Event.AudioTracks.AudioTracks
     | BeforeComplete Jawa.Event.BeforeComplete.BeforeComplete
+    | BeforePlay Jawa.Event.BeforePlay.BeforePlay
     | Breakpoint Jawa.Event.Breakpoint.Breakpoint
     | BufferChange Jawa.Event.BufferChange.BufferChange
     | BufferFull Jawa.Event.BufferFull.BufferFull
@@ -102,6 +104,9 @@ decoderWith string =
 
         "beforeComplete" ->
             Json.Decode.map BeforeComplete Jawa.Event.BeforeComplete.decoder
+
+        "beforePlay" ->
+            Json.Decode.map BeforePlay Jawa.Event.BeforePlay.decoder
 
         "breakpoint" ->
             Json.Decode.map Breakpoint Jawa.Event.Breakpoint.decoder
@@ -216,6 +221,9 @@ encoder event =
 
         BeforeComplete x ->
             encoderWith "beforeComplete" Jawa.Event.BeforeComplete.encoder x
+
+        BeforePlay x ->
+            encoderWith "beforePlay" Jawa.Event.BeforePlay.encoder x
 
         Breakpoint x ->
             encoderWith "breakpoint" Jawa.Event.Breakpoint.encoder x

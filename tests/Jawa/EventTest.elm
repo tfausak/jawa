@@ -4,6 +4,7 @@ import Fuzz
 import Jawa.Event
 import Jawa.Event.AudioTracksTest
 import Jawa.Event.BeforeCompleteTest
+import Jawa.Event.BeforePlayTest
 import Jawa.Event.BreakpointTest
 import Jawa.Event.BufferChangeTest
 import Jawa.Event.BufferFullTest
@@ -75,6 +76,19 @@ test =
                 "type": "beforeComplete"
             } """
             (Jawa.Event.BeforeComplete {})
+        , Jawa.Extra.Test.testCodec "works with beforePlay"
+            Jawa.Event.decoder
+            Jawa.Event.encoder
+            """ {
+                "playReason": "autostart",
+                "type": "beforePlay",
+                "viewable": 0
+            } """
+            (Jawa.Event.BeforePlay
+                { playReason = Jawa.PlayReason.Autostart
+                , viewable = Jawa.Viewable.Hidden
+                }
+            )
         , Jawa.Extra.Test.testCodec "works with breakpoint"
             Jawa.Event.decoder
             Jawa.Event.encoder
@@ -508,6 +522,7 @@ fuzzer =
     Fuzz.oneOf
         [ Fuzz.map Jawa.Event.AudioTracks Jawa.Event.AudioTracksTest.fuzzer
         , Fuzz.map Jawa.Event.BeforeComplete Jawa.Event.BeforeCompleteTest.fuzzer
+        , Fuzz.map Jawa.Event.BeforePlay Jawa.Event.BeforePlayTest.fuzzer
         , Fuzz.map Jawa.Event.Breakpoint Jawa.Event.BreakpointTest.fuzzer
         , Fuzz.map Jawa.Event.BufferChange Jawa.Event.BufferChangeTest.fuzzer
         , Fuzz.map Jawa.Event.BufferFull Jawa.Event.BufferFullTest.fuzzer

@@ -8,6 +8,7 @@
         "Jawa.AudioTrack",
         "Jawa.Event.AudioTracks",
         "Jawa.Event.BeforeComplete",
+        "Jawa.Event.BeforePlay",
         "Jawa.Event.Breakpoint",
         "Jawa.Event.BufferChange",
         "Jawa.Event.BufferFull",
