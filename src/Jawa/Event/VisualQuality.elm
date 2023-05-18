@@ -1,8 +1,8 @@
-module Jawa.Event.VisualQuality exposing (VisualQuality, decoder, encode)
+module Jawa.Event.VisualQuality exposing (VisualQuality, decoder, encode, tag)
 
 {-|
 
-@docs VisualQuality, decoder, encode
+@docs VisualQuality, decoder, encode, tag
 
 -}
 
@@ -41,3 +41,10 @@ encode x =
         , ( "mode", Jawa.QualityMode.encode x.mode )
         , ( "reason", Jawa.QualityReason.encode x.reason )
         ]
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "visualQuality"

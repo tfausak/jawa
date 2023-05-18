@@ -1,8 +1,8 @@
-module Jawa.Event.Resize exposing (Resize, decoder, encode)
+module Jawa.Event.Resize exposing (Resize, decoder, encode, tag)
 
 {-|
 
-@docs Resize, decoder, encode
+@docs Resize, decoder, encode, tag
 
 -}
 
@@ -35,3 +35,10 @@ encode x =
         [ ( "height", Json.Encode.int x.height )
         , ( "width", Json.Encode.int x.width )
         ]
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "resize"

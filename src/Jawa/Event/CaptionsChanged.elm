@@ -1,8 +1,8 @@
-module Jawa.Event.CaptionsChanged exposing (CaptionsChanged, decoder, encode)
+module Jawa.Event.CaptionsChanged exposing (CaptionsChanged, decoder, encode, tag)
 
 {-|
 
-@docs CaptionsChanged, decoder, encode
+@docs CaptionsChanged, decoder, encode, tag
 
 -}
 
@@ -36,3 +36,10 @@ encode x =
         [ ( "track", Json.Encode.int x.track )
         , ( "tracks", Json.Encode.list Jawa.CaptionTrack.encode x.tracks )
         ]
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "captionsChanged"

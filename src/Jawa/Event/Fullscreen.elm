@@ -1,8 +1,8 @@
-module Jawa.Event.Fullscreen exposing (Fullscreen, decoder, encode)
+module Jawa.Event.Fullscreen exposing (Fullscreen, decoder, encode, tag)
 
 {-|
 
-@docs Fullscreen, decoder, encode
+@docs Fullscreen, decoder, encode, tag
 
 -}
 
@@ -32,3 +32,10 @@ encode x =
     Json.Encode.object
         [ ( "fullscreen", Json.Encode.bool x.fullscreen )
         ]
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "fullscreen"

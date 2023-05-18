@@ -1,8 +1,8 @@
-module Jawa.Event.BufferFull exposing (BufferFull, decoder, encode)
+module Jawa.Event.BufferFull exposing (BufferFull, decoder, encode, tag)
 
 {-|
 
-@docs BufferFull, decoder, encode
+@docs BufferFull, decoder, encode, tag
 
 -}
 
@@ -30,3 +30,10 @@ encode : BufferFull -> Json.Encode.Value
 encode _ =
     Json.Encode.object
         []
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "bufferFull"

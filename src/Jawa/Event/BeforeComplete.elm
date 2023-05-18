@@ -1,8 +1,8 @@
-module Jawa.Event.BeforeComplete exposing (BeforeComplete, decoder, encode)
+module Jawa.Event.BeforeComplete exposing (BeforeComplete, decoder, encode, tag)
 
 {-|
 
-@docs BeforeComplete, decoder, encode
+@docs BeforeComplete, decoder, encode, tag
 
 -}
 
@@ -30,3 +30,10 @@ encode : BeforeComplete -> Json.Encode.Value
 encode _ =
     Json.Encode.object
         []
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "beforeComplete"

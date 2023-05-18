@@ -1,8 +1,8 @@
-module Jawa.Event.Seek exposing (Seek, decoder, encode)
+module Jawa.Event.Seek exposing (Seek, decoder, encode, tag)
 
 {-|
 
-@docs Seek, decoder, encode
+@docs Seek, decoder, encode, tag
 
 -}
 
@@ -49,3 +49,10 @@ encode x =
         , ( "position", Json.Encode.float x.position )
         , ( "seekRange", Jawa.SeekRange.encode x.seekRange )
         ]
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "seek"

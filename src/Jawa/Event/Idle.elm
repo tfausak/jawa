@@ -1,8 +1,8 @@
-module Jawa.Event.Idle exposing (Idle, decoder, encode)
+module Jawa.Event.Idle exposing (Idle, decoder, encode, tag)
 
 {-|
 
-@docs Idle, decoder, encode
+@docs Idle, decoder, encode, tag
 
 -}
 
@@ -39,3 +39,10 @@ encode x =
         , ( "oldstate", Jawa.State.encode x.oldstate )
         , ( "reason", Jawa.State.encode x.reason )
         ]
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "idle"

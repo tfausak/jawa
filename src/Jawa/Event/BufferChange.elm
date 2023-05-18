@@ -1,8 +1,8 @@
-module Jawa.Event.BufferChange exposing (BufferChange, decoder, encode)
+module Jawa.Event.BufferChange exposing (BufferChange, decoder, encode, tag)
 
 {-|
 
-@docs BufferChange, decoder, encode
+@docs BufferChange, decoder, encode, tag
 
 -}
 
@@ -45,3 +45,10 @@ encode x =
         , ( "position", Json.Encode.float x.position )
         , ( "seekRange", Jawa.SeekRange.encode x.seekRange )
         ]
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "bufferChange"

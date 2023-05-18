@@ -1,8 +1,8 @@
-module Jawa.Event.Time exposing (Time, decoder, encode)
+module Jawa.Event.Time exposing (Time, decoder, encode, tag)
 
 {-|
 
-@docs Time, decoder, encode
+@docs Time, decoder, encode, tag
 
 -}
 
@@ -50,3 +50,10 @@ encode x =
         , ( "seekRange", Jawa.SeekRange.encode x.seekRange )
         , ( "viewable", Jawa.Viewable.encode x.viewable )
         ]
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "time"

@@ -1,8 +1,8 @@
-module Jawa.Event.Mute exposing (Mute, decoder, encode)
+module Jawa.Event.Mute exposing (Mute, decoder, encode, tag)
 
 {-|
 
-@docs Mute, decoder, encode
+@docs Mute, decoder, encode, tag
 
 -}
 
@@ -32,3 +32,10 @@ encode x =
     Json.Encode.object
         [ ( "mute", Json.Encode.bool x.mute )
         ]
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "mute"

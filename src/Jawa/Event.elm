@@ -104,126 +104,57 @@ decoder =
 
 decoderWith : String -> Json.Decode.Decoder Event
 decoderWith string =
-    case string of
-        "audioTracks" ->
-            Json.Decode.map AudioTracks Jawa.Event.AudioTracks.decoder
+    case Dict.get string decoders of
+        Just eventDecoder ->
+            eventDecoder
 
-        "beforeComplete" ->
-            Json.Decode.map BeforeComplete Jawa.Event.BeforeComplete.decoder
+        Nothing ->
+            Json.Decode.fail <| "unknown Event: " ++ string
 
-        "beforePlay" ->
-            Json.Decode.map BeforePlay Jawa.Event.BeforePlay.decoder
 
-        "breakpoint" ->
-            Json.Decode.map Breakpoint Jawa.Event.Breakpoint.decoder
-
-        "buffer" ->
-            Json.Decode.map Buffer Jawa.Event.Buffer.decoder
-
-        "bufferChange" ->
-            Json.Decode.map BufferChange Jawa.Event.BufferChange.decoder
-
-        "bufferFull" ->
-            Json.Decode.map BufferFull Jawa.Event.BufferFull.decoder
-
-        "captionsChanged" ->
-            Json.Decode.map CaptionsChanged Jawa.Event.CaptionsChanged.decoder
-
-        "captionsList" ->
-            Json.Decode.map CaptionsList Jawa.Event.CaptionsList.decoder
-
-        "click" ->
-            Json.Decode.map Click Jawa.Event.Click.decoder
-
-        "complete" ->
-            Json.Decode.map Complete Jawa.Event.Complete.decoder
-
-        "controls" ->
-            Json.Decode.map Controls Jawa.Event.Controls.decoder
-
-        "displayClick" ->
-            Json.Decode.map DisplayClick Jawa.Event.DisplayClick.decoder
-
-        "firstFrame" ->
-            Json.Decode.map FirstFrame Jawa.Event.FirstFrame.decoder
-
-        "fullscreen" ->
-            Json.Decode.map Fullscreen Jawa.Event.Fullscreen.decoder
-
-        "idle" ->
-            Json.Decode.map Idle Jawa.Event.Idle.decoder
-
-        "mediaType" ->
-            Json.Decode.map MediaType Jawa.Event.MediaType.decoder
-
-        "mute" ->
-            Json.Decode.map Mute Jawa.Event.Mute.decoder
-
-        "pause" ->
-            Json.Decode.map Pause Jawa.Event.Pause.decoder
-
-        "pipEnter" ->
-            Json.Decode.map PipEnter Jawa.Event.PipEnter.decoder
-
-        "pipLeave" ->
-            Json.Decode.map PipLeave Jawa.Event.PipLeave.decoder
-
-        "play" ->
-            Json.Decode.map Play Jawa.Event.Play.decoder
-
-        "playbackRateChanged" ->
-            Json.Decode.map PlaybackRateChanged Jawa.Event.PlaybackRateChanged.decoder
-
-        "playlist" ->
-            Json.Decode.map Playlist Jawa.Event.Playlist.decoder
-
-        "playlistComplete" ->
-            Json.Decode.map PlaylistComplete Jawa.Event.PlaylistComplete.decoder
-
-        "playlistItem" ->
-            Json.Decode.map PlaylistItem Jawa.Event.PlaylistItem.decoder
-
-        "providerFirstFrame" ->
-            Json.Decode.map ProviderFirstFrame Jawa.Event.ProviderFirstFrame.decoder
-
-        "ready" ->
-            Json.Decode.map Ready Jawa.Event.Ready.decoder
-
-        "remove" ->
-            Json.Decode.map Remove Jawa.Event.Remove.decoder
-
-        "resize" ->
-            Json.Decode.map Resize Jawa.Event.Resize.decoder
-
-        "seek" ->
-            Json.Decode.map Seek Jawa.Event.Seek.decoder
-
-        "seeked" ->
-            Json.Decode.map Seeked Jawa.Event.Seeked.decoder
-
-        "setupError" ->
-            Json.Decode.map SetupError Jawa.Event.SetupError.decoder
-
-        "time" ->
-            Json.Decode.map Time Jawa.Event.Time.decoder
-
-        "userActive" ->
-            Json.Decode.map UserActive Jawa.Event.UserActive.decoder
-
-        "userInactive" ->
-            Json.Decode.map UserInactive Jawa.Event.UserInactive.decoder
-
-        "viewable" ->
-            Json.Decode.map Viewable Jawa.Event.Viewable.decoder
-
-        "visualQuality" ->
-            Json.Decode.map VisualQuality Jawa.Event.VisualQuality.decoder
-
-        "volume" ->
-            Json.Decode.map Volume Jawa.Event.Volume.decoder
-
-        _ ->
-            Json.Decode.fail <| "invalid Event: " ++ string
+decoders : Dict.Dict String (Json.Decode.Decoder Event)
+decoders =
+    Dict.fromList
+        [ ( Jawa.Event.AudioTracks.tag, Json.Decode.map AudioTracks Jawa.Event.AudioTracks.decoder )
+        , ( Jawa.Event.BeforeComplete.tag, Json.Decode.map BeforeComplete Jawa.Event.BeforeComplete.decoder )
+        , ( Jawa.Event.BeforePlay.tag, Json.Decode.map BeforePlay Jawa.Event.BeforePlay.decoder )
+        , ( Jawa.Event.Breakpoint.tag, Json.Decode.map Breakpoint Jawa.Event.Breakpoint.decoder )
+        , ( Jawa.Event.Buffer.tag, Json.Decode.map Buffer Jawa.Event.Buffer.decoder )
+        , ( Jawa.Event.BufferChange.tag, Json.Decode.map BufferChange Jawa.Event.BufferChange.decoder )
+        , ( Jawa.Event.BufferFull.tag, Json.Decode.map BufferFull Jawa.Event.BufferFull.decoder )
+        , ( Jawa.Event.CaptionsChanged.tag, Json.Decode.map CaptionsChanged Jawa.Event.CaptionsChanged.decoder )
+        , ( Jawa.Event.CaptionsList.tag, Json.Decode.map CaptionsList Jawa.Event.CaptionsList.decoder )
+        , ( Jawa.Event.Click.tag, Json.Decode.map Click Jawa.Event.Click.decoder )
+        , ( Jawa.Event.Complete.tag, Json.Decode.map Complete Jawa.Event.Complete.decoder )
+        , ( Jawa.Event.Controls.tag, Json.Decode.map Controls Jawa.Event.Controls.decoder )
+        , ( Jawa.Event.DisplayClick.tag, Json.Decode.map DisplayClick Jawa.Event.DisplayClick.decoder )
+        , ( Jawa.Event.FirstFrame.tag, Json.Decode.map FirstFrame Jawa.Event.FirstFrame.decoder )
+        , ( Jawa.Event.Fullscreen.tag, Json.Decode.map Fullscreen Jawa.Event.Fullscreen.decoder )
+        , ( Jawa.Event.Idle.tag, Json.Decode.map Idle Jawa.Event.Idle.decoder )
+        , ( Jawa.Event.MediaType.tag, Json.Decode.map MediaType Jawa.Event.MediaType.decoder )
+        , ( Jawa.Event.Mute.tag, Json.Decode.map Mute Jawa.Event.Mute.decoder )
+        , ( Jawa.Event.Pause.tag, Json.Decode.map Pause Jawa.Event.Pause.decoder )
+        , ( Jawa.Event.PipEnter.tag, Json.Decode.map PipEnter Jawa.Event.PipEnter.decoder )
+        , ( Jawa.Event.PipLeave.tag, Json.Decode.map PipLeave Jawa.Event.PipLeave.decoder )
+        , ( Jawa.Event.Play.tag, Json.Decode.map Play Jawa.Event.Play.decoder )
+        , ( Jawa.Event.PlaybackRateChanged.tag, Json.Decode.map PlaybackRateChanged Jawa.Event.PlaybackRateChanged.decoder )
+        , ( Jawa.Event.Playlist.tag, Json.Decode.map Playlist Jawa.Event.Playlist.decoder )
+        , ( Jawa.Event.PlaylistComplete.tag, Json.Decode.map PlaylistComplete Jawa.Event.PlaylistComplete.decoder )
+        , ( Jawa.Event.PlaylistItem.tag, Json.Decode.map PlaylistItem Jawa.Event.PlaylistItem.decoder )
+        , ( Jawa.Event.ProviderFirstFrame.tag, Json.Decode.map ProviderFirstFrame Jawa.Event.ProviderFirstFrame.decoder )
+        , ( Jawa.Event.Ready.tag, Json.Decode.map Ready Jawa.Event.Ready.decoder )
+        , ( Jawa.Event.Remove.tag, Json.Decode.map Remove Jawa.Event.Remove.decoder )
+        , ( Jawa.Event.Resize.tag, Json.Decode.map Resize Jawa.Event.Resize.decoder )
+        , ( Jawa.Event.Seek.tag, Json.Decode.map Seek Jawa.Event.Seek.decoder )
+        , ( Jawa.Event.Seeked.tag, Json.Decode.map Seeked Jawa.Event.Seeked.decoder )
+        , ( Jawa.Event.SetupError.tag, Json.Decode.map SetupError Jawa.Event.SetupError.decoder )
+        , ( Jawa.Event.Time.tag, Json.Decode.map Time Jawa.Event.Time.decoder )
+        , ( Jawa.Event.UserActive.tag, Json.Decode.map UserActive Jawa.Event.UserActive.decoder )
+        , ( Jawa.Event.UserInactive.tag, Json.Decode.map UserInactive Jawa.Event.UserInactive.decoder )
+        , ( Jawa.Event.Viewable.tag, Json.Decode.map Viewable Jawa.Event.Viewable.decoder )
+        , ( Jawa.Event.VisualQuality.tag, Json.Decode.map VisualQuality Jawa.Event.VisualQuality.decoder )
+        , ( Jawa.Event.Volume.tag, Json.Decode.map Volume Jawa.Event.Volume.decoder )
+        ]
 
 
 {-| A JSON encoder.
@@ -232,121 +163,121 @@ encode : Event -> Json.Encode.Value
 encode event =
     case event of
         AudioTracks x ->
-            encodeWith "audioTracks" Jawa.Event.AudioTracks.encode x
+            encodeWith Jawa.Event.AudioTracks.tag Jawa.Event.AudioTracks.encode x
 
         BeforeComplete x ->
-            encodeWith "beforeComplete" Jawa.Event.BeforeComplete.encode x
+            encodeWith Jawa.Event.BeforeComplete.tag Jawa.Event.BeforeComplete.encode x
 
         BeforePlay x ->
-            encodeWith "beforePlay" Jawa.Event.BeforePlay.encode x
+            encodeWith Jawa.Event.BeforePlay.tag Jawa.Event.BeforePlay.encode x
 
         Breakpoint x ->
-            encodeWith "breakpoint" Jawa.Event.Breakpoint.encode x
+            encodeWith Jawa.Event.Breakpoint.tag Jawa.Event.Breakpoint.encode x
 
         Buffer x ->
-            encodeWith "buffer" Jawa.Event.Buffer.encode x
+            encodeWith Jawa.Event.Buffer.tag Jawa.Event.Buffer.encode x
 
         BufferChange x ->
-            encodeWith "bufferChange" Jawa.Event.BufferChange.encode x
+            encodeWith Jawa.Event.BufferChange.tag Jawa.Event.BufferChange.encode x
 
         BufferFull x ->
-            encodeWith "bufferFull" Jawa.Event.BufferFull.encode x
+            encodeWith Jawa.Event.BufferFull.tag Jawa.Event.BufferFull.encode x
 
         CaptionsChanged x ->
-            encodeWith "captionsChanged" Jawa.Event.CaptionsChanged.encode x
+            encodeWith Jawa.Event.CaptionsChanged.tag Jawa.Event.CaptionsChanged.encode x
 
         CaptionsList x ->
-            encodeWith "captionsList" Jawa.Event.CaptionsList.encode x
+            encodeWith Jawa.Event.CaptionsList.tag Jawa.Event.CaptionsList.encode x
 
         Click x ->
-            encodeWith "click" Jawa.Event.Click.encode x
+            encodeWith Jawa.Event.Click.tag Jawa.Event.Click.encode x
 
         Complete x ->
-            encodeWith "complete" Jawa.Event.Complete.encode x
+            encodeWith Jawa.Event.Complete.tag Jawa.Event.Complete.encode x
 
         Controls x ->
-            encodeWith "controls" Jawa.Event.Controls.encode x
+            encodeWith Jawa.Event.Controls.tag Jawa.Event.Controls.encode x
 
         DisplayClick x ->
-            encodeWith "displayClick" Jawa.Event.DisplayClick.encode x
+            encodeWith Jawa.Event.DisplayClick.tag Jawa.Event.DisplayClick.encode x
 
         FirstFrame x ->
-            encodeWith "firstFrame" Jawa.Event.FirstFrame.encode x
+            encodeWith Jawa.Event.FirstFrame.tag Jawa.Event.FirstFrame.encode x
 
         Fullscreen x ->
-            encodeWith "fullscreen" Jawa.Event.Fullscreen.encode x
+            encodeWith Jawa.Event.Fullscreen.tag Jawa.Event.Fullscreen.encode x
 
         Idle x ->
-            encodeWith "idle" Jawa.Event.Idle.encode x
+            encodeWith Jawa.Event.Idle.tag Jawa.Event.Idle.encode x
 
         MediaType x ->
-            encodeWith "mediaType" Jawa.Event.MediaType.encode x
+            encodeWith Jawa.Event.MediaType.tag Jawa.Event.MediaType.encode x
 
         Mute x ->
-            encodeWith "mute" Jawa.Event.Mute.encode x
+            encodeWith Jawa.Event.Mute.tag Jawa.Event.Mute.encode x
 
         Pause x ->
-            encodeWith "pause" Jawa.Event.Pause.encode x
+            encodeWith Jawa.Event.Pause.tag Jawa.Event.Pause.encode x
 
         PipEnter x ->
-            encodeWith "pipEnter" Jawa.Event.PipEnter.encode x
+            encodeWith Jawa.Event.PipEnter.tag Jawa.Event.PipEnter.encode x
 
         PipLeave x ->
-            encodeWith "pipLeave" Jawa.Event.PipLeave.encode x
+            encodeWith Jawa.Event.PipLeave.tag Jawa.Event.PipLeave.encode x
 
         Play x ->
-            encodeWith "play" Jawa.Event.Play.encode x
+            encodeWith Jawa.Event.Play.tag Jawa.Event.Play.encode x
 
         PlaybackRateChanged x ->
-            encodeWith "playbackRateChanged" Jawa.Event.PlaybackRateChanged.encode x
+            encodeWith Jawa.Event.PlaybackRateChanged.tag Jawa.Event.PlaybackRateChanged.encode x
 
         Playlist x ->
-            encodeWith "playlist" Jawa.Event.Playlist.encode x
+            encodeWith Jawa.Event.Playlist.tag Jawa.Event.Playlist.encode x
 
         PlaylistComplete x ->
-            encodeWith "playlistComplete" Jawa.Event.PlaylistComplete.encode x
+            encodeWith Jawa.Event.PlaylistComplete.tag Jawa.Event.PlaylistComplete.encode x
 
         PlaylistItem x ->
-            encodeWith "playlistItem" Jawa.Event.PlaylistItem.encode x
+            encodeWith Jawa.Event.PlaylistItem.tag Jawa.Event.PlaylistItem.encode x
 
         ProviderFirstFrame x ->
-            encodeWith "providerFirstFrame" Jawa.Event.ProviderFirstFrame.encode x
+            encodeWith Jawa.Event.ProviderFirstFrame.tag Jawa.Event.ProviderFirstFrame.encode x
 
         Ready x ->
-            encodeWith "ready" Jawa.Event.Ready.encode x
+            encodeWith Jawa.Event.Ready.tag Jawa.Event.Ready.encode x
 
         Remove x ->
-            encodeWith "remove" Jawa.Event.Remove.encode x
+            encodeWith Jawa.Event.Remove.tag Jawa.Event.Remove.encode x
 
         Resize x ->
-            encodeWith "resize" Jawa.Event.Resize.encode x
+            encodeWith Jawa.Event.Resize.tag Jawa.Event.Resize.encode x
 
         Seek x ->
-            encodeWith "seek" Jawa.Event.Seek.encode x
+            encodeWith Jawa.Event.Seek.tag Jawa.Event.Seek.encode x
 
         Seeked x ->
-            encodeWith "seeked" Jawa.Event.Seeked.encode x
+            encodeWith Jawa.Event.Seeked.tag Jawa.Event.Seeked.encode x
 
         SetupError x ->
-            encodeWith "setupError" Jawa.Event.SetupError.encode x
+            encodeWith Jawa.Event.SetupError.tag Jawa.Event.SetupError.encode x
 
         Time x ->
-            encodeWith "time" Jawa.Event.Time.encode x
+            encodeWith Jawa.Event.Time.tag Jawa.Event.Time.encode x
 
         UserActive x ->
-            encodeWith "userActive" Jawa.Event.UserActive.encode x
+            encodeWith Jawa.Event.UserActive.tag Jawa.Event.UserActive.encode x
 
         UserInactive x ->
-            encodeWith "userInactive" Jawa.Event.UserInactive.encode x
+            encodeWith Jawa.Event.UserInactive.tag Jawa.Event.UserInactive.encode x
 
         Viewable x ->
-            encodeWith "viewable" Jawa.Event.Viewable.encode x
+            encodeWith Jawa.Event.Viewable.tag Jawa.Event.Viewable.encode x
 
         VisualQuality x ->
-            encodeWith "visualQuality" Jawa.Event.VisualQuality.encode x
+            encodeWith Jawa.Event.VisualQuality.tag Jawa.Event.VisualQuality.encode x
 
         Volume x ->
-            encodeWith "volume" Jawa.Event.Volume.encode x
+            encodeWith Jawa.Event.Volume.tag Jawa.Event.Volume.encode x
 
 
 encodeWith : String -> (a -> Json.Decode.Value) -> a -> Json.Encode.Value
@@ -356,20 +287,20 @@ encodeWith t f x =
         json =
             f x
 
-        key : String
-        key =
+        typeKey : String
+        typeKey =
             "type"
 
-        value : Json.Encode.Value
-        value =
+        typeValue : Json.Encode.Value
+        typeValue =
             Json.Encode.string t
     in
     case Json.Decode.decodeValue (Json.Decode.dict Json.Decode.value) json of
         Ok dict ->
-            Json.Encode.dict identity identity (Dict.insert key value dict)
+            Json.Encode.dict identity identity (Dict.insert typeKey typeValue dict)
 
         Err _ ->
             Json.Encode.object
-                [ ( key, value )
+                [ ( typeKey, typeValue )
                 , ( "value", json )
                 ]

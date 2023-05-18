@@ -1,8 +1,8 @@
-module Jawa.Event.Ready exposing (Ready, decoder, encode)
+module Jawa.Event.Ready exposing (Ready, decoder, encode, tag)
 
 {-|
 
-@docs Ready, decoder, encode
+@docs Ready, decoder, encode, tag
 
 -}
 
@@ -36,3 +36,10 @@ encode x =
         [ ( "setupTime", Json.Encode.float x.setupTime )
         , ( "viewable", Jawa.Viewable.encode x.viewable )
         ]
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "ready"

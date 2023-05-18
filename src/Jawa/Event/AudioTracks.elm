@@ -1,8 +1,8 @@
-module Jawa.Event.AudioTracks exposing (AudioTracks, decoder, encode)
+module Jawa.Event.AudioTracks exposing (AudioTracks, decoder, encode, tag)
 
 {-|
 
-@docs AudioTracks, decoder, encode
+@docs AudioTracks, decoder, encode, tag
 
 -}
 
@@ -36,3 +36,10 @@ encode x =
         [ ( "currentTrack", Json.Encode.int x.currentTrack )
         , ( "tracks", Json.Encode.list Jawa.AudioTrack.encode x.tracks )
         ]
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "audioTracks"

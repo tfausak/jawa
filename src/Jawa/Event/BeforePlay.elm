@@ -1,8 +1,8 @@
-module Jawa.Event.BeforePlay exposing (BeforePlay, decoder, encode)
+module Jawa.Event.BeforePlay exposing (BeforePlay, decoder, encode, tag)
 
 {-|
 
-@docs BeforePlay, decoder, encode
+@docs BeforePlay, decoder, encode, tag
 
 -}
 
@@ -37,3 +37,10 @@ encode x =
         [ ( "playReason", Jawa.PlayReason.encode x.playReason )
         , ( "viewable", Jawa.Viewable.encode x.viewable )
         ]
+
+
+{-| The tag that describes this type.
+-}
+tag : String
+tag =
+    "beforePlay"
