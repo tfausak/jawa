@@ -35,6 +35,7 @@ import Jawa.Event.ResizeTest
 import Jawa.Event.SeekTest
 import Jawa.Event.SeekedTest
 import Jawa.Event.SetupErrorTest
+import Jawa.Event.SubtitlesTracksTest
 import Jawa.Event.TimeTest
 import Jawa.Event.UserActiveTest
 import Jawa.Event.UserInactiveTest
@@ -468,6 +469,17 @@ test =
                 , message = ""
                 }
             )
+        , Jawa.Extra.Test.testCodec "works with subtitlesTracks"
+            Jawa.Event.decoder
+            Jawa.Event.encode
+            """ {
+                "tracks": [],
+                "type": "subtitlesTracks"
+            } """
+            (Jawa.Event.SubtitlesTracks
+                { tracks = []
+                }
+            )
         , Jawa.Extra.Test.testCodec "works with time"
             Jawa.Event.decoder
             Jawa.Event.encode
@@ -597,6 +609,7 @@ fuzzer =
         , Fuzz.map Jawa.Event.Seek Jawa.Event.SeekTest.fuzzer
         , Fuzz.map Jawa.Event.Seeked Jawa.Event.SeekedTest.fuzzer
         , Fuzz.map Jawa.Event.SetupError Jawa.Event.SetupErrorTest.fuzzer
+        , Fuzz.map Jawa.Event.SubtitlesTracks Jawa.Event.SubtitlesTracksTest.fuzzer
         , Fuzz.map Jawa.Event.Time Jawa.Event.TimeTest.fuzzer
         , Fuzz.map Jawa.Event.UserActive Jawa.Event.UserActiveTest.fuzzer
         , Fuzz.map Jawa.Event.UserInactive Jawa.Event.UserInactiveTest.fuzzer

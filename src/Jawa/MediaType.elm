@@ -36,7 +36,7 @@ fromString string =
             Ok Video
 
         _ ->
-            Err <| "invalid MediaType: " ++ string
+            Err <| "unknown MediaType: " ++ string
 
 
 {-| A JSON encoder.

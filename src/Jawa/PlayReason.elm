@@ -52,7 +52,7 @@ fromString string =
             Ok RelatedInteraction
 
         _ ->
-            Err <| "invalid PlayReason: " ++ string
+            Err <| "unknown PlayReason: " ++ string
 
 
 {-| A JSON encoder.

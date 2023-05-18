@@ -36,7 +36,7 @@ fromInt int =
             Ok Visible
 
         _ ->
-            Err <| "invalid Viewable: " ++ String.fromInt int
+            Err <| "unknown Viewable: " ++ String.fromInt int
 
 
 {-| A JSON encoder.

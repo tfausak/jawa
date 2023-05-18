@@ -40,7 +40,7 @@ fromString string =
             Ok Thumbnails
 
         _ ->
-            Err <| "invalid TrackKind: " ++ string
+            Err <| "unknown TrackKind: " ++ string
 
 
 {-| A JSON encoder.

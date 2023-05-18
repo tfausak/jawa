@@ -40,6 +40,7 @@ import Jawa.Event.Resize
 import Jawa.Event.Seek
 import Jawa.Event.Seeked
 import Jawa.Event.SetupError
+import Jawa.Event.SubtitlesTracks
 import Jawa.Event.Time
 import Jawa.Event.UserActive
 import Jawa.Event.UserInactive
@@ -86,6 +87,7 @@ type Event
     | Seek Jawa.Event.Seek.Seek
     | Seeked Jawa.Event.Seeked.Seeked
     | SetupError Jawa.Event.SetupError.SetupError
+    | SubtitlesTracks Jawa.Event.SubtitlesTracks.SubtitlesTracks
     | Time Jawa.Event.Time.Time
     | UserActive Jawa.Event.UserActive.UserActive
     | UserInactive Jawa.Event.UserInactive.UserInactive
@@ -148,6 +150,7 @@ decoders =
         , ( Jawa.Event.Seek.tag, Json.Decode.map Seek Jawa.Event.Seek.decoder )
         , ( Jawa.Event.Seeked.tag, Json.Decode.map Seeked Jawa.Event.Seeked.decoder )
         , ( Jawa.Event.SetupError.tag, Json.Decode.map SetupError Jawa.Event.SetupError.decoder )
+        , ( Jawa.Event.SubtitlesTracks.tag, Json.Decode.map SubtitlesTracks Jawa.Event.SubtitlesTracks.decoder )
         , ( Jawa.Event.Time.tag, Json.Decode.map Time Jawa.Event.Time.decoder )
         , ( Jawa.Event.UserActive.tag, Json.Decode.map UserActive Jawa.Event.UserActive.decoder )
         , ( Jawa.Event.UserInactive.tag, Json.Decode.map UserInactive Jawa.Event.UserInactive.decoder )
@@ -260,6 +263,9 @@ encode event =
 
         SetupError x ->
             encodeWith Jawa.Event.SetupError.tag Jawa.Event.SetupError.encode x
+
+        SubtitlesTracks x ->
+            encodeWith Jawa.Event.SubtitlesTracks.tag Jawa.Event.SubtitlesTracks.encode x
 
         Time x ->
             encodeWith Jawa.Event.Time.tag Jawa.Event.Time.encode x
