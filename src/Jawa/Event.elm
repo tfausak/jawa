@@ -24,6 +24,7 @@ import Jawa.Event.FirstFrame
 import Jawa.Event.Fullscreen
 import Jawa.Event.Idle
 import Jawa.Event.Levels
+import Jawa.Event.LevelsChanged
 import Jawa.Event.MediaType
 import Jawa.Event.Mute
 import Jawa.Event.Pause
@@ -72,6 +73,7 @@ type Event
     | Fullscreen Jawa.Event.Fullscreen.Fullscreen
     | Idle Jawa.Event.Idle.Idle
     | Levels Jawa.Event.Levels.Levels
+    | LevelsChanged Jawa.Event.LevelsChanged.LevelsChanged
     | MediaType Jawa.Event.MediaType.MediaType
     | Mute Jawa.Event.Mute.Mute
     | Pause Jawa.Event.Pause.Pause
@@ -136,6 +138,7 @@ decoders =
         , ( Jawa.Event.Fullscreen.tag, Json.Decode.map Fullscreen Jawa.Event.Fullscreen.decoder )
         , ( Jawa.Event.Idle.tag, Json.Decode.map Idle Jawa.Event.Idle.decoder )
         , ( Jawa.Event.Levels.tag, Json.Decode.map Levels Jawa.Event.Levels.decoder )
+        , ( Jawa.Event.LevelsChanged.tag, Json.Decode.map LevelsChanged Jawa.Event.LevelsChanged.decoder )
         , ( Jawa.Event.MediaType.tag, Json.Decode.map MediaType Jawa.Event.MediaType.decoder )
         , ( Jawa.Event.Mute.tag, Json.Decode.map Mute Jawa.Event.Mute.decoder )
         , ( Jawa.Event.Pause.tag, Json.Decode.map Pause Jawa.Event.Pause.decoder )
@@ -218,6 +221,9 @@ encode event =
 
         Levels x ->
             encodeWith Jawa.Event.Levels.tag Jawa.Event.Levels.encode x
+
+        LevelsChanged x ->
+            encodeWith Jawa.Event.LevelsChanged.tag Jawa.Event.LevelsChanged.encode x
 
         MediaType x ->
             encodeWith Jawa.Event.MediaType.tag Jawa.Event.MediaType.encode x
