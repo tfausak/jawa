@@ -31,6 +31,7 @@
         "Jawa.Event.PipEnter",
         "Jawa.Event.PipLeave",
         "Jawa.Event.Play",
+        "Jawa.Event.PlayAttempt",
         "Jawa.Event.PlaybackRateChanged",
         "Jawa.Event.Playlist",
         "Jawa.Event.PlaylistComplete",

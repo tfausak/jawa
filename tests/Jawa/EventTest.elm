@@ -25,6 +25,7 @@ import Jawa.Event.MuteTest
 import Jawa.Event.PauseTest
 import Jawa.Event.PipEnterTest
 import Jawa.Event.PipLeaveTest
+import Jawa.Event.PlayAttemptTest
 import Jawa.Event.PlayTest
 import Jawa.Event.PlaybackRateChangedTest
 import Jawa.Event.PlaylistCompleteTest
@@ -352,6 +353,17 @@ test =
                 , viewable = Jawa.Viewable.Hidden
                 }
             )
+        , Jawa.Extra.Test.testCodec "works with playAttempt"
+            Jawa.Event.decoder
+            Jawa.Event.encode
+            """ {
+                "playReason": "interaction",
+                "type": "playAttempt"
+            } """
+            (Jawa.Event.PlayAttempt
+                { playReason = Jawa.PlayReason.Interaction
+                }
+            )
         , Jawa.Extra.Test.testCodec "works with playbackRateChanged"
             Jawa.Event.decoder
             Jawa.Event.encode
@@ -628,6 +640,7 @@ fuzzer =
         , Fuzz.map Jawa.Event.PipEnter Jawa.Event.PipEnterTest.fuzzer
         , Fuzz.map Jawa.Event.PipLeave Jawa.Event.PipLeaveTest.fuzzer
         , Fuzz.map Jawa.Event.Play Jawa.Event.PlayTest.fuzzer
+        , Fuzz.map Jawa.Event.PlayAttempt Jawa.Event.PlayAttemptTest.fuzzer
         , Fuzz.map Jawa.Event.PlaybackRateChanged Jawa.Event.PlaybackRateChangedTest.fuzzer
         , Fuzz.map Jawa.Event.Playlist Jawa.Event.PlaylistTest.fuzzer
         , Fuzz.map Jawa.Event.PlaylistComplete Jawa.Event.PlaylistCompleteTest.fuzzer
