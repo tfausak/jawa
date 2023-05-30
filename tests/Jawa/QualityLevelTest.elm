@@ -25,7 +25,7 @@ test =
             } """
             { bitrate = 0
             , height = 1
-            , index = 2
+            , index = Just 2
             , label = "a"
             , width = 3
             }
@@ -37,6 +37,6 @@ fuzzer =
     Fuzz.map5 Jawa.QualityLevel.QualityLevel
         Fuzz.int
         Fuzz.int
-        Fuzz.int
+        (Fuzz.maybe Fuzz.int)
         Fuzz.string
         Fuzz.int
