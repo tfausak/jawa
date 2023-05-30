@@ -18,6 +18,7 @@ import Jawa.Event.DisplayClickTest
 import Jawa.Event.FirstFrameTest
 import Jawa.Event.FullscreenTest
 import Jawa.Event.IdleTest
+import Jawa.Event.LevelsTest
 import Jawa.Event.MediaTypeTest
 import Jawa.Event.MuteTest
 import Jawa.Event.PauseTest
@@ -248,6 +249,19 @@ test =
                 { newstate = Jawa.State.Buffering
                 , oldstate = Jawa.State.Complete
                 , reason = Jawa.State.Error
+                }
+            )
+        , Jawa.Extra.Test.testCodec "works with levels"
+            Jawa.Event.decoder
+            Jawa.Event.encode
+            """ {
+                "currentQuality": 0,
+                "levels": [],
+                "type": "levels"
+            } """
+            (Jawa.Event.Levels
+                { currentQuality = 0
+                , levels = []
                 }
             )
         , Jawa.Extra.Test.testCodec "works with mediaType"
@@ -551,7 +565,7 @@ test =
                 { level =
                     { bitrate = 0
                     , height = 1
-                    , index = 2
+                    , index = Just 2
                     , label = "a"
                     , width = 3
                     }
@@ -592,6 +606,7 @@ fuzzer =
         , Fuzz.map Jawa.Event.FirstFrame Jawa.Event.FirstFrameTest.fuzzer
         , Fuzz.map Jawa.Event.Fullscreen Jawa.Event.FullscreenTest.fuzzer
         , Fuzz.map Jawa.Event.Idle Jawa.Event.IdleTest.fuzzer
+        , Fuzz.map Jawa.Event.Levels Jawa.Event.LevelsTest.fuzzer
         , Fuzz.map Jawa.Event.MediaType Jawa.Event.MediaTypeTest.fuzzer
         , Fuzz.map Jawa.Event.Mute Jawa.Event.MuteTest.fuzzer
         , Fuzz.map Jawa.Event.Pause Jawa.Event.PauseTest.fuzzer

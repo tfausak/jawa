@@ -35,7 +35,7 @@ test =
             { level =
                 { bitrate = 0
                 , height = 1
-                , index = 2
+                , index = Just 2
                 , label = "a"
                 , width = 3
                 }

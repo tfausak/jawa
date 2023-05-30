@@ -37,30 +37,6 @@ test =
             , title = Nothing
             , tracks = []
             }
-        , Jawa.Extra.Test.testCodec "works with null fields"
-            Jawa.PlaylistItem.decoder
-            Jawa.PlaylistItem.encode
-            """ {
-                "allSources": [],
-                "description": null,
-                "file": "a",
-                "image": null,
-                "mediaId": null,
-                "preload": "auto",
-                "sources": [],
-                "title": null,
-                "tracks": []
-            } """
-            { allSources = []
-            , description = Nothing
-            , file = "a"
-            , image = Nothing
-            , mediaId = Nothing
-            , preload = Jawa.Preload.Auto
-            , sources = []
-            , title = Nothing
-            , tracks = []
-            }
         , Jawa.Extra.Test.testCodec "works with non-null fields"
             Jawa.PlaylistItem.decoder
             Jawa.PlaylistItem.encode

@@ -7,7 +7,9 @@ module Jawa.QualityLevel exposing (QualityLevel, decoder, encode)
 -}
 
 import Json.Decode
+import Json.Decode.Extra
 import Json.Encode
+import Maybe.Extra
 
 
 {-| <https://docs.jwplayer.com/players/reference/getqualitylevels>
@@ -15,7 +17,7 @@ import Json.Encode
 type alias QualityLevel =
     { bitrate : Int
     , height : Int
-    , index : Int
+    , index : Maybe Int
     , label : String
     , width : Int
     }
@@ -28,7 +30,7 @@ decoder =
     Json.Decode.map5 QualityLevel
         (Json.Decode.field "bitrate" Json.Decode.int)
         (Json.Decode.field "height" Json.Decode.int)
-        (Json.Decode.field "index" Json.Decode.int)
+        (Json.Decode.Extra.optionalNullableField "index" Json.Decode.int)
         (Json.Decode.field "label" Json.Decode.string)
         (Json.Decode.field "width" Json.Decode.int)
 
@@ -37,10 +39,11 @@ decoder =
 -}
 encode : QualityLevel -> Json.Encode.Value
 encode x =
-    Json.Encode.object
-        [ ( "bitrate", Json.Encode.int x.bitrate )
-        , ( "height", Json.Encode.int x.height )
-        , ( "index", Json.Encode.int x.index )
-        , ( "label", Json.Encode.string x.label )
-        , ( "width", Json.Encode.int x.width )
-        ]
+    [ Just ( "bitrate", Json.Encode.int x.bitrate )
+    , Just ( "height", Json.Encode.int x.height )
+    , Maybe.map (Json.Encode.int >> Tuple.pair "index") x.index
+    , Just ( "label", Json.Encode.string x.label )
+    , Just ( "width", Json.Encode.int x.width )
+    ]
+        |> Maybe.Extra.values
+        |> Json.Encode.object

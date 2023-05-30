@@ -12,7 +12,7 @@ import Jawa.Track
 import Json.Decode
 import Json.Decode.Extra
 import Json.Encode
-import Json.Encode.Extra
+import Maybe.Extra
 
 
 {-| <https://docs.jwplayer.com/players/reference/playlist-events>
@@ -50,14 +50,15 @@ decoder =
 -}
 encode : PlaylistItem -> Json.Encode.Value
 encode x =
-    Json.Encode.object
-        [ ( "allSources", Json.Encode.list Jawa.Source.encode x.allSources )
-        , ( "description", Json.Encode.Extra.maybe Json.Encode.string x.description )
-        , ( "file", Json.Encode.string x.file )
-        , ( "image", Json.Encode.Extra.maybe Json.Encode.string x.image )
-        , ( "mediaId", Json.Encode.Extra.maybe Json.Encode.string x.mediaId )
-        , ( "preload", Jawa.Preload.encode x.preload )
-        , ( "sources", Json.Encode.list Jawa.Source.encode x.sources )
-        , ( "title", Json.Encode.Extra.maybe Json.Encode.string x.title )
-        , ( "tracks", Json.Encode.list Jawa.Track.encode x.tracks )
-        ]
+    [ Just ( "allSources", Json.Encode.list Jawa.Source.encode x.allSources )
+    , Maybe.map (Json.Encode.string >> Tuple.pair "description") x.description
+    , Just ( "file", Json.Encode.string x.file )
+    , Maybe.map (Json.Encode.string >> Tuple.pair "image") x.image
+    , Maybe.map (Json.Encode.string >> Tuple.pair "mediaId") x.mediaId
+    , Just ( "preload", Jawa.Preload.encode x.preload )
+    , Just ( "sources", Json.Encode.list Jawa.Source.encode x.sources )
+    , Maybe.map (Json.Encode.string >> Tuple.pair "title") x.title
+    , Just ( "tracks", Json.Encode.list Jawa.Track.encode x.tracks )
+    ]
+        |> Maybe.Extra.values
+        |> Json.Encode.object
