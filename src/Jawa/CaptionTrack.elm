@@ -9,7 +9,7 @@ module Jawa.CaptionTrack exposing (CaptionTrack, decoder, encode)
 import Json.Decode
 import Json.Decode.Extra
 import Json.Encode
-import Json.Encode.Extra
+import Maybe.Extra
 
 
 {-| <https://docs.jwplayer.com/players/reference/getcaptionslist>
@@ -35,8 +35,9 @@ decoder =
 -}
 encode : CaptionTrack -> Json.Encode.Value
 encode x =
-    Json.Encode.object
-        [ ( "id", Json.Encode.string x.id )
-        , ( "label", Json.Encode.string x.label )
-        , ( "language", Json.Encode.Extra.maybe Json.Encode.string x.language )
-        ]
+    [ Just ( "id", Json.Encode.string x.id )
+    , Just ( "label", Json.Encode.string x.label )
+    , Maybe.map (Json.Encode.string >> Tuple.pair "language") x.language
+    ]
+        |> Maybe.Extra.values
+        |> Json.Encode.object
