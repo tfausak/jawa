@@ -23,6 +23,7 @@
         "Jawa.Event.FirstFrame",
         "Jawa.Event.Fullscreen",
         "Jawa.Event.Idle",
+        "Jawa.Event.Levels",
         "Jawa.Event.MediaType",
         "Jawa.Event.Mute",
         "Jawa.Event.Pause",
