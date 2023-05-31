@@ -43,6 +43,7 @@
         "Jawa.Event.Seek",
         "Jawa.Event.Seeked",
         "Jawa.Event.SetupError",
+        "Jawa.Event.SubtitlesTrackChanged",
         "Jawa.Event.SubtitlesTracks",
         "Jawa.Event.Time",
         "Jawa.Event.UserActive",

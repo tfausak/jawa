@@ -38,6 +38,7 @@ import Jawa.Event.ResizeTest
 import Jawa.Event.SeekTest
 import Jawa.Event.SeekedTest
 import Jawa.Event.SetupErrorTest
+import Jawa.Event.SubtitlesTrackChangedTest
 import Jawa.Event.SubtitlesTracksTest
 import Jawa.Event.TimeTest
 import Jawa.Event.UserActiveTest
@@ -527,6 +528,19 @@ test =
                 , message = ""
                 }
             )
+        , Jawa.Extra.Test.testCodec "works with subtitlesTrackChanged"
+            Jawa.Event.decoder
+            Jawa.Event.encode
+            """ {
+                "currentTrack": 0,
+                "tracks": [],
+                "type": "subtitlesTrackChanged"
+            } """
+            (Jawa.Event.SubtitlesTrackChanged
+                { currentTrack = 0
+                , tracks = []
+                }
+            )
         , Jawa.Extra.Test.testCodec "works with subtitlesTracks"
             Jawa.Event.decoder
             Jawa.Event.encode
@@ -670,6 +684,7 @@ fuzzer =
         , Fuzz.map Jawa.Event.Seek Jawa.Event.SeekTest.fuzzer
         , Fuzz.map Jawa.Event.Seeked Jawa.Event.SeekedTest.fuzzer
         , Fuzz.map Jawa.Event.SetupError Jawa.Event.SetupErrorTest.fuzzer
+        , Fuzz.map Jawa.Event.SubtitlesTrackChanged Jawa.Event.SubtitlesTrackChangedTest.fuzzer
         , Fuzz.map Jawa.Event.SubtitlesTracks Jawa.Event.SubtitlesTracksTest.fuzzer
         , Fuzz.map Jawa.Event.Time Jawa.Event.TimeTest.fuzzer
         , Fuzz.map Jawa.Event.UserActive Jawa.Event.UserActiveTest.fuzzer
