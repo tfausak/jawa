@@ -37,7 +37,9 @@ decoder =
         (Json.Decode.Extra.optionalNullableField "kind" Json.Decode.string)
         (Json.Decode.Extra.optionalNullableField "label" Json.Decode.string)
         (Json.Decode.field "name" Json.Decode.string)
-        (Json.Decode.field "subtitleTrack" Jawa.Metadata.decoder)
+        (Json.Decode.Extra.optionalNullableField "subtitleTrack" Jawa.Metadata.decoder
+            |> Json.Decode.map (Maybe.withDefault (Jawa.Metadata.Metadata Json.Encode.null))
+        )
 
 
 {-| A JSON encoder.
