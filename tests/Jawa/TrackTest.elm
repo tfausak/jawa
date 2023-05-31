@@ -25,7 +25,7 @@ test =
             } """
             { file = "a"
             , kind = Jawa.TrackKind.Captions
-            , label = "b"
+            , label = Just "b"
             }
         ]
 
@@ -35,4 +35,4 @@ fuzzer =
     Fuzz.map3 Jawa.Track.Track
         Fuzz.string
         Jawa.TrackKindTest.fuzzer
-        Fuzz.string
+        (Fuzz.maybe Fuzz.string)
