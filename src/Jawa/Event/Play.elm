@@ -13,7 +13,7 @@ import Json.Decode
 import Json.Encode
 
 
-{-| <https://docs.jwplayer.com/players/reference/playback-events-1#onpause>
+{-| <https://docs.jwplayer.com/players/reference/playback-events-1#onplay>
 -}
 type alias Play =
     { newstate : Jawa.State.State
