@@ -32,7 +32,7 @@ test =
             , default = False
             , id = "a"
             , kind = Just "b"
-            , label = "c"
+            , label = Just "c"
             , name = "d"
             , subtitleTrack = Jawa.Metadata.Metadata (Json.Encode.object [])
             }
@@ -46,6 +46,6 @@ fuzzer =
         Fuzz.bool
         Fuzz.string
         (Fuzz.maybe Fuzz.string)
-        Fuzz.string
+        (Fuzz.maybe Fuzz.string)
         Fuzz.string
         Jawa.MetadataTest.fuzzer
