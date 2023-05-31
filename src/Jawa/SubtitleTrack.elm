@@ -8,7 +8,9 @@ module Jawa.SubtitleTrack exposing (SubtitleTrack, decoder, encode)
 
 import Jawa.Metadata
 import Json.Decode
+import Json.Decode.Extra
 import Json.Encode
+import Maybe.Extra
 
 
 {-| This type is not documented.
@@ -17,7 +19,7 @@ type alias SubtitleTrack =
     { data : List Jawa.Metadata.Metadata
     , default : Bool
     , id : String
-    , kind : String
+    , kind : Maybe String
     , label : String
     , name : String
     , subtitleTrack : Jawa.Metadata.Metadata
@@ -32,7 +34,7 @@ decoder =
         (Json.Decode.field "data" (Json.Decode.list Jawa.Metadata.decoder))
         (Json.Decode.field "default" Json.Decode.bool)
         (Json.Decode.field "_id" Json.Decode.string)
-        (Json.Decode.field "kind" Json.Decode.string)
+        (Json.Decode.Extra.optionalNullableField "kind" Json.Decode.string)
         (Json.Decode.field "label" Json.Decode.string)
         (Json.Decode.field "name" Json.Decode.string)
         (Json.Decode.field "subtitleTrack" Jawa.Metadata.decoder)
@@ -42,12 +44,13 @@ decoder =
 -}
 encode : SubtitleTrack -> Json.Encode.Value
 encode x =
-    Json.Encode.object
-        [ ( "data", Json.Encode.list Jawa.Metadata.encode x.data )
-        , ( "default", Json.Encode.bool x.default )
-        , ( "_id", Json.Encode.string x.id )
-        , ( "kind", Json.Encode.string x.kind )
-        , ( "label", Json.Encode.string x.label )
-        , ( "name", Json.Encode.string x.name )
-        , ( "subtitleTrack", Jawa.Metadata.encode x.subtitleTrack )
-        ]
+    [ Just ( "data", Json.Encode.list Jawa.Metadata.encode x.data )
+    , Just ( "default", Json.Encode.bool x.default )
+    , Just ( "_id", Json.Encode.string x.id )
+    , Maybe.map (Json.Encode.string >> Tuple.pair "kind") x.kind
+    , Just ( "label", Json.Encode.string x.label )
+    , Just ( "name", Json.Encode.string x.name )
+    , Just ( "subtitleTrack", Jawa.Metadata.encode x.subtitleTrack )
+    ]
+        |> Maybe.Extra.values
+        |> Json.Encode.object

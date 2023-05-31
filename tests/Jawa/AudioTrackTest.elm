@@ -22,7 +22,7 @@ test =
                 "language": "a",
                 "name": "b"
             } """
-            { autoselect = False
+            { autoselect = Just False
             , defaulttrack = True
             , groupid = Nothing
             , hlsjsIndex = Nothing
@@ -35,7 +35,7 @@ test =
 fuzzer : Fuzz.Fuzzer Jawa.AudioTrack.AudioTrack
 fuzzer =
     Fuzz.map6 Jawa.AudioTrack.AudioTrack
-        Fuzz.bool
+        (Fuzz.maybe Fuzz.bool)
         Fuzz.bool
         (Fuzz.maybe Fuzz.string)
         (Fuzz.maybe Fuzz.int)

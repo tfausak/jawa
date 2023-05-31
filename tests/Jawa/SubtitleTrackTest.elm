@@ -31,7 +31,7 @@ test =
             { data = []
             , default = False
             , id = "a"
-            , kind = "b"
+            , kind = Just "b"
             , label = "c"
             , name = "d"
             , subtitleTrack = Jawa.Metadata.Metadata (Json.Encode.object [])
@@ -45,7 +45,7 @@ fuzzer =
         (Fuzz.list Jawa.MetadataTest.fuzzer)
         Fuzz.bool
         Fuzz.string
-        Fuzz.string
+        (Fuzz.maybe Fuzz.string)
         Fuzz.string
         Fuzz.string
         Jawa.MetadataTest.fuzzer

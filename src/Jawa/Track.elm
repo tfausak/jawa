@@ -8,7 +8,9 @@ module Jawa.Track exposing (Track, decoder, encode)
 
 import Jawa.TrackKind
 import Json.Decode
+import Json.Decode.Extra
 import Json.Encode
+import Maybe.Extra
 
 
 {-| This type is not documented.
@@ -16,7 +18,7 @@ import Json.Encode
 type alias Track =
     { file : String
     , kind : Jawa.TrackKind.TrackKind
-    , label : String
+    , label : Maybe String
     }
 
 
@@ -27,15 +29,16 @@ decoder =
     Json.Decode.map3 Track
         (Json.Decode.field "file" Json.Decode.string)
         (Json.Decode.field "kind" Jawa.TrackKind.decoder)
-        (Json.Decode.field "label" Json.Decode.string)
+        (Json.Decode.Extra.optionalNullableField "label" Json.Decode.string)
 
 
 {-| A JSON encoder.
 -}
 encode : Track -> Json.Encode.Value
 encode x =
-    Json.Encode.object
-        [ ( "file", Json.Encode.string x.file )
-        , ( "kind", Jawa.TrackKind.encode x.kind )
-        , ( "label", Json.Encode.string x.label )
-        ]
+    [ Just ( "file", Json.Encode.string x.file )
+    , Just ( "kind", Jawa.TrackKind.encode x.kind )
+    , Maybe.map (Json.Encode.string >> Tuple.pair "label") x.label
+    ]
+        |> Maybe.Extra.values
+        |> Json.Encode.object

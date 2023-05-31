@@ -20,6 +20,7 @@ type PlayReason
     | Playlist
     | RelatedAuto
     | RelatedInteraction
+    | Repeat
 
 
 {-| A JSON decoder.
@@ -50,6 +51,9 @@ fromString string =
 
         "related-interaction" ->
             Ok RelatedInteraction
+
+        "repeat" ->
+            Ok Repeat
 
         _ ->
             Err <| "unknown PlayReason: " ++ string
@@ -82,3 +86,6 @@ toString x =
 
         RelatedInteraction ->
             "related-interaction"
+
+        Repeat ->
+            "repeat"

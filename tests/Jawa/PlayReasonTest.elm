@@ -43,6 +43,11 @@ test =
             Jawa.PlayReason.encode
             "\"related-interaction\""
             Jawa.PlayReason.RelatedInteraction
+        , Jawa.Extra.Test.testCodec "works with repeat"
+            Jawa.PlayReason.decoder
+            Jawa.PlayReason.encode
+            "\"repeat\""
+            Jawa.PlayReason.Repeat
         ]
 
 
@@ -55,4 +60,5 @@ fuzzer =
         , Jawa.PlayReason.Playlist
         , Jawa.PlayReason.RelatedAuto
         , Jawa.PlayReason.RelatedInteraction
+        , Jawa.PlayReason.Repeat
         ]
