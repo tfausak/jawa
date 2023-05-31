@@ -7,6 +7,7 @@ module Jawa.Event.PlayAttempt exposing (PlayAttempt, decoder, encode, tag)
 -}
 
 import Jawa.PlayReason
+import Jawa.PlaylistItem
 import Json.Decode
 import Json.Encode
 
@@ -14,9 +15,8 @@ import Json.Encode
 {-| This event is not documented.
 -}
 type alias PlayAttempt =
-    { playReason : Jawa.PlayReason.PlayReason
-
-    -- TODO: item
+    { item : Jawa.PlaylistItem.PlaylistItem
+    , playReason : Jawa.PlayReason.PlayReason
     }
 
 
@@ -24,7 +24,8 @@ type alias PlayAttempt =
 -}
 decoder : Json.Decode.Decoder PlayAttempt
 decoder =
-    Json.Decode.map PlayAttempt
+    Json.Decode.map2 PlayAttempt
+        (Json.Decode.field "item" Jawa.PlaylistItem.decoder)
         (Json.Decode.field "playReason" Jawa.PlayReason.decoder)
 
 
@@ -33,7 +34,8 @@ decoder =
 encode : PlayAttempt -> Json.Encode.Value
 encode x =
     Json.Encode.object
-        [ ( "playReason", Jawa.PlayReason.encode x.playReason )
+        [ ( "item", Jawa.PlaylistItem.encode x.item )
+        , ( "playReason", Jawa.PlayReason.encode x.playReason )
         ]
 
 

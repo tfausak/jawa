@@ -357,11 +357,29 @@ test =
             Jawa.Event.decoder
             Jawa.Event.encode
             """ {
+                "item": {
+                    "allSources": [],
+                    "file": "a",
+                    "preload": "none",
+                    "sources": [],
+                    "tracks": []
+                },
                 "playReason": "interaction",
                 "type": "playAttempt"
             } """
             (Jawa.Event.PlayAttempt
-                { playReason = Jawa.PlayReason.Interaction
+                { item =
+                    { allSources = []
+                    , description = Nothing
+                    , file = "a"
+                    , image = Nothing
+                    , mediaId = Nothing
+                    , preload = Jawa.Preload.None
+                    , sources = []
+                    , title = Nothing
+                    , tracks = []
+                    }
+                , playReason = Jawa.PlayReason.Interaction
                 }
             )
         , Jawa.Extra.Test.testCodec "works with playbackRateChanged"
