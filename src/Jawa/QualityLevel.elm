@@ -15,7 +15,7 @@ import Maybe.Extra
 {-| <https://docs.jwplayer.com/players/reference/getqualitylevels>
 -}
 type alias QualityLevel =
-    { bitrate : Int
+    { bitrate : Maybe Int
     , height : Int
     , index : Maybe Int
     , label : String
@@ -28,7 +28,7 @@ type alias QualityLevel =
 decoder : Json.Decode.Decoder QualityLevel
 decoder =
     Json.Decode.map5 QualityLevel
-        (Json.Decode.field "bitrate" Json.Decode.int)
+        (Json.Decode.Extra.optionalNullableField "bitrate" Json.Decode.int)
         (Json.Decode.field "height" Json.Decode.int)
         (Json.Decode.Extra.optionalNullableField "index" Json.Decode.int)
         (Json.Decode.field "label" Json.Decode.string)
@@ -39,7 +39,7 @@ decoder =
 -}
 encode : QualityLevel -> Json.Encode.Value
 encode x =
-    [ Just ( "bitrate", Json.Encode.int x.bitrate )
+    [ Maybe.map (Json.Encode.int >> Tuple.pair "bitrate") x.bitrate
     , Just ( "height", Json.Encode.int x.height )
     , Maybe.map (Json.Encode.int >> Tuple.pair "index") x.index
     , Just ( "label", Json.Encode.string x.label )

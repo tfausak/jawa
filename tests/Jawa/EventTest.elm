@@ -607,7 +607,7 @@ test =
             } """
             (Jawa.Event.VisualQuality
                 { level =
-                    { bitrate = 0
+                    { bitrate = Just 0
                     , height = 1
                     , index = Just 2
                     , label = "a"
