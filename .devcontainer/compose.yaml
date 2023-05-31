@@ -2,7 +2,7 @@
     "services": {
         "devcontainer": {
             "command": "sh -exc 'while sleep 1m; do :; done'",
-            "image": "mcr.microsoft.com/devcontainers/javascript-node:18",
+            "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
             "init": true,
             "user": "node",
             "volumes": [
