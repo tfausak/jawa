@@ -31,6 +31,7 @@ import Jawa.Event.Pause
 import Jawa.Event.PipEnter
 import Jawa.Event.PipLeave
 import Jawa.Event.Play
+import Jawa.Event.PlayAttempt
 import Jawa.Event.PlaybackRateChanged
 import Jawa.Event.Playlist
 import Jawa.Event.PlaylistComplete
@@ -80,6 +81,7 @@ type Event
     | PipEnter Jawa.Event.PipEnter.PipEnter
     | PipLeave Jawa.Event.PipLeave.PipLeave
     | Play Jawa.Event.Play.Play
+    | PlayAttempt Jawa.Event.PlayAttempt.PlayAttempt
     | PlaybackRateChanged Jawa.Event.PlaybackRateChanged.PlaybackRateChanged
     | Playlist Jawa.Event.Playlist.Playlist
     | PlaylistComplete Jawa.Event.PlaylistComplete.PlaylistComplete
@@ -145,6 +147,7 @@ decoders =
         , ( Jawa.Event.PipEnter.tag, Json.Decode.map PipEnter Jawa.Event.PipEnter.decoder )
         , ( Jawa.Event.PipLeave.tag, Json.Decode.map PipLeave Jawa.Event.PipLeave.decoder )
         , ( Jawa.Event.Play.tag, Json.Decode.map Play Jawa.Event.Play.decoder )
+        , ( Jawa.Event.PlayAttempt.tag, Json.Decode.map PlayAttempt Jawa.Event.PlayAttempt.decoder )
         , ( Jawa.Event.PlaybackRateChanged.tag, Json.Decode.map PlaybackRateChanged Jawa.Event.PlaybackRateChanged.decoder )
         , ( Jawa.Event.Playlist.tag, Json.Decode.map Playlist Jawa.Event.Playlist.decoder )
         , ( Jawa.Event.PlaylistComplete.tag, Json.Decode.map PlaylistComplete Jawa.Event.PlaylistComplete.decoder )
@@ -242,6 +245,9 @@ encode event =
 
         Play x ->
             encodeWith Jawa.Event.Play.tag Jawa.Event.Play.encode x
+
+        PlayAttempt x ->
+            encodeWith Jawa.Event.PlayAttempt.tag Jawa.Event.PlayAttempt.encode x
 
         PlaybackRateChanged x ->
             encodeWith Jawa.Event.PlaybackRateChanged.tag Jawa.Event.PlaybackRateChanged.encode x
