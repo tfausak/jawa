@@ -315,7 +315,7 @@ test =
             (Jawa.Event.Pause
                 { newstate = Jawa.State.Buffering
                 , oldstate = Jawa.State.Complete
-                , pauseReason = Jawa.PauseReason.External
+                , pauseReason = Just Jawa.PauseReason.External
                 , reason = Jawa.State.Error
                 , viewable = Jawa.Viewable.Hidden
                 }

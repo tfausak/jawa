@@ -31,7 +31,7 @@ test =
             } """
             { newstate = Jawa.State.Buffering
             , oldstate = Jawa.State.Complete
-            , pauseReason = Jawa.PauseReason.External
+            , pauseReason = Just Jawa.PauseReason.External
             , reason = Jawa.State.Error
             , viewable = Jawa.Viewable.Hidden
             }
@@ -43,6 +43,6 @@ fuzzer =
     Fuzz.map5 Jawa.Event.Pause.Pause
         Jawa.StateTest.fuzzer
         Jawa.StateTest.fuzzer
-        Jawa.PauseReasonTest.fuzzer
+        (Fuzz.maybe Jawa.PauseReasonTest.fuzzer)
         Jawa.StateTest.fuzzer
         Jawa.ViewableTest.fuzzer
