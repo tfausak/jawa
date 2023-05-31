@@ -20,7 +20,7 @@ type alias SubtitleTrack =
     , default : Bool
     , id : String
     , kind : Maybe String
-    , label : String
+    , label : Maybe String
     , name : String
     , subtitleTrack : Jawa.Metadata.Metadata
     }
@@ -35,9 +35,11 @@ decoder =
         (Json.Decode.field "default" Json.Decode.bool)
         (Json.Decode.field "_id" Json.Decode.string)
         (Json.Decode.Extra.optionalNullableField "kind" Json.Decode.string)
-        (Json.Decode.field "label" Json.Decode.string)
+        (Json.Decode.Extra.optionalNullableField "label" Json.Decode.string)
         (Json.Decode.field "name" Json.Decode.string)
-        (Json.Decode.field "subtitleTrack" Jawa.Metadata.decoder)
+        (Json.Decode.Extra.optionalNullableField "subtitleTrack" Jawa.Metadata.decoder
+            |> Json.Decode.map (Maybe.withDefault (Jawa.Metadata.Metadata Json.Encode.null))
+        )
 
 
 {-| A JSON encoder.
@@ -48,7 +50,7 @@ encode x =
     , Just ( "default", Json.Encode.bool x.default )
     , Just ( "_id", Json.Encode.string x.id )
     , Maybe.map (Json.Encode.string >> Tuple.pair "kind") x.kind
-    , Just ( "label", Json.Encode.string x.label )
+    , Maybe.map (Json.Encode.string >> Tuple.pair "label") x.label
     , Just ( "name", Json.Encode.string x.name )
     , Just ( "subtitleTrack", Jawa.Metadata.encode x.subtitleTrack )
     ]
