@@ -10,7 +10,7 @@ import Json.Decode
 import Json.Encode
 
 
-{-| <https://docs.jwplayer.com/players/reference/advertising-events#onbeforecomplete>
+{-| <https://docs.jwplayer.com/players/reference/playlist-events#onplaylistcomplete>
 -}
 type alias PlaylistComplete =
     {}
