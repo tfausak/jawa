@@ -497,11 +497,11 @@ test =
                 "type": "seek"
             } """
             (Jawa.Event.Seek
-                { currentTime = 0.1
+                { currentTime = Just 0.1
                 , duration = 0.2
                 , metadata = Jawa.Metadata.Metadata Json.Encode.null
                 , offset = 0.3
-                , position = 0.4
+                , position = Just 0.4
                 , seekRange =
                     { end = 0.5
                     , start = 0.6
