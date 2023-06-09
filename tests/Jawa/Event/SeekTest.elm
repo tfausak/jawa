@@ -31,11 +31,11 @@ test =
                     "start": 0.6
                 }
             } """
-            { currentTime = 0.1
+            { currentTime = Just 0.1
             , duration = 0.2
             , metadata = Jawa.Metadata.Metadata Json.Encode.null
             , offset = 0.3
-            , position = 0.4
+            , position = Just 0.4
             , seekRange =
                 { end = 0.5
                 , start = 0.6
@@ -47,9 +47,9 @@ test =
 fuzzer : Fuzz.Fuzzer Jawa.Event.Seek.Seek
 fuzzer =
     Fuzz.map6 Jawa.Event.Seek.Seek
-        Fuzz.niceFloat
+        (Fuzz.maybe Fuzz.niceFloat)
         Fuzz.niceFloat
         Jawa.MetadataTest.fuzzer
         Fuzz.niceFloat
-        Fuzz.niceFloat
+        (Fuzz.maybe Fuzz.niceFloat)
         Jawa.SeekRangeTest.fuzzer
