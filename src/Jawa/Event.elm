@@ -1,8 +1,8 @@
-module Jawa.Event exposing (Event(..), decoder, encode)
+module Jawa.Event exposing (Event(..), decoder, encode, toTag)
 
 {-|
 
-@docs Event, decoder, encode
+@docs Event, decoder, encode, toTag
 
 -}
 
@@ -334,3 +334,141 @@ encodeWith t f x =
                 [ ( typeKey, typeValue )
                 , ( "value", json )
                 ]
+
+
+{-| Converts an event into a tag describing which type it is.
+-}
+toTag : Event -> String
+toTag event =
+    case event of
+        AudioTracks _ ->
+            Jawa.Event.AudioTracks.tag
+
+        BeforeComplete _ ->
+            Jawa.Event.BeforeComplete.tag
+
+        BeforePlay _ ->
+            Jawa.Event.BeforePlay.tag
+
+        Breakpoint _ ->
+            Jawa.Event.Breakpoint.tag
+
+        Buffer _ ->
+            Jawa.Event.Buffer.tag
+
+        BufferChange _ ->
+            Jawa.Event.BufferChange.tag
+
+        BufferFull _ ->
+            Jawa.Event.BufferFull.tag
+
+        CaptionsChanged _ ->
+            Jawa.Event.CaptionsChanged.tag
+
+        CaptionsList _ ->
+            Jawa.Event.CaptionsList.tag
+
+        Click _ ->
+            Jawa.Event.Click.tag
+
+        Complete _ ->
+            Jawa.Event.Complete.tag
+
+        Controls _ ->
+            Jawa.Event.Controls.tag
+
+        DisplayClick _ ->
+            Jawa.Event.DisplayClick.tag
+
+        FirstFrame _ ->
+            Jawa.Event.FirstFrame.tag
+
+        Fullscreen _ ->
+            Jawa.Event.Fullscreen.tag
+
+        Idle _ ->
+            Jawa.Event.Idle.tag
+
+        Levels _ ->
+            Jawa.Event.Levels.tag
+
+        LevelsChanged _ ->
+            Jawa.Event.LevelsChanged.tag
+
+        MediaType _ ->
+            Jawa.Event.MediaType.tag
+
+        Mute _ ->
+            Jawa.Event.Mute.tag
+
+        Pause _ ->
+            Jawa.Event.Pause.tag
+
+        PipEnter _ ->
+            Jawa.Event.PipEnter.tag
+
+        PipLeave _ ->
+            Jawa.Event.PipLeave.tag
+
+        Play _ ->
+            Jawa.Event.Play.tag
+
+        PlayAttempt _ ->
+            Jawa.Event.PlayAttempt.tag
+
+        PlaybackRateChanged _ ->
+            Jawa.Event.PlaybackRateChanged.tag
+
+        Playlist _ ->
+            Jawa.Event.Playlist.tag
+
+        PlaylistComplete _ ->
+            Jawa.Event.PlaylistComplete.tag
+
+        PlaylistItem _ ->
+            Jawa.Event.PlaylistItem.tag
+
+        ProviderFirstFrame _ ->
+            Jawa.Event.ProviderFirstFrame.tag
+
+        Ready _ ->
+            Jawa.Event.Ready.tag
+
+        Remove _ ->
+            Jawa.Event.Remove.tag
+
+        Resize _ ->
+            Jawa.Event.Resize.tag
+
+        Seek _ ->
+            Jawa.Event.Seek.tag
+
+        Seeked _ ->
+            Jawa.Event.Seeked.tag
+
+        SetupError _ ->
+            Jawa.Event.SetupError.tag
+
+        SubtitlesTrackChanged _ ->
+            Jawa.Event.SubtitlesTrackChanged.tag
+
+        SubtitlesTracks _ ->
+            Jawa.Event.SubtitlesTracks.tag
+
+        Time _ ->
+            Jawa.Event.Time.tag
+
+        UserActive _ ->
+            Jawa.Event.UserActive.tag
+
+        UserInactive _ ->
+            Jawa.Event.UserInactive.tag
+
+        Viewable _ ->
+            Jawa.Event.Viewable.tag
+
+        VisualQuality _ ->
+            Jawa.Event.VisualQuality.tag
+
+        Volume _ ->
+            Jawa.Event.Volume.tag
